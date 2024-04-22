@@ -11,8 +11,8 @@ export default function Home() {
           <div className={styles.container}>
           <Image src="/logo.svg"
             alt="Logo do sistema BeeTech"
-            width={185}
-            height={88}
+            width={190}
+            height={90}
             priority
             className={styles.logo}
           />

@@ -1,34 +1,47 @@
-.main{
-  background-color: #F9BD1C !important;
-  width: 100%;
-}
 
 .header{
-  background-color: #17130B;
+  position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: auto;
+  overflow-x: hidden;
 }
 
-.container{
+
+.header:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 70%;
+  height: 100%;
+  background-color: #17130B;
+  border-radius: 0 0 70% 70% / 0 0 100% 100%;
+  transform: scaleX(1.7);
+
+}
+.container{
+  z-index: 1;
+  width: 100%;
+  max-width: 80%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
+  position: relative;
 }
 
 .nav{
-  
+  position: relative;
+  z-index: 1;
 
 }
 
 .navLink{
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 500;
   text-decoration: none;
   color: white;
@@ -46,20 +59,23 @@
   margin-left: 60px;
   font-size: 1.4rem;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 100px;
 }
 
 .desc{
-  background-color: #17130B;
-  max-width: 70%;
+  z-index: 1;
+  position: relative;
+  max-width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60vh;
+  height: 70vh;
 }
 
 .textArea{
+  z-index: 1;
+  position: relative;
   width: 577px;
   height: 208px;
   margin-right: 20rem;
@@ -69,6 +85,11 @@
   font-size: 4.5rem;
   font-weight: bold;
   color: white;
+}
+
+.descImg{
+  z-index: 1;
+  position: relative;
 }
 
 .span{
@@ -95,6 +116,7 @@
 
   .navBtn{
     width: 105px;
+    font-weight: 600;
   }
 }
 
@@ -122,11 +144,19 @@
     margin-top: 15px;
     margin-bottom: 25px;
   }
+
+  .navBtn{
+    font-weight: 600;
+  }
 }
 
 @media (max-width: 870px) {
   .nav{
     display: none;
+  }
+
+  .navBtn{
+    font-weight: 600;
   }
 }
 
@@ -141,6 +171,10 @@
   
   .logo{
     width: 150px;
+  }
+
+  .navBtn{
+    font-weight: 600;
   }
 }
 
@@ -161,6 +195,10 @@
     width: 320px;
     height: 210px;
     margin: 0;
+  }
+
+  .navBtn{
+    font-weight: 600;
   }
 }
 
@@ -186,5 +224,8 @@
     width: 110px
   }
 
+  .navBtn{
+    font-weight: 600;
+  }
 
 }
