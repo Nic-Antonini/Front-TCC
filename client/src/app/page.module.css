@@ -1,4 +1,3 @@
-
 .header{
   position: relative;
   display: flex;
@@ -9,7 +8,6 @@
   height: auto;
   overflow-x: hidden;
 }
-
 
 .header:before{
   content: '';
@@ -23,6 +21,7 @@
   transform: scaleX(1.7);
 
 }
+
 .container{
   z-index: 1;
   width: 100%;
@@ -41,12 +40,11 @@
 }
 
 .navLink{
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 500;
   text-decoration: none;
   color: white;
   margin-left: 45px;
-
 }
 
 .navBtn{
@@ -58,6 +56,40 @@
   box-sizing: border-box;
   margin-left: 60px;
   font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 100px;
+}
+
+.toggleNavbar{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.navLink1{
+  font-size: 2.0rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: white;
+  margin-top: 10px;
+}
+
+.navBtn1{
+  height: 40px;
+  width: 115px;
+  color: #17130B;
+  background-color: #F9BD1C;
+  border: transparent;
+  box-sizing: border-box;
+  margin-top: 15px;
+  font-size: 1.8rem;
   text-transform: uppercase;
   font-weight: 600;
   border-radius: 100px;
@@ -155,8 +187,20 @@
     display: none;
   }
 
-  .navBtn{
-    font-weight: 600;
+  .toggleNavbar{
+    display: flex;
+  }
+
+  .desc{
+    height: 65vh;
+  }
+
+  .descImg{
+    height: 310px;
+  }
+
+  .header:before{
+    transform: scaleX(2.0);
   }
 }
 

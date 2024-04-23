@@ -1,9 +1,24 @@
+"use client";
+import React, {useState} from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
 
 export default function Home() {
+  const [imagemSrc, setImagemSrc] = useState('/toggleNavbar.svg'); // Define o caminho da imagem inicial
+  const [linksVisiveis, setLinksVisiveis] = useState(false); // Estado para controlar a visibilidade dos links
+
+  const handleClick = () => {
+    // Verifica o caminho atual da imagem e alterna para o próximo caminho
+    if (imagemSrc === '/toggleNavbar.svg') {
+      setImagemSrc('/toggleNavbar2.svg'); // Substitua 'outraImagem.svg' pelo caminho da outra imagem desejada
+      setLinksVisiveis(true); // Mostra os links quando a outra imagem é exibida
+    } else {
+      setImagemSrc('/toggleNavbar.svg'); // Volta para o caminho original se já estiver na outra imagem
+      setLinksVisiveis(false); // Oculta os links quando a imagem original é exibida
+    }
+  };
   return (
     <main className={styles.main}>
       
@@ -23,10 +38,31 @@ export default function Home() {
             <Link href={"/"} className={styles.navLink}>FAQ</Link>
             <a href="/" className={styles.navLink}>Sobre Nós</a>
             <Link href={"/"} className={styles.navLink}>Entrar</Link>
-            <>
             <Link href={"/"}><button className={styles.navBtn}>Cadastrar</button></Link>
-            </>
           </nav>
+
+          <div className={styles.toggleNavbar}>
+      <button className={styles.menu} onClick={handleClick}>
+        <Image 
+          src={imagemSrc}
+          alt="Botão para abrir o menu"
+          width={48}
+          height={48}
+          priority
+        />
+      </button>
+      {linksVisiveis && ( // Renderiza os links apenas se linksVisiveis for verdadeiro
+        <>
+          <a href="/" className={styles.navLink1}>Como Funciona</a>
+          <a href="/" className={styles.navLink1}>Contato</a>
+          <Link href={"/"} className={styles.navLink1}>FAQ</Link>
+          <a href="/" className={styles.navLink1}>Sobre Nós</a>
+          <Link href={"/"} className={styles.navLink1}>Entrar</Link>
+          <Link href={"/"}><button className={styles.navBtn1}>Cadastrar</button></Link>
+        </>
+      )}
+    </div>
+
           </div>
         <section className={styles.desc}>
           <div className={styles.textArea}>
@@ -46,6 +82,9 @@ export default function Home() {
             className={styles.descImg}/>
         </section>
       </header>
+
+
+
     </main>
   );
 }
