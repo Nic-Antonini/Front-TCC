@@ -1,22 +1,35 @@
 "use client";
-import React, {useState} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap-trial/ScrollTrigger';
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
 
 export default function Home() {
-  const [imagemSrc, setImagemSrc] = useState('/toggleNavbar.svg'); // Define o caminho da imagem inicial
-  const [linksVisiveis, setLinksVisiveis] = useState(false); // Estado para controlar a visibilidade dos links
+  const [imagemSrc, setImagemSrc] = useState('/toggleNavbar.svg');
+  const [linksVisiveis, setLinksVisiveis] = useState(false); 
+
+  useLayoutEffect(()=>{
+    gsap.to(`.${styles.descImg}`, {
+      duration: 1, x: 0, opacity: 1, 
+    })
+  }, []);
+
+  useLayoutEffect(()=>{
+    gsap.to(`.${styles.textArea}`, {
+      duration: 2, opacity: 1
+    })
+  }, []);
 
   const handleClick = () => {
-    // Verifica o caminho atual da imagem e alterna para o próximo caminho
     if (imagemSrc === '/toggleNavbar.svg') {
-      setImagemSrc('/toggleNavbar2.svg'); // Substitua 'outraImagem.svg' pelo caminho da outra imagem desejada
-      setLinksVisiveis(true); // Mostra os links quando a outra imagem é exibida
+      setImagemSrc('/toggleNavbar2.svg'); 
+      setLinksVisiveis(true); 
     } else {
-      setImagemSrc('/toggleNavbar.svg'); // Volta para o caminho original se já estiver na outra imagem
-      setLinksVisiveis(false); // Oculta os links quando a imagem original é exibida
+      setImagemSrc('/toggleNavbar.svg');
+      setLinksVisiveis(false); 
     }
   };
   return (
@@ -51,7 +64,7 @@ export default function Home() {
           priority
         />
       </button>
-      {linksVisiveis && ( // Renderiza os links apenas se linksVisiveis for verdadeiro
+      {linksVisiveis && (
         <>
           <a href="/" className={styles.navLink1}>Como Funciona</a>
           <a href="/" className={styles.navLink1}>Contato</a>
