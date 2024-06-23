@@ -81,8 +81,8 @@ export default function Home() {
           <div className={styles.textArea}>
             <h1 className={styles.textDesc}>
               Unindo <span className={styles.span}> Criadores de Abelhas </span>
-              e <span className={styles.span}> Produtores Rurais </span>
-              Rumo a um Futuro <span className={styles.span}> Sustentável </span>
+              e <span className={styles.span2}> Produtores Rurais </span>
+              Rumo a um Futuro <span className={styles.span2}> Sustentável </span>
               e <span className={styles.span}>Tecnológico</span>.
             </h1>
           </div>

@@ -2,7 +2,7 @@
 import styles from './page.module.css'
 import Image from 'next/image'
 
-export default function apiEdit() {
+export default function agriEdit() {
   return (
     <main className={styles.main}>
         <div className={styles.coverPhoto}>
@@ -11,7 +11,7 @@ export default function apiEdit() {
         <div className={styles.profileContainer}>
             <div className={styles.profilePhoto}>
             <Image
-                src="/ApiProfile.svg"
+                src="/AgriProfile.svg"
                 alt="Beekeeper icon"
                 width={206}
                 height={206}
@@ -21,8 +21,8 @@ export default function apiEdit() {
             </div>
             <div className={styles.profileDetails}>
                 <div>
-                    <p className={styles.nameProfile}>Nome do apicultor</p>
-                    <p className={styles.localProfile}>Localização do apicultor</p>
+                    <p className={styles.nameProfile}>Nome do agricultor</p>
+                    <p className={styles.localProfile}>Localização do agricultor</p>
                 </div>
                 <>
                 <Image
@@ -41,7 +41,7 @@ export default function apiEdit() {
                 <label htmlFor="descArea" className={styles.titleDesc}> Descrição </label>
                 
                 <Image
-                    src="/editDesc.svg"
+                    src="/editDesc2.svg"
                     alt="Beekeeper icon"
                     width={30}
                     height={30}
@@ -54,7 +54,7 @@ export default function apiEdit() {
             
             <div className={styles.footerDesc}>
             <Image
-                    src="/confirmDesc.svg"
+                    src="/confirmDesc2.svg"
                     alt="Beekeeper icon"
                     width={30}
                     height={30}
@@ -68,7 +68,7 @@ export default function apiEdit() {
 
             <div className={styles.carouselPhotos}>
             <Image
-                    src="/arrowLeft.svg"
+                    src="/arrowLeft2.svg"
                     alt="Beekeeper icon"
                     width={35}
                     height={35}
@@ -107,7 +107,7 @@ export default function apiEdit() {
                 </div>
 
                 <Image
-                    src="/arrowRight.svg"
+                    src="/arrowRight2.svg"
                     alt="Beekeeper icon"
                     width={35}
                     height={35}
@@ -117,7 +117,7 @@ export default function apiEdit() {
             </div>
         </div>
         <Image
-            src="/confirmProfile.svg"
+            src="/confirmProfile2.svg"
             alt="Beekeeper icon"
             width={70}
             height={70}

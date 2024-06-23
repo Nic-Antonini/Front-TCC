@@ -135,6 +135,10 @@
   color: #F9BD1C;
 }
 
+.span2{
+  color: #51754C;
+}
+
 @media (max-width: 1415px){
   .navLink{
     margin-left: 35px;
