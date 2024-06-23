@@ -51,9 +51,9 @@ export default function Home() {
     duration: 1,
     scrollTrigger: {
       trigger: `.${styles.containerAboutUs}`,
-      start: "top 400px",
-      end: "bottom 500px",
-      scrub: true
+      start: "top 450px",
+      end: "bottom 900px",
+
     }
   })
   return () =>{
@@ -68,9 +68,9 @@ export default function Home() {
       duration: 2,
       scrollTrigger: {
         trigger: `.${styles.containerAboutUs}`,
-        start: "top 400px",
-        end: "bottom 500px",
-        scrub: true
+        start: "top 450px",
+        end: "bottom 900px",
+
       }
     })
     return () =>{
@@ -91,7 +91,7 @@ export default function Home() {
           />
 
           <nav className={styles.nav}>
-            <a href="/#ComoFunciona" className={styles.navLink}>Como Funciona</a>
+            <a href="/#ComoFunciona" className={styles.navLink}>Como Funciona?</a>
             <a href="/" className={styles.navLink}>Contato</a>
             <Link href={"/"} className={styles.navLink}>FAQ</Link>
             <a href="/#SobreNós" className={styles.navLink}>Sobre Nós</a>
@@ -162,8 +162,30 @@ export default function Home() {
         </div>
       </section>
       <section id='ComoFunciona' className={styles.containerHow}>
-            h
+        <h1 className={styles.titleHow}>Como funciona?</h1>
+        <div className={styles.subSec}>
+            <h1 className={styles.titleSec}>Crie sua Conta!</h1>
+            <p className={styles.textSec}>
+                Cadastre-se na nossa plataforma como apicultor ou agricultor preenchendo seus dados de forma rápida e fácil.
+            </p>
+            <Image alt='Cadastro' src='/hand.svg' height={500} width={400} />
+        </div>
+        <div className={styles.subSec}>
+            <Image alt='Busca' src='/smartphone.svg' height={500} width={400} />
+            <h1 className={styles.titleSec}>Encontre Parceiros Ideais</h1>
+            <p className={styles.textSec}>
+                Utilize nossos filtros de busca para encontrar o apicultor ou agricultor perfeito para suas necessidades.
+            </p>
+        </div>
+        <div className={styles.subSec}>
+            <h1 className={styles.titleSec}>Negocie com Facilidade</h1>
+            <p className={styles.textSec}>
+                Após encontrar o parceiro ideal, entre em contato para negociar e fechar negócios de maneira simples e direta.
+            </p>
+            <Image alt='Negociação' src='/match.svg' height={400} width={300} />
+        </div>
       </section>
+
       <section id='Contato'>
 
       </section>
