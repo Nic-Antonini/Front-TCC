@@ -1,7 +1,11 @@
 .main{
   width: 100%;
-  height: 100vh;
+  height: auto;
   background-color: #F9BD1C;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .header{
@@ -38,19 +42,50 @@
   position: relative;
 }
 
-.nav{
+.nav {
   position: relative;
   z-index: 1;
-
 }
 
-.navLink{
+.navLink {
   font-size: 1.6rem;
   font-weight: 500;
   text-decoration: none;
   color: white;
   margin-left: 45px;
+  position: relative;
+  cursor: pointer;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
 }
+
+.navLink:focus,
+.navLink:hover {
+  color: #51754C;
+}
+
+.navLink:focus:after,
+.navLink:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+.navLink:after {
+  content: "";
+  pointer-events: none;
+  bottom: -3px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #51754C;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
+
+
 
 .navBtn{
   height: 40px;
@@ -64,6 +99,15 @@
   text-transform: uppercase;
   font-weight: 600;
   border-radius: 100px;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+}
+
+.navBtn:hover{
+  background-color: #51754C;
+  color: white;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
 }
 
 .toggleNavbar{
@@ -138,6 +182,44 @@
 .span2{
   color: #51754C;
 }
+
+.containerAboutUs{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-top: 160px;
+  gap: 300px;
+  margin-bottom: 100px;
+}
+
+.apiary{
+  position: relative;
+  right: 100%;
+}
+
+.textAboutUs{
+  width: 580px;
+}
+
+.titleAboutUs{
+  color: #51754C;
+  font-size: 3.2rem;
+  font-weight:bold ;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0;
+}
+
+.aboutUs{
+  font-size: 2.6rem;
+  line-height: 36px;
+  color: #082008;
+  opacity: 0;
+}
+
+
+/* RESPONSIVIDADE */
 
 @media (max-width: 1415px){
   .navLink{
