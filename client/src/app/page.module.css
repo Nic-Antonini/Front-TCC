@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .header{
@@ -16,7 +17,6 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  overflow-x: hidden;
 }
 
 .header:before{
@@ -229,6 +229,7 @@
   position: relative;
   height: auto;
   z-index: 1;
+  gap: 100px;
 }
 
 .containerHow:before{
@@ -248,16 +249,36 @@
   font-size: 3.2rem;
   font-weight:bold ;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 200px;
   text-align: center;
   color: white;
 }
 
 .subSec{
-  z-index: 1;
+  position: relative;
   height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 640px;
 }
 
+.textAreaSec{
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.titleSec{
+  font-size: 3.2rem;
+  color: #F9BD1C;
+  font-weight: bold;
+}
+
+.textSec{
+  font-size: 2.4rem;
+  color: white;
+}
 /* RESPONSIVIDADE */
 
 @media (max-width: 1415px){

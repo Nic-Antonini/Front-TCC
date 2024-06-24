@@ -164,24 +164,30 @@ export default function Home() {
       <section id='ComoFunciona' className={styles.containerHow}>
         <h1 className={styles.titleHow}>Como funciona?</h1>
         <div className={styles.subSec}>
-            <h1 className={styles.titleSec}>Crie sua Conta!</h1>
-            <p className={styles.textSec}>
-                Cadastre-se na nossa plataforma como apicultor ou agricultor preenchendo seus dados de forma rápida e fácil.
-            </p>
+          <div className={styles.textAreaSec}>
+              <h1 className={styles.titleSec}>Crie sua Conta!</h1>
+              <p className={styles.textSec}>
+                  Cadastre-se na nossa plataforma como apicultor ou agricultor preenchendo seus dados de forma rápida e fácil.
+              </p>
+            </div>
             <Image alt='Cadastro' src='/hand.svg' height={500} width={400} />
         </div>
         <div className={styles.subSec}>
             <Image alt='Busca' src='/smartphone.svg' height={500} width={400} />
-            <h1 className={styles.titleSec}>Encontre Parceiros Ideais</h1>
-            <p className={styles.textSec}>
-                Utilize nossos filtros de busca para encontrar o apicultor ou agricultor perfeito para suas necessidades.
-            </p>
+            <div className={styles.textAreaSec}>
+              <h1 className={styles.titleSec}>Encontre Parceiros Ideais</h1>
+              <p className={styles.textSec}>
+                  Utilize nossos filtros de busca para encontrar o apicultor ou agricultor perfeito para suas necessidades.
+              </p>
+            </div>
         </div>
         <div className={styles.subSec}>
-            <h1 className={styles.titleSec}>Negocie com Facilidade</h1>
-            <p className={styles.textSec}>
-                Após encontrar o parceiro ideal, entre em contato para negociar e fechar negócios de maneira simples e direta.
-            </p>
+            <div className={styles.textAreaSec}>
+              <h1 className={styles.titleSec}>Negocie com Facilidade</h1>
+              <p className={styles.textSec}>
+                  Após encontrar o parceiro ideal, entre em contato para negociar e fechar negócios de maneira simples e direta.
+              </p>
+            </div>
             <Image alt='Negociação' src='/match.svg' height={400} width={300} />
         </div>
       </section>
