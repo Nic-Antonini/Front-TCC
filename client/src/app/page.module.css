@@ -205,7 +205,7 @@
 }
 
 .titleAboutUs{
-  color: #51754C;
+  color: #2b3f29;
   font-size: 3.2rem;
   font-weight:bold ;
   text-transform: uppercase;
@@ -229,7 +229,8 @@
   position: relative;
   height: auto;
   z-index: 1;
-  gap: 100px;
+  gap: 50px;
+  padding-bottom: 150px;
 }
 
 .containerHow:before{
@@ -240,44 +241,109 @@
   width: 100%;
   height: 100%;
   background-color: #17130B;
-  border-radius: 100% 100% 0 0;
-  transform: scaleX(1.8);
+  border-radius: 100% 100% 100% 100%;
+  transform: scaleX(1.9);
 }
 
 .titleHow{
   position: relative;
-  font-size: 3.2rem;
+  font-size: 4.4rem;
   font-weight:bold ;
   text-transform: uppercase;
-  margin-bottom: 200px;
+  margin-bottom: 120px;
   text-align: center;
   color: white;
 }
 
-.subSec{
+.subSec1{
   position: relative;
-  height: 400px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 640px;
+  gap: 230px;
+}
+
+.subSec2{
+  position: relative;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 280px
+}
+
+.subSec3{
+  position: relative;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 270px;
+}
+
+.imgHand{
+  margin-left: 10px;
+  transform:translateX(2000px);
+  opacity: 0;
+}
+
+.imgSmartphone{
+  margin-right: 25px;
+  transform:translateX(-2000px);
+  opacity: 0;
+}
+
+.imgMatch{
+  transform:translateX(2000px);
+  opacity: 0;
 }
 
 .textAreaSec{
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 490px;
+  line-height: 40px;
 }
 
 .titleSec{
-  font-size: 3.2rem;
+  font-size: 4.2rem;
   color: #F9BD1C;
   font-weight: bold;
 }
 
+.titleSecR{
+  font-size: 4.2rem;
+  color: #F9BD1C;
+  font-weight: bold;
+  text-align: right;
+  margin-bottom: 5px;
+}
+
 .textSec{
-  font-size: 2.4rem;
+  font-size: 3.4rem;
   color: white;
+}
+
+.textSecR{
+  font-size: 3.4rem;
+  color: white;
+  text-align: right;
+}
+
+.contactContainer{
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.titleContact{
+  color: #2b3f29;
+  font-size: 4.4rem;
+  font-weight: 900 ;
+  text-transform: uppercase;
+  margin-top: 10px;
 }
 /* RESPONSIVIDADE */
 

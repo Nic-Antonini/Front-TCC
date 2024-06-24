@@ -14,7 +14,7 @@ export default function Home() {
     const descImgElement = document.querySelector(`.${styles.descImg}`);
     if (descImgElement) {
       gsap.to(descImgElement, {
-        duration: 1, x: 0, opacity: 1, 
+        duration: 1, x: 0, opacity: 1
       });
       return () =>{
         gsap.killTweensOf(`.${styles.descImg}`)
@@ -51,9 +51,8 @@ export default function Home() {
     duration: 1,
     scrollTrigger: {
       trigger: `.${styles.containerAboutUs}`,
-      start: "top 450px",
-      end: "bottom 900px",
-
+      start: "top 500px",
+      end: "bottom 700px"
     }
   })
   return () =>{
@@ -68,8 +67,8 @@ export default function Home() {
       duration: 2,
       scrollTrigger: {
         trigger: `.${styles.containerAboutUs}`,
-        start: "top 450px",
-        end: "bottom 900px",
+        start: "top 500px",
+        end: "bottom 700px",
 
       }
     })
@@ -77,6 +76,48 @@ export default function Home() {
         gsap.killTweensOf([`.${styles.apiary}`, `.${styles.titleAboutUs}`])
     }
     }, [])
+
+    useLayoutEffect(() => {
+      gsap.registerPlugin(ScrollTrigger)
+      gsap.to(`.${styles.imgHand}`, {
+        duration: 1, x: 0, opacity: 1, scrollTrigger:{
+          trigger: `.${styles.subSec1}`,
+          start: "top 600px",
+          end: "bottom 700px",
+        }
+      })
+      return () =>{
+        gsap.killTweensOf([`.${styles.imgHand}`])
+    }
+    })
+
+    useLayoutEffect(() => {
+      gsap.registerPlugin(ScrollTrigger)
+      gsap.to(`.${styles.imgMatch}`, {
+        duration: 1, x: 0, opacity: 1, scrollTrigger:{
+          trigger: `.${styles.subSec3}`,
+          start: "top 500px",
+          end: "bottom 700px",
+        }
+      })
+      return () =>{
+        gsap.killTweensOf([`.${styles.imgHand}`])
+    }
+    })
+
+    useLayoutEffect(() => {
+      gsap.registerPlugin(ScrollTrigger)
+      gsap.to(`.${styles.imgSmartphone}`, {
+        duration: 1, x: 0, opacity: 1, scrollTrigger:{
+          trigger: `.${styles.subSec2}`,
+          start: "top 600px",
+          end: "bottom 700px",
+        }
+      })
+      return () =>{
+        gsap.killTweensOf([`.${styles.imgSmartphone}`])
+    }
+    })
 
   return (
     <main className={styles.main}>
@@ -91,10 +132,10 @@ export default function Home() {
           />
 
           <nav className={styles.nav}>
-            <a href="/#ComoFunciona" className={styles.navLink}>Como Funciona?</a>
-            <a href="/" className={styles.navLink}>Contato</a>
-            <Link href={"/"} className={styles.navLink}>FAQ</Link>
             <a href="/#SobreNós" className={styles.navLink}>Sobre Nós</a>
+            <a href="/#ComoFunciona" className={styles.navLink}>Como Funciona?</a>
+            <a href="/#Contato" className={styles.navLink}>Contato</a>
+            <Link href={"/"} className={styles.navLink}>FAQ</Link>
             <Link href={"/"} className={styles.navLink}>Entrar</Link>
             <Link href={"/"}><button className={styles.navBtn}>Cadastrar</button></Link>
           </nav>
@@ -140,14 +181,14 @@ export default function Home() {
             className={styles.descImg}/>
         </div>
       </header>
-      <section id='SobreNós' className={styles.containerAboutUs}>
-        <Image src={"/apiary.svg"}
+      <section  className={styles.containerAboutUs}>
+        <Image  src={"/apiary.svg"}
         width={370}
         height={480}
         alt='Desenho de uma colméia'
         className={styles.apiary}
         />
-        <div className={styles.textAboutUs}>
+        <div id='SobreNós' className={styles.textAboutUs}>
             <h1 className={styles.titleAboutUs}>
             Sobre nós
             </h1>
@@ -163,17 +204,17 @@ export default function Home() {
       </section>
       <section id='ComoFunciona' className={styles.containerHow}>
         <h1 className={styles.titleHow}>Como funciona?</h1>
-        <div className={styles.subSec}>
+        <div className={styles.subSec1}>
           <div className={styles.textAreaSec}>
-              <h1 className={styles.titleSec}>Crie sua Conta!</h1>
-              <p className={styles.textSec}>
+              <h1 className={styles.titleSecR}>Crie sua Conta!</h1>
+              <p className={styles.textSecR}>
                   Cadastre-se na nossa plataforma como apicultor ou agricultor preenchendo seus dados de forma rápida e fácil.
               </p>
             </div>
-            <Image alt='Cadastro' src='/hand.svg' height={500} width={400} />
+            <Image alt='Cadastro' src='/hand.svg' height={700} width={600} className={styles.imgHand} />
         </div>
-        <div className={styles.subSec}>
-            <Image alt='Busca' src='/smartphone.svg' height={500} width={400} />
+        <div className={styles.subSec2}>
+            <Image alt='Busca' src='/smartphone.svg' height={450} width={300} className={styles.imgSmartphone}/>
             <div className={styles.textAreaSec}>
               <h1 className={styles.titleSec}>Encontre Parceiros Ideais</h1>
               <p className={styles.textSec}>
@@ -181,19 +222,19 @@ export default function Home() {
               </p>
             </div>
         </div>
-        <div className={styles.subSec}>
+        <div className={styles.subSec3}>
             <div className={styles.textAreaSec}>
-              <h1 className={styles.titleSec}>Negocie com Facilidade</h1>
-              <p className={styles.textSec}>
+              <h1 className={styles.titleSecR}>Negocie com Facilidade</h1>
+              <p className={styles.textSecR}>
                   Após encontrar o parceiro ideal, entre em contato para negociar e fechar negócios de maneira simples e direta.
               </p>
             </div>
-            <Image alt='Negociação' src='/match.svg' height={400} width={300} />
+            <Image alt='Negociação' src='/match.svg' height={650} width={300} className={styles.imgMatch}/>
         </div>
       </section>
 
-      <section id='Contato'>
-
+      <section id='Contato' className={styles.contactContainer}>
+        <h1 className={styles.titleContact}>Contato</h1>
       </section>
     </main>
   );
