@@ -13,14 +13,14 @@ export default function login(){
                     Preencha os dados corretamente para entrar na BeeTech
                     </h2>
                 </div>
-                <input type="email" id='email' placeholder='Insira seu e-mail'/>
-                <input type="password" id='password' placeholder='Insira sua senha'/>
+                <input type="email" id='email' placeholder='Insira seu e-mail' className={styles.input}/>
+                <input type="password" id='password' placeholder='Insira sua senha' className={styles.input}/>
                 <div className={styles.extra}>
-                Manter-me conectado <input type="checkbox" name="rememberMe" id="rememberMe" />
-                <Link href={'/'}>Esqueci a senha</Link>
+                <p className={styles.text}> <input type="checkbox" name="rememberMe" id="rememberMe" className={styles.check} /> Manter-me conectado </p>
+                <Link href={'/'} className={styles.link}>Esqueci a senha</Link>
                 </div>
-                <input type="button" value="Entrar" />
-                <Link href={'/'}>Não possui conta? Cadastre-se</Link>
+                <input type="button" value="Entrar" className={styles.btn} />
+                <Link className={styles.link} href={'/'}>Não possui conta? Cadastre-se</Link>
             </div>
         </div>
     )
