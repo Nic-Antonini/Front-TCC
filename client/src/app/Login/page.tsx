@@ -1,5 +1,6 @@
 import styles from './page.module.css';
 import Link from "next/link";
+import Image from "next/image";
 
 export default function login(){
     return(
@@ -7,10 +8,10 @@ export default function login(){
             <div className={styles.loginContainer}>
                 <div className={styles.headerContainer}>
                     <h1 className={styles.titleLogin}>
-                    Entre na BeeTech
+                    Entre na <span className={styles.span}>BeeTech</span>
                     </h1>
                     <h2 className={styles.subtitleLogin}>
-                    Preencha os dados corretamente para entrar na BeeTech
+                    Preencha os dados corretamente para entrar na BeeTech:
                     </h2>
                 </div>
                 <input type="email" id='email' placeholder='Insira seu e-mail' className={styles.input}/>

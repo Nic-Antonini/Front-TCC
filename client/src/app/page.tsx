@@ -189,8 +189,8 @@ export default function Home() {
 
           <Image src="/descImg.svg"
             alt="Ilustração de um apicultor e um agricultor unidos"
-            width={250}
-            height={305}
+            width={280}
+            height={330}
             priority
             className={styles.descImg}/>
         </div>
