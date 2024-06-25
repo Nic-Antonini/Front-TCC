@@ -139,8 +139,8 @@ export default function Home() {
         <div className={styles.container}>
           <Image src="/logo.svg"
             alt="Logo do sistema BeeTech"
-            width={190}
-            height={90}
+            width={170}
+            height={70}
             priority
             className={styles.logo}
           />
@@ -189,16 +189,16 @@ export default function Home() {
 
           <Image src="/descImg.svg"
             alt="Ilustração de um apicultor e um agricultor unidos"
-            width={310}
-            height={405}
+            width={250}
+            height={305}
             priority
             className={styles.descImg}/>
         </div>
       </header>
       <section  className={styles.containerAboutUs}>
         <Image  src={"/apiary.svg"}
-        width={370}
-        height={480}
+        width={340}
+        height={450}
         alt='Desenho de uma colméia'
         className={styles.apiary}
         />
