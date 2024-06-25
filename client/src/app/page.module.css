@@ -89,7 +89,7 @@
 
 
 .navBtn{
-  height: 40px;
+  height: 45px;
   width: 115px;
   color: #17130B;
   background-color: #F9BD1C;
@@ -98,7 +98,7 @@
   margin-left: 60px;
   font-size: 1.4rem;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 100px;
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 400ms;
@@ -242,12 +242,12 @@
   height: 100%;
   background-color: #17130B;
   border-radius: 100% 100% 100% 100%;
-  transform: scaleX(1.9);
+  transform: scaleX(2);
 }
 
 .titleHow{
   position: relative;
-  font-size: 4.4rem;
+  font-size: 3.4rem;
   font-weight:bold ;
   text-transform: uppercase;
   margin-bottom: 120px;
@@ -257,29 +257,29 @@
 
 .subSec1{
   position: relative;
-  height: 500px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 230px;
+  gap: 180px;
 }
 
 .subSec2{
   position: relative;
-  height: 500px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 280px
+  gap: 180px
 }
 
 .subSec3{
   position: relative;
-  height: 500px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 270px;
+  gap: 180px;
 }
 
 .imgHand{
@@ -307,13 +307,13 @@
 }
 
 .titleSec{
-  font-size: 4.2rem;
+  font-size: 3.2rem;
   color: #F9BD1C;
   font-weight: bold;
 }
 
 .titleSecR{
-  font-size: 4.2rem;
+  font-size: 3.2rem;
   color: #F9BD1C;
   font-weight: bold;
   text-align: right;
@@ -321,12 +321,12 @@
 }
 
 .textSec{
-  font-size: 3.4rem;
+  font-size: 2.8rem;
   color: white;
 }
 
 .textSecR{
-  font-size: 3.4rem;
+  font-size: 2.8rem;
   color: white;
   text-align: right;
 }
@@ -336,15 +336,123 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 100px;
 }
 
 .titleContact{
   color: #2b3f29;
-  font-size: 4.4rem;
+  text-align: center;
+  font-size: 3.6rem;
   font-weight: 900 ;
   text-transform: uppercase;
-  margin-top: 10px;
+  margin-top: 70px;
 }
+
+.contactArea{
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.formContact{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-left: 55px;
+}
+
+.formTitle{
+  font-size: 2.4rem;
+  width: 420px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.formInput{
+  width: 550px;
+  height: 45px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 15px;
+  background-color: #17130B;
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.formInput::placeholder{
+  color: #ffffff58;
+}
+
+.formTextInput{
+  width: 550px;
+  height: 90px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 20px;
+  background-color: #17130B;
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.formTextInput::placeholder{
+  color: #ffffff58;
+}
+
+.formBtn{
+  width: 220px;
+  height: 45px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #51754C;
+  margin-top: 15px;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: 400ms;
+}
+
+.formBtn:hover{
+  transform: scale(1.07);
+  transition: 400ms;
+}
+
+.bee{
+  margin-right: 20px;
+  transform: translateX(-2000px);
+}
+
+.footer{
+  background-color: #17130B;
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  padding-top: 30px;
+  box-sizing: border-box;
+}
+
+.logoFooter{
+  margin-right: 13px;
+}
+
+.rightsFooter{
+  font-size: 1.4rem;
+  text-align: center;
+  color: white;
+  margin-bottom: 5px;
+}
+
 /* RESPONSIVIDADE */
 
 @media (max-width: 1415px){

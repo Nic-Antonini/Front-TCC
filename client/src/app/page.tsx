@@ -119,6 +119,20 @@ export default function Home() {
     }
     })
 
+    useLayoutEffect(() => {
+      gsap.registerPlugin(ScrollTrigger)
+      gsap.to(`.${styles.bee}`, {
+        duration: 1, x: 0, opacity: 1, scrollTrigger:{
+          trigger: `.${styles.formContact}`,
+          start: "top 600px",
+          end: "bottom 700px",
+        }
+      })
+      return () =>{
+        gsap.killTweensOf([`.${styles.bee}`])
+    }
+    })
+
   return (
     <main className={styles.main}>
       <header className={styles.header}>
@@ -211,10 +225,10 @@ export default function Home() {
                   Cadastre-se na nossa plataforma como apicultor ou agricultor preenchendo seus dados de forma rápida e fácil.
               </p>
             </div>
-            <Image alt='Cadastro' src='/hand.svg' height={700} width={600} className={styles.imgHand} />
+            <Image alt='Cadastro' src='/hand.svg' height={600} width={500} className={styles.imgHand} />
         </div>
         <div className={styles.subSec2}>
-            <Image alt='Busca' src='/smartphone.svg' height={450} width={300} className={styles.imgSmartphone}/>
+            <Image alt='Busca' src='/smartphone.svg' height={350} width={200} className={styles.imgSmartphone}/>
             <div className={styles.textAreaSec}>
               <h1 className={styles.titleSec}>Encontre Parceiros Ideais</h1>
               <p className={styles.textSec}>
@@ -229,13 +243,43 @@ export default function Home() {
                   Após encontrar o parceiro ideal, entre em contato para negociar e fechar negócios de maneira simples e direta.
               </p>
             </div>
-            <Image alt='Negociação' src='/match.svg' height={650} width={300} className={styles.imgMatch}/>
+            <Image alt='Negociação' src='/match.svg' height={490} width={250} className={styles.imgMatch}/>
         </div>
       </section>
 
       <section id='Contato' className={styles.contactContainer}>
         <h1 className={styles.titleContact}>Contato</h1>
+        <div className={styles.contactArea}>
+            <Image
+              alt='Abelhas voando em volta de uma colmeia'
+              height={620}
+              width={410}
+              src={"/bee.svg"}
+              className={styles.bee}
+            />
+            <div className={styles.formContact}>
+              <h2 className={styles.formTitle}>Entre em contato conosco, preenchendo os dados corretamente:</h2>
+              <input type="text" id='name' name='name' placeholder='Insira seu nome completo' className={styles.formInput}/>
+              <input type="email" id='email' name='email' placeholder='Insira seu e-mail'className={styles.formInput}/>
+              <input type="text" id='subject' name='subject' placeholder='Insira o título do assunto a ser tratado' className={styles.formInput}/>
+              <input type="text" id='message' name='message'placeholder='Insira sua mensagem'className={styles.formTextInput}/>
+              <center>
+              <input type="button" value="Enviar" className={styles.formBtn} />
+              </center>
+            </div>
+        </div>
       </section>
+      <footer className={styles.footer}>
+      <Image src="/logo.svg"
+            alt="Logo do sistema BeeTech"
+            width={160}
+            height={60}
+            priority
+            className={styles.logoFooter}
+          />
+
+        <p className={styles.rightsFooter}>© 2024 APSP  -  Todos os direitos reservados.</p>
+      </footer>
     </main>
   );
 }

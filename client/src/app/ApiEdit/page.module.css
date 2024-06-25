@@ -147,7 +147,7 @@
 
 .photoGallery{
     width: 350px;
-    height: 350px;
+    height: 300px;
     background-color: rgba(99, 89, 64, 0.69);
     border-radius: 15px;
     display: flex;
