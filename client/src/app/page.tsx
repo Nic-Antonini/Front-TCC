@@ -150,8 +150,8 @@ export default function Home() {
             <a href="/#ComoFunciona" className={styles.navLink}>Como Funciona?</a>
             <a href="/#Contato" className={styles.navLink}>Contato</a>
             <Link href={"/"} className={styles.navLink}>FAQ</Link>
-            <Link href={"/"} className={styles.navLink}>Entrar</Link>
-            <Link href={"/"}><button className={styles.navBtn}>Cadastrar</button></Link>
+            <Link href={"/Login"} className={styles.navLink}>Entrar</Link>
+            <Link href={"/Cadastro"}><button className={styles.navBtn}>Cadastrar</button></Link>
           </nav>
 
           <div className={styles.toggleNavbar}>

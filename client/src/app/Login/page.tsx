@@ -21,7 +21,7 @@ export default function login(){
                 <Link href={'/'} className={styles.link}>Esqueci a senha</Link>
                 </div>
                 <input type="button" value="Entrar" className={styles.btn} />
-                <Link className={styles.link} href={'/'}>Não possui conta? Cadastre-se</Link>
+                <Link className={styles.link} href={'/Cadastro'}>Não possui conta? Cadastre-se</Link>
             </div>
         </div>
     )
