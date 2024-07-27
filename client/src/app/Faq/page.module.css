@@ -148,7 +148,53 @@
   }
 
 .section{
-    height: 100vh;
+    height: auto;
+    margin: auto; 
+    width: 70%;
+}
+
+.FAQ{
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+
+.questionArea{
+  height: 8.0rem;
+  width: 95%;
+  margin-bottom: 40px;
+}
+
+.boxButton{
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  height: 4.5rem;
+  border-bottom: black 1px solid;
+}
+
+.question{
+  font-size: 2.0rem;
+  font-weight: 500;
+}
+
+.more{
+  font-size: 2.4rem;
+  font-weight: 300;
+}
+
+.answerArea{
+  margin-top: 20px;
+}
+
+.answer{
+  font-size: 1.4rem;
+  
+}
+
+.title{
+  font-size: 3.2rem;
+  font-weight: bolder;
+  margin-top: 40px;
 }
 
   .footer{
