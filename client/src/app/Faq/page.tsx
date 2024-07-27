@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './page.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
+import Box from './component/page';
 
 export default function faq(){
     const [imagemSrc, setImagemSrc] = useState('/toggleNavbar.svg');
@@ -65,99 +66,7 @@ export default function faq(){
         <div className={styles.section}>
             <h1 className={styles.title}>FAQ (Dúvidas Frequentes)</h1>
             <div className={styles.FAQ}>
-              <div className={styles.questionArea}>
-              <div className={styles.boxButton}>
-                <p className={styles.question}>
-                Como posso me registrar na plataforma BeeTech?
-                </p>
-                <span className={styles.more}>
-                  +
-                </span>
-                
-              </div>
-                <div className={styles.answerArea}>
-                  <p className={styles.answer}>
-                  Para se registrar, clique no botão "Registrar" no canto superior direito da página inicial e preencha o formulário com suas informações pessoais e profissionais.
-                  </p>
-                </div>
-              </div>
-              <div className={styles.questionArea}>
-              <div className={styles.boxButton}>
-                <p className={styles.question}>
-                Quem pode usar a BeeTech?
-                </p>
-                <span className={styles.more}>
-                  +
-                </span>
-              </div>
-                <div className={styles.answerArea}>
-                  <p className={styles.answer}>
-                  A BeeTech é destinada tanto a apicultores que oferecem serviços de polinização quanto a agricultores que necessitam desses serviços.
-                  </p>
-                </div>
-              </div>
-              <div className={styles.questionArea}>
-              <div className={styles.boxButton}>
-                <p className={styles.question}>
-                Como funciona o sistema de pesquisa na BeeTech?
-                </p>
-                <span className={styles.more}>
-                  +
-                </span>
-              </div>
-                <div className={styles.answerArea}>
-                  <p className={styles.answer}>
-                  O sistema permite que usuários filtrem suas buscas com base em critérios como proximidade geográfica e disponibilidade das espécies de abelhas necessárias para polinização.
-                  </p>
-                </div>
-              </div>
-              <div className={styles.questionArea}>
-              <div className={styles.boxButton}>
-                <p className={styles.question}>
-                A BeeTech é responsável pelos preços das negociações?
-                </p>
-                <span className={styles.more}>
-                  +
-                </span>
-                </div>
-                <div className={styles.answerArea}>
-                  <p className={styles.answer}>
-                  Não, a BeeTech não assume responsabilidade pelos preços estabelecidos nas negociações. Essas questões são de inteira responsabilidade dos usuários envolvidos na transação.
-
-                  </p>
-                </div>
-              </div>
-              <div className={styles.questionArea}>
-                <div className={styles.boxButton}>
-                  <p className={styles.question}>
-                  A BeeTech processa pagamentos entre usuários?
-                  </p>
-                  <span className={styles.more}>
-                    +
-                  </span>
-                </div>
-                <div className={styles.answerArea}>
-                  <p className={styles.answer}>
-                  Não, o processamento de pagamentos deve ser acordado e realizado diretamente entre os usuários.
-                  </p>
-                </div>
-              </div>
-              
-              <div className={styles.questionArea}>
-              <div className={styles.boxButton}>
-                <p className={styles.question}>
-                O que devo fazer se encontrar um problema técnico na plataforma?
-                </p>
-                <span className={styles.more}>
-                  +
-                </span>
-                </div>
-                <div className={styles.answerArea}>
-                  <p className={styles.answer}>
-                  e você encontrar um problema técnico, entre em contato com o suporte técnico da BeeTech através do formulário de contato disponível no site.
-                  </p>
-                </div>
-              </div>
+              <Box/>
             </div>
         </div>
         <footer className={styles.footer}>
