@@ -147,7 +147,7 @@
   }
 
 .section{
-    height: auto;
+    height: 100%;
     margin: auto; 
     width: 70%;
 }
