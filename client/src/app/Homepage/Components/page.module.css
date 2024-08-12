@@ -1,4 +1,73 @@
 .sidebar{
     width: 300px;
     background-color: #F9BD1C;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 0 30px 0 30px;
+}
+
+.navBar{
+    margin-top: 2.5rem;
+    margin-bottom: 6.5rem;
+}
+
+.navLink{
+    display: flex; 
+    align-items: center; 
+    gap: 1.2rem; 
+    font-size: 2.2rem; 
+    font-weight: 600;
+    color: #231F17;
+    text-decoration: none;
+    margin-top: 35px;
+    font-weight: 500;
+}
+
+.navLink:hover{
+    font-weight: 800;
+}
+
+.navLink:active{
+    font-weight: 800;
+}
+
+.division{
+    width: 270px;
+    background-color:#231F17;
+    border: none;
+    height: 1px;
+    margin-bottom: 20px;
+}
+
+.secondNavBar{
+    height: 500px;
+    width: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.titleSecNavBar{
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.navChat{
+    display: flex; 
+    align-items: center; 
+    gap: 1.2rem;
+    font-size: 1.6rem;
+    text-decoration: none;
+    color: #1E1B16;
+    font-weight: 500;
+    margin-top: 25px;
+}
+
+.profileUserChat{
+    border-radius: 50px;
+    border: 2px solid #1E1B16;
+}
+
+.navChat:hover{
+    font-weight: 700;
 }
