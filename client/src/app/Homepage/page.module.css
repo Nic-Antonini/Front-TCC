@@ -1,0 +1,10 @@
+.body{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.aside{
+    
+}
+
