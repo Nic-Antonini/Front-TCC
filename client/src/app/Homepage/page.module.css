@@ -1,0 +1,16 @@
+.allPage{
+    display: flex;
+    flex: 1 1 0%;
+    height: 100vh;
+}
+
+.secondDiv{
+    display: flex;
+    flex: 1 1 0%;
+
+}
+
+.main{
+    flex: 1 1 0%;
+    background-color: #231F17;
+}
