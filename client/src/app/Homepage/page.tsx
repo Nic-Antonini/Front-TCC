@@ -1,14 +1,14 @@
-import styles from './page.module.css'
+import React from "react";
+import style from "./page.module.css";
+import Sidebar from './Components/page'
 
-export default function user(){
+export default function Homepage() {
     return(
-        <div className={styles.body}>
-            <div>
-                <aside className={styles.sidebar}>
-
-                </aside>
-                <main className={styles.main}>
-
+        <div className={style.allPage}>
+            <div className={style.secondDiv}>
+                <Sidebar/>
+                <main className={style.main}>
+                main
                 </main>
             </div>
         </div>
