@@ -8,7 +8,7 @@ export default function Homepage() {
             <div className={style.secondDiv}>
                 <Sidebar/>
                 <main className={style.main}>
-                main
+                
                 </main>
             </div>
         </div>
