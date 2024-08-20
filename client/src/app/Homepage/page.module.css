@@ -1,16 +1,61 @@
 .allPage{
     display: flex;
     flex: 1 1 0%;
-    height: 100vh;
+
+    
 }
 
 .secondDiv{
     display: flex;
     flex: 1 1 0%;
-
 }
 
 .main{
+    display: flex;
     flex: 1 1 0%;
     background-color: #231F17;
+    flex-direction: column;
+    padding-bottom: 100px;
+    height: auto;
+}
+
+.myProfileDiv{
+    display: flex;
+    justify-content: end;
+    padding: 2.0rem 2.0rem 0 0;
+}
+
+.myProfile{
+    border-radius: 100px;
+    background-color: #51754C;
+    cursor: pointer;
+}
+
+.myProfile:hover{
+    border: 1.5px solid white;
+    box-sizing: border-box;
+}
+
+.sections{
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 0 6.4rem;
+    gap: 200px;
+}
+
+.sec1{
+    padding: 8.5rem 0 0 0;
+}
+
+.secTitle{
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 66px;
+}
+
+.profiles{
+    display: flex;
+    justify-content: start;
+    align-items: start;
 }
