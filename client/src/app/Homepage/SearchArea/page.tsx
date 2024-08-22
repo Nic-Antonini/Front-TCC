@@ -51,7 +51,7 @@ export default function searchArea() {
                 location="Bastos, São Paulo."
                 hectares={32}
                 cultivation="Abacate; Amendoim; Café; Milho."
-                pesticides="Glifosato; Atrazina."
+                pesticides={true}
                 />
 
             </div>

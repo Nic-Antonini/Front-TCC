@@ -12,7 +12,7 @@
     "autoprefixer": "^10.4.19",
     "embla-carousel": "^8.1.8",
     "embla-carousel-autoplay": "^8.1.8",
-    "embla-carousel-react": "^8.1.8",
+    "embla-carousel-react": "^8.2.0",
     "gsap": "^3.12.5",
     "lucide-react": "^0.427.0",
     "next": "14.2.2",
