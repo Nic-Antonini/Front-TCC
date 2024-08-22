@@ -53,6 +53,13 @@ export default function searchArea() {
                 cultivation="Abacate; Amendoim; Café; Milho."
                 pesticides={true}
                 />
+                <ProfileSearched1
+                profilePhoto="/beekeeper.svg"
+                name="Ana Clara Pacheco"
+                location="Marília, São Paulo."
+                availability={28}
+                species="Jandaíra; Arapuá."
+              />
 
             </div>
             <div className={styles.searchFilter}></div>
