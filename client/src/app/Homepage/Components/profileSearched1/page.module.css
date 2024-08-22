@@ -1,0 +1,43 @@
+.profile{
+    height: 220;
+    width: 100%;
+    background-color: rgba(99, 89, 64, 0.69);
+    border-radius: 30px;
+    transition: 0.2s;
+}
+
+.profile:hover{
+    transform: scale(1.03);
+    transition: 0.2s;
+}
+
+.profileLink{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+}
+
+.profilePhoto{
+    background-color: #F9BD1C;
+    border-start-start-radius: 30px;
+    border-end-start-radius: 30px;
+}
+
+.infoList{
+    padding: 30px 20px 20px 20px;
+}
+
+.profileName{
+    font-size: 24px;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.profileInfo{
+    font-size: 18px;
+    color: white;
+    margin-bottom: 12px;
+    font-weight: 300;
+}

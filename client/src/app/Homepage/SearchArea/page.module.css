@@ -53,14 +53,14 @@
     background-color: rgba(99, 89, 64, 0.69);
     width: 100%;
     margin-bottom: 35px;
-    height: 35px;
+    height: 40px;
     border-radius: 20px;
     display: flex;
     align-items: center;
 }
 
 .searchBar{
-    height: 35;
+    height: 40px;
     width: 95%;
     background-color: transparent;
     box-shadow: 0 0 0 0;

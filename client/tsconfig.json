@@ -27,7 +27,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/Faq/component/page.jsx",
-    "src/app/Faq/page.tsx"
-, "src/app/Homepage/Components/profileSearched/page.tsx"  ],
+    "src/app/Faq/page.tsx",
+    "src/app/Homepage/Components/profileSearched1/page.tsx"
+  ],
   "exclude": ["node_modules"]
 }

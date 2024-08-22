@@ -6,12 +6,14 @@ import styles from './page.module.css'
 interface ProfileProps {
     name: string;
     location: string;
-    availability: number;
+    hectares: number;
     profilePhoto: string;
+    cultivation: string;
+    pesticides: string;
 }
 
 
-export default function profileSearched({name, location, availability, profilePhoto }: ProfileProps){
+export default function profileSearched2({name, location, hectares, profilePhoto, cultivation, pesticides }: ProfileProps){
     return(
         <div className={styles.profile}>
             <Link href={'/?'} className={styles.profileLink}>
@@ -24,7 +26,9 @@ export default function profileSearched({name, location, availability, profilePh
                 <ul className={styles.infoList}>
                     <li className={styles.profileName}>{name}</li>
                     <li className={styles.profileInfo}>Proximidade: {location}</li>
-                    <li className={styles.profileInfo}>Caixas disponíveis: {availability}</li>
+                    <li className={styles.profileInfo}>Hectares da plantação: {hectares}ha</li>
+                    <li className={styles.profileInfo}>Culturas: {cultivation}</li>
+                    <li className={styles.profileInfo}>Agrotóxicos: {pesticides}</li>
                 </ul>
             </Link>
         </div>

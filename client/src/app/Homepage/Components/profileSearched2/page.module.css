@@ -7,7 +7,7 @@
 }
 
 .profile:hover{
-    transform: scale(1.02);
+    transform: scale(1.03);
     transition: 0.2s;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .profilePhoto{
-    background-color: #F9BD1C;
+    background-color: #51754C;
     border-start-start-radius: 30px;
     border-end-start-radius: 30px;
 }
