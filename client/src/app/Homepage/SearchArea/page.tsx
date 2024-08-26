@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Sidebar from "../Components/sidebar/page";
 import ProfileSearched1 from "../Components/profileSearched1/page";
 import ProfileSearched2 from "../Components/profileSearched2/page";
+import Filter1 from "../Components/filter1/page";
 import { Search } from "lucide-react";
 import styles from "./page.module.css";
 import Link from "next/link";
@@ -55,7 +56,9 @@ export default function searchArea() {
                 />
 
             </div>
-            <div className={styles.searchFilter}></div>
+            <div className={styles.searchFilter}>
+              <Filter1/>
+            </div>
           </div>
         </main>
       </div>
