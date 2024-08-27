@@ -94,5 +94,9 @@
     background-color: #F9BD1C;
     margin-top: 100px;
     border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    text-align: left;
 }
 

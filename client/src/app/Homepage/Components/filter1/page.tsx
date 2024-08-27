@@ -9,8 +9,8 @@ export default function filter1({}){
                 Filtros de pesquisa
             </h1>
 
-            <p className={styles.beeSpecies}>Espécies de abelha</p>
-
+            <p className={styles.filter}>Espécies de abelha</p>
+            <hr className={styles.division} />
             <div className={styles.specie}>
                 <input type="checkbox" />
                 <p>
@@ -30,12 +30,16 @@ export default function filter1({}){
                 </p>
             </div>
 
-            <p>Disponibilidade de caixas</p>
-            <input type="text" className={styles.input} />
+            <p className={styles.filter}>Disponibilidade de caixas</p>
+            <hr className={styles.division} />
+            <input type="number" className={styles.input} />
 
-            <p>
-                
-            </p>
+            <p className={styles.filter}>Localização</p>
+            <hr className={styles.division} />
+            <div>
+                <input type="text" />
+                <Search/>
+            </div>
         </>
     )
 }

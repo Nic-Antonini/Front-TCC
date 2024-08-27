@@ -1,0 +1,16 @@
+.title{
+    font-size: 2.6rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.division{
+    width: 270px;
+    background-color:#231F17;
+    border: none;
+    height: 1px;
+    margin-bottom: 20px;
+}
+
+.filter{
+}
