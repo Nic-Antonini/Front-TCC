@@ -28,7 +28,7 @@
     font-weight: 800;
 }
 
-.navLink:active{
+.navLink:focus{
     font-weight: 800;
 }
 
