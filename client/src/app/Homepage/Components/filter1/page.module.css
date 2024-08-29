@@ -1,11 +1,16 @@
+.main{
+    width: 80%;
+}
+
 .title{
     font-size: 2.6rem;
     font-weight: 600;
     margin-bottom: 40px;
+    text-align: center;
 }
 
 .division{
-    width: 270px;
+    width: 100%;
     background-color:#231F17;
     border: none;
     height: 1px;
@@ -13,4 +18,37 @@
 }
 
 .filter{
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    margin-top: 60px;
+}
+
+.species{
+    height: 130px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.specie{
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.checkbox{
+    all: unset;
+    display: inline-block;
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 8px;
+    border: 1px solid black;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.checkbox:checked{
+    background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGVjayI+PHBhdGggZD0iTTIwIDYgOSAxN2wtNS01Ii8+PC9zdmc+);
+    background-color: #000000;
 }
