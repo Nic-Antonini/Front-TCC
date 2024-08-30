@@ -56,9 +56,7 @@ export default function searchArea() {
                 />
 
             </div>
-            <div className={styles.searchFilter}>
               <Filter1/>
-            </div>
           </div>
         </main>
       </div>
