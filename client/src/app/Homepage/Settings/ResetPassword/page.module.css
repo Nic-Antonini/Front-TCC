@@ -1,0 +1,83 @@
+.allPage{
+    display: flex;
+    flex: 1 1 0%;
+}
+
+.secondDiv{
+    display: flex;
+    flex: 1 1 0%;
+}
+
+.main{
+    display: flex;
+    flex: 1 1 0%;
+    background-color: #231F17;
+    flex-direction: column;
+    padding: 100px 350px 100px 70px;
+    height: 100vh;
+}
+
+.title{
+    font-size: 3.2rem;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 68px;
+    gap: 47px;
+}
+
+.input{
+    height: 45px;
+    border-radius: 14px;
+    padding: 0 20px 0 20px;
+    font-size: 1.8rem;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+    background-color: rgba(99, 89, 64, 0.69);
+    color: #fff;
+}
+
+.input:focus{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+} 
+
+.input::placeholder{
+    color: rgba(255, 255, 255, 0.43);;
+}
+
+.link{
+    font-size: 1.6rem;
+    color: rgba(249, 189, 28, 0.82);
+    margin-left: 5px;
+}
+
+.button{
+    width: 210px;
+    height: 50px;
+    border-radius: 15px;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    border: none;
+    box-shadow: none;
+    background-color: #51754C;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 65px auto 0 auto;
+    cursor: pointer;
+    transition: 400ms;
+}
+
+.button:hover{
+    transform: scale(1.07);
+    transition: 400ms;
+}

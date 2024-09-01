@@ -55,7 +55,7 @@ export default function Homepage() {
             </section>
             <section className={style.sec}>
               <h1 className={style.secTitle}>
-                Apicultores em destaque:
+                Apicultores favoritados:
               </h1>
               <div className={style.profiles}>
                 <EmblaCarousel slides={SLIDES} options={OPTIONS} />

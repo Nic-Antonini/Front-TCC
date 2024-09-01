@@ -4,6 +4,7 @@ import Sidebar from "../Components/sidebar/page";
 import ProfileSearched1 from "../Components/profileSearched1/page";
 import ProfileSearched2 from "../Components/profileSearched2/page";
 import Filter1 from "../Components/filter1/page";
+import Filter2 from "../Components/filter2/page";
 import { Search } from "lucide-react";
 import styles from "./page.module.css";
 import Link from "next/link";
@@ -46,7 +47,7 @@ export default function searchArea() {
                 availability={28}
                 species="Africana; Europeia."
               />
-              <ProfileSearched2
+                <ProfileSearched2
                 profilePhoto="/farmer.svg"
                 name="Nicolas Pablo Antonini Dos Santos"
                 location="Bastos, São Paulo."
