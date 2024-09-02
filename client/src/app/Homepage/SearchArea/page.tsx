@@ -57,7 +57,7 @@ export default function searchArea() {
                 />
 
             </div>
-              <Filter1/>
+              <Filter2/>
           </div>
         </main>
       </div>
