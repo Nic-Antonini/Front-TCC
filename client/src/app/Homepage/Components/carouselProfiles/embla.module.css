@@ -4,7 +4,7 @@
     margin: auto;
     --slide-height: 26.5rem;
     --slide-spacing: 1px;
-    --slide-size: 21.3%;
+    --slide-size: 20.3%;
     display: flex;
     align-items: center;
     gap: 20px;

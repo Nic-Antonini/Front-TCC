@@ -1,12 +1,13 @@
 .allPage{
     display: flex;
+    height: auto;
     flex: 1 1 0%;
-    height: 100vh;
 }
 
 .secondDiv{
     display: flex;
     flex: 1 1 0%;
+    height: auto;
 }
 
 .main{

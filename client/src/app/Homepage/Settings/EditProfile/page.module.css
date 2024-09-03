@@ -1,0 +1,18 @@
+.allPage{
+    display: flex;
+    flex: 1 1 0%;
+}
+
+.secondDiv{
+    display: flex;
+    flex: 1 1 0%;
+}
+
+.main{
+    display: flex;
+    flex: 1 1 0%;
+    background-color: #231F17;
+    flex-direction: column;
+    padding: 100px 350px 100px 70px;
+    height: 100vh;
+}

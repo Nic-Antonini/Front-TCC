@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "src/app/Faq/component/page.jsx",
     "src/app/Faq/page.tsx",
-    "src/app/Homepage/Components/profileSearched1/page.tsx"
+    "src/app/farmer/profileSearched/page.tsx"
   ],
   "exclude": ["node_modules"]
 }
