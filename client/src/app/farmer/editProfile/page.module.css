@@ -1,0 +1,36 @@
+.main{
+    display: flex;
+    flex: 1 1 0%;
+    background-color: #231F17;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Estilo do container para a foto de perfil */
+.profile .imageContainer {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Faz a imagem ficar circular */
+    overflow: hidden; /* Garante que a imagem não vaze do container */
+    position: relative;
+    cursor: pointer;
+  }
+  
+  /* Estilo do container para a foto de capa */
+  .cover .imageContainer {
+    width: 1200px;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background-color: #304e33b0;
+  }  
+  
+  .uploadIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  
