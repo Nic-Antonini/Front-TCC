@@ -18,14 +18,22 @@
   
   /* Estilo do container para a foto de capa */
   .cover .imageContainer {
+    margin: 20px auto 0 auto;
+    border-radius: 10px;
     width: 1200px;
     height: 300px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
-    background-color: #304e33b0;
+    background-color: #30372F;
+    transition:cubic-bezier(0.075, 0.82, 0.165, 1);
   }  
   
+  .imageContainer:hover{
+    background-color: #232822;
+    transition:cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
   .uploadIcon {
     position: absolute;
     top: 50%;
