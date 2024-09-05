@@ -1,44 +1,109 @@
-.main{
-    display: flex;
-    flex: 1 1 0%;
-    background-color: #231F17;
-    flex-direction: column;
-    height: 100vh;
+.main {
+  display: flex;
+  flex: 1 1 0%;
+  background-color: #231F17;
+  flex-direction: column;
+  height: 100vh;
 }
 
 /* Estilo do container para a foto de perfil */
-.profile .imageContainer {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%; /* Faz a imagem ficar circular */
-    overflow: hidden; /* Garante que a imagem não vaze do container */
-    position: relative;
-    cursor: pointer;
-  }
-  
-  /* Estilo do container para a foto de capa */
-  .cover .imageContainer {
-    margin: 20px auto 0 auto;
-    border-radius: 10px;
-    width: 1200px;
-    height: 300px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    background-color: #30372F;
-    transition:cubic-bezier(0.075, 0.82, 0.165, 1);
-  }  
-  
-  .imageContainer:hover{
-    background-color: #232822;
-    transition:cubic-bezier(0.075, 0.82, 0.165, 1);
-  }
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: -100px; /* Ajusta a posição da foto de perfil sobre a capa */
+  margin-left: 270px;
+}
 
-  .uploadIcon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  
+.imageContainerProfile {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%; /* Faz a imagem ficar circular */
+  overflow: hidden; /* Garante que a imagem não vaze do container */
+  position: relative;
+  cursor: pointer;
+  background-color: #2f412d;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  border: 4px solid #231F17;
+}
+
+.imageContainerProfile:hover {
+  background-color: #232822;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+/* Estilo do ícone de upload para a foto de perfil */
+.uploadIconProfile {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.imageContainerProfile:hover .uploadIconProfile {
+  opacity: 1;
+}
+
+.imageContainerProfile:hover .imgProfile{
+  filter: brightness(0.5); 
+}
+
+/* Estilo do container para a foto de capa */
+.cover {
+  display: flex;
+  justify-content: center;
+}
+
+.imageContainer {
+  margin: 20px auto 0 auto;
+  border-radius: 10px;
+  width: 1200px;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background-color: #30372F;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.imageContainer:hover .imgProfile{
+  filter: brightness(0.5); 
+}
+
+.uploadIcon{
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.imgProfile{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageContainer:hover .uploadIcon{
+  opacity: 1;
+}
+
+.imageContainer:hover {
+  background-color: #232822;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+}
+
+/* Estilo do ícone de upload para a foto de capa */
+.uploadIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Estilo para o nome de perfil */
+.profileName {
+  color: white;
+  font-size: 18px;
+  margin-top: 10px;
+}
