@@ -170,8 +170,8 @@
 
 .confirmProfile{
     position: fixed;
-    bottom: 20px;
-    right: 20px; 
+    bottom: 1000px;
+    right: 100px; 
     cursor: pointer;
     transition: 0.2s;
 }
