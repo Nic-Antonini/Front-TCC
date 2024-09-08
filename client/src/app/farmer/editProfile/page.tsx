@@ -100,60 +100,61 @@ export default function EditProfile({name, description, nameFarm, location, hect
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox} />
                                 <p>
-                                    cultivo 1
+                                    Soja
                                 </p>
                             </div>
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 2
+                                    Milho
                                 </p>
                             </div>
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 3
+                                    Café
                                 </p>
                             </div>
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 4
+                                    Laranja
                                 </p>
                             </div>
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 5
+                                    Abacate
                                 </p>
                             </div>
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 6
+                                    Maçâ
                                 </p>
                             </div>
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 7
+                                    Abóbora
                                 </p>
                             </div>
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 8
+                                    Sorgo
                                 </p>
                             </div>
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 9
+                                    Melancia
                                 </p>
-                            </div>                            <div className={styles.culture}>
+                            </div>                            
+                            <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 10
+                                    Amendoim
                                 </p>
                             </div>
                             <div className={styles.culture}>

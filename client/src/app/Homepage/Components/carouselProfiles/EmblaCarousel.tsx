@@ -8,6 +8,7 @@ import {
 } from './EmblaCarouselArrowButtons'
 import useEmblaCarousel from 'embla-carousel-react';
 import styles from './embla.module.css'
+import Image from 'next/image';
 
 type PropType = {
   slides: number[]
@@ -32,7 +33,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className={styles.embla__container}>
           {slides.map((index) => (
             <div className={styles.embla__slide} key={index}>
-              <div className={styles.embla__slide__number}>{index + 1}</div>
+              <Image src={'/beekeeper.svg'} width={260} height={320} alt='' className={styles.embla__slide__number}/>
             </div>
           ))}
         </div>
