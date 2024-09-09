@@ -11,12 +11,11 @@ interface ProfileProps {
     name: string;
     description: string;
     nameFarm: string;
-    location: string;
     hectares: number;
 }
 
 
-export default function EditProfile({name, description, nameFarm, location, hectares}: ProfileProps) {
+export default function EditProfile({name, description, nameFarm, hectares}: ProfileProps) {
     const [profileImage, setProfileImage] = useState<string>('/agriProfile.svg'); // Imagem padrão do profile
     const [coverImage, setCoverImage] = useState<string>('/default-cover.png'); // Imagem padrão do cover
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Para armazenar a mensagem de erro
@@ -160,19 +159,19 @@ export default function EditProfile({name, description, nameFarm, location, hect
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 11
+                                    Mandioca
                                 </p>
                             </div>
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 12
+                                    Maconha
                                 </p>
                             </div>
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    cultivo 13
+                                    Berinjela
                                 </p>
                             </div>
                         </div>

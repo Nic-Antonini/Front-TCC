@@ -9,7 +9,8 @@ export default function editProfile(){
         <div className={styles.allPage}>
             <div className={styles.secondDiv}>
                 <Sidebar />
-                <Farmer name='Nome do agricultor' description='Informações sobre o agricultor...'/>
+                <Farmer name='Nome do agricultor' description='Informações sobre o agricultor...'
+                nameFarm='Fazenda do Quico Zinho' hectares={10}/>
             </div>
         </div>
     )
