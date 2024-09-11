@@ -179,8 +179,12 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
                 </section>
                 <div className={styles.farm}>
                     <h1 className={styles.titleFarm}>Propriedade</h1>
-                    <p className={styles.nameFarm}>Nome da propriedade: {nameFarm}</p>
-                    <p className={styles.hecFarm}>Hectares de plantação: {hectares}</p>
+                    <p className={styles.nameFarm}>Nome da propriedade: 
+                        <input type="text" name="nameFarm" className={styles.nameFarmEdit} placeholder={nameFarm}/> 
+                    </p>
+                    <p className={styles.hecFarm}>Hectares de plantação: 
+                        <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(hectares)}/>
+                    </p>
                 </div>
             </div>
             <Check size={25} color="#fff" className={styles.confirmProfile}/>
