@@ -137,14 +137,15 @@ export default function Home() {
     <main className={styles.main}>
       <header className={styles.header}>
         <div className={styles.container}>
-          <Image src="/logo.svg"
-            alt="Logo do sistema BeeTech"
-            width={170}
-            height={70}
-            priority
-            className={styles.logo}
-          />
-
+          <Link href={'/'}>
+            <Image src="/logo.svg"
+              alt="Logo do sistema BeeTech"
+              width={170}
+              height={70}
+              priority
+              className={styles.logo}
+            />
+          </Link>
           <nav className={styles.nav}>
             <a href="/#SobreNós" className={styles.navLink}>Sobre Nós</a>
             <a href="/#ComoFunciona" className={styles.navLink}>Como Funciona?</a>
