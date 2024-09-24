@@ -165,7 +165,7 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
                             <div className={styles.culture}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    Maconha
+                                    Abacaxi
                                 </p>
                             </div>
                             <div className={styles.culture}>
@@ -185,6 +185,10 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
                     <p className={styles.hecFarm}>Hectares de plantação: 
                         <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(hectares)}/>
                     </p>
+
+                    <div className={styles.map}>
+                        
+                    </div>
                 </div>
             </div>
             <Check size={25} color="#fff" className={styles.confirmProfile}/>
