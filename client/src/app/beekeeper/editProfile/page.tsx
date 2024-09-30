@@ -17,7 +17,7 @@ interface ProfileProps {
 
 
 export default function EditProfile({name, description, nameFarm, hectares}: ProfileProps) {
-    const [profileImage, setProfileImage] = useState<string>('/agriProfile.svg'); // Imagem padrão do profile
+    const [profileImage, setProfileImage] = useState<string>('/apiProfile.svg'); // Imagem padrão do profile
     const [coverImage, setCoverImage] = useState<string>('/default-cover.png'); // Imagem padrão do cover
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Para armazenar a mensagem de erro
 
@@ -141,84 +141,84 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
                         <p className={styles.descTitle}>Descrição</p>
                         <textarea name="description" id="description" className={styles.description}>{description}</textarea>
                     </div>
-                    <div className={styles.culturesArea}>
-                        <h1 className={styles.titleCultures}>
-                            Cultivos
+                    <div className={styles.speciesArea}>
+                        <h1 className={styles.titleSpecies}>
+                            Espécies
                         </h1>
-                        <div className={styles.cultures}>
-                            <div className={styles.culture}>
+                        <div className={styles.species}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox} />
                                 <p>
                                     Soja
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Milho
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Café
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Laranja
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Abacate
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Maçâ
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Abóbora
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Sorgo
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Melancia
                                 </p>
                             </div>                            
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Amendoim
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Mandioca
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Abacaxi
                                 </p>
                             </div>
-                            <div className={styles.culture}>
+                            <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
                                     Berinjela

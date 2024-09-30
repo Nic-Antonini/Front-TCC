@@ -22,13 +22,13 @@
   overflow: hidden; /* Garante que a imagem não vaze do container */
   position: relative;
   cursor: pointer;
-  background-color: #2f412d;
+  background-color: #F9BD1C;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   border: 4px solid #231F17;
 }
 
 .imageContainerProfile:hover {
-  background-color: #232822;
+  background-color: #b98800;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
@@ -94,7 +94,7 @@
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  background-color: #30372F;
+  background-color: #c79200;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
@@ -118,7 +118,7 @@
 }
 
 .imageContainer:hover {
-  background-color: #232822;
+  background-color: #8a6500;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 
 }
@@ -161,7 +161,7 @@
   width: 870px;
   height: 300px;
   border: none;
-  background-color: rgba(72, 98, 69, 0.195);
+  background-color: #926b0096;
   box-sizing: border-box;
 }
 
@@ -202,7 +202,7 @@
   right: 50px; 
   cursor: pointer;
   transition: 0.2s;
-  background-color: #43603f;
+  background-color: #F9BD1C;
   border-radius: 100%;
   padding: 20px;
 }
@@ -212,7 +212,7 @@
   transition: 0.2s;
 }
 
-.cultures{
+.species{
   width: 250px;
   padding-left: 5px;
   height: 220px;
@@ -220,14 +220,14 @@
   overflow-x: hidden;
 }
 
-.titleCultures{
+.titleSpecies{
   font-size: 2.0rem;
   color: #fff;
   font-weight: 600;
   margin-bottom: 40px;
 }
 
-.culture{
+.specie{
   display: flex;
   align-items: center;
   font-size: 1.6rem;
@@ -241,14 +241,14 @@
   width: 1.6rem;
   height: 1.6rem;
   margin-right: 8px;
-  border: 1px solid #43603f;
+  border: 1px solid #F9BD1C;
   border-radius: 3px;
   box-sizing: border-box;
 }
 
 .checkbox:checked{
   background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZWNrIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiLz48L3N2Zz4=);
-  background-color: #43603f;
+  background-color: #F9BD1C;
 }
 
 .farm{
@@ -321,7 +321,7 @@
 }
 
 .searchInput{
-  background-color: #2f412d;
+  background-color: #b98800;
   border: none;
   box-shadow: none;
   height: 22px;
@@ -329,15 +329,26 @@
   margin-right: 10px;
   padding: 8px;
   box-sizing: border-box;
-  color: white;
+  color: #231F17;
   width: 300px;
 }
 
+.searchInput::placeholder{
+  color: #231f17a8;
+}
+
+.searchInput:focus{
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+
 .searchBtn{
-  background-color: #43603f;
+  background-color: #F9BD1C;
   border: none;
   box-sizing: border-box;
-  color: white;
+  color: #231F17;
   font-size: 12px;
   width: 50px;
   height: 22px;
