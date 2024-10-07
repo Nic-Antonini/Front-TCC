@@ -1,5 +1,5 @@
 Coisas a fazer:
     -Arrumar o carrousel de imagens para galeria do perfil e para homepage onde ficará os perfis recomendados;
-    -Terminar tela de forgot password;
     -Ver com o alexandre a API do google maps;
-    -Olhar a documentação do nodemailer para usar no back-end.
+    -Olhar a documentação do nodemailer para usar no back-end;
+    -Pesquisar como colocar o manter-me conectado no back-end.
