@@ -18,7 +18,6 @@ export default function login(){
                 <input type="password" id='password' placeholder='Insira sua senha' className={styles.input}/>
                 <div className={styles.extra}>
                 <p className={styles.text}> <input type="checkbox" name="rememberMe" id="rememberMe" className={styles.check} /> Manter-me conectado </p>
-                <Link href={'/'} className={styles.link}>Esqueci a senha</Link>
                 </div>
                 <input type="button" value="Entrar" className={styles.btn} />
                 <Link className={styles.link} href={'/Cadastro'}>Não possui conta? Cadastre-se</Link>

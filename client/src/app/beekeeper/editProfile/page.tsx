@@ -149,55 +149,55 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
                             <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox} />
                                 <p>
-                                    Soja
+                                    Uruçu
                                 </p>
                             </div>
                             <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    Milho
+                                    Mandaçaia
                                 </p>
                             </div>
                             <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    Café
+                                    Jataí
                                 </p>
                             </div>
                             <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    Laranja
+                                    Manduri
                                 </p>
                             </div>
                             <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    Abacate
+                                    Bugia
                                 </p>
                             </div>
                             <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    Maçâ
+                                    Mirim
                                 </p>
                             </div>
                             <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    Abóbora
+                                    Européia
                                 </p>
                             </div>
                             <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    Sorgo
+                                    Africana
                                 </p>
                             </div>
                             <div className={styles.specie}>
                                 <input type="checkbox" className={styles.checkbox}/>
                                 <p>
-                                    Melancia
+                                    Arapuá
                                 </p>
                             </div>                            
                             <div className={styles.specie}>
@@ -228,11 +228,11 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
                     </div>
                 </section>
                 <div className={styles.farm}>
-                    <h1 className={styles.titleFarm}>Propriedade</h1>
-                    <p className={styles.nameFarm}>Nome da propriedade: 
+                    <h1 className={styles.titleFarm}>Apiário</h1>
+                    <p className={styles.nameFarm}>Nome do apiário: 
                         <input type="text" name="nameFarm" className={styles.nameFarmEdit} placeholder={nameFarm}/> 
                     </p>
-                    <p className={styles.hecFarm}>Hectares de plantação: 
+                    <p className={styles.hecFarm}>Colméias disponíveis: 
                         <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(hectares)}/>
                     </p>
 
