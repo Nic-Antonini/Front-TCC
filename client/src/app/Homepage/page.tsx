@@ -4,19 +4,12 @@ import style from "./page.module.css";
 import Sidebar from "./Components/sidebar/page";
 import Image from "next/image";
 import Link from "next/link";
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 export default function Homepage() {
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  };
+
 
   return (
     <div className={style.allPage}>
@@ -41,44 +34,7 @@ export default function Homepage() {
                 Apicultores que talvez você se interesse:
               </h1>
               <div className={style.profiles}>
-                <Slider className={style.list} {...settings}>
-                <div className={style.profile}>
 
-                </div>
-                <div className={style.profile}>
-
-</div>
-<div className={style.profile}>
-
-</div>
-<div className={style.profile}>
-
-</div>
-
-<div className={style.profile}>
-
-</div>
-<div className={style.profile}>
-
-</div>
-<div className={style.profile}>
-
-</div>
-<div className={style.profile}>
-
-</div>
-<div className={style.profile}>
-
-</div>
-<div className={style.profile}>
-
-</div>
-<div className={style.profile}>
-
-</div>
-
-
-                </Slider>
               </div>
             </section>
             <section className={style.sec}>
