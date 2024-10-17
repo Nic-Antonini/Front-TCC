@@ -4,13 +4,30 @@ import style from "./page.module.css";
 import Sidebar from "./Components/sidebar/page";
 import Image from "next/image";
 import Link from "next/link";
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
 
 export default function Homepage() {
-
-
-
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 7
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 5
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
   return (
     <div className={style.allPage}>
       <div className={style.secondDiv}>
@@ -33,9 +50,39 @@ export default function Homepage() {
               <h1 className={style.secTitle}>
                 Apicultores que talvez você se interesse:
               </h1>
-              <div className={style.profiles}>
+              <Carousel  responsive={responsive} className={style.profiles}>
+                  <div className={style.profile}>
+                    <Image src="/beekeeper.svg" alt="Perfil Recomendado" width={200} height={200}/>
+                  </div>
 
-              </div>
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                  </div>
+              </Carousel>
             </section>
             <section className={style.sec}>
               <h1 className={style.secTitle}>
