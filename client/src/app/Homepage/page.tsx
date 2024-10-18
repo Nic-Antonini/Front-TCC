@@ -52,52 +52,117 @@ export default function Homepage() {
               </h1>
               <Carousel  responsive={responsive} className={style.profiles}>
                   <div className={style.profile}>
-                    <Image src="/beekeeper.svg" alt="Perfil Recomendado" width={200} height={200}/>
+                    <Image src="/beekeeper.svg" alt="Perfil Recomendado" width={215} height={215}/>
                   </div>
 
                   <div className={style.profile}>
-                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
                   </div>
 
                   <div className={style.profile}>
-                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
                   </div>
 
                   <div className={style.profile}>
-                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
                   </div>
 
                   <div className={style.profile}>
-                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
                   </div>
 
                   <div className={style.profile}>
-                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
                   </div>
 
                   <div className={style.profile}>
-                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
                   </div>
 
                   <div className={style.profile}>
-                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={200} height={200}/>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
                   </div>
               </Carousel>
             </section>
-            <section className={style.sec}>
+            <section className={style.sec1}>
               <h1 className={style.secTitle}>
                 Apicultores mais próximos de você:
               </h1>
+              
               <div className={style.profiles}>
-             
+              <Carousel  responsive={responsive} className={style.profiles}>
+                  <div className={style.profile}>
+                    <Image src="/beekeeper.svg" alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+              </Carousel>
               </div>
             </section>
-            <section className={style.sec}>
+            <section className={style.sec1}>
               <h1 className={style.secTitle}>
                 Apicultores favoritados:
               </h1>
               <div className={style.profiles}>
-                
+              <Carousel  responsive={responsive} className={style.profiles}>
+                  <div className={style.profile}>
+                    <Image src="/beekeeper.svg" alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+
+                  <div className={style.profile}>
+                    <Image src='/beekeeper.svg' alt="Perfil Recomendado" width={215} height={215}/>
+                  </div>
+              </Carousel>
               </div>
             </section>
           </div>
