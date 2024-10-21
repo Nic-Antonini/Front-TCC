@@ -43,6 +43,7 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
     };
 
     useEffect(() => {
+        
         const initMap = () => {
           // Inicializa o mapa centrado nas coordenadas fornecidas
           const initialLocation = { lat: -21.9385624, lng: -50.5269037 };

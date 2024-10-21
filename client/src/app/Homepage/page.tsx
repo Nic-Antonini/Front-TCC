@@ -9,6 +9,7 @@ import 'react-multi-carousel/lib/styles.css';
 
 
 export default function Homepage() {
+  
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
