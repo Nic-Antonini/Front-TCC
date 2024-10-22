@@ -15,7 +15,7 @@ export default function suport(){
                 <form action="/Homepage/Settings/Suport" className={styles.form}>
                     <input  className={styles.input} type="password" name="password" placeholder='Insira sua senha atual'/>
                     <input className={styles.input} type="password" name="passwordConfirm" placeholder='Insira sua nova senha'/>
-                    <Link href={'/ForgotPassword'} className={styles.link}>Esqueceu sua senha?</Link>
+    
                     <input className={styles.button} type="submit" value="Redefinir"  />
                 </form>
                 </main>
