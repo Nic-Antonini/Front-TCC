@@ -11,6 +11,7 @@ interface profileProps{
 }
 
 export default function publicProfile({coverImage, profileImage, userName}: profileProps){
+
     return(
         <div className={styles.main}>
 
@@ -39,7 +40,9 @@ export default function publicProfile({coverImage, profileImage, userName}: prof
                 <p>{userName}</p>
             </div>
 
+            <div className={styles.more}>
 
+            </div>
 
         </div>
     )
