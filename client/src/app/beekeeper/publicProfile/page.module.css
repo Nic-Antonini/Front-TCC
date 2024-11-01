@@ -21,7 +21,6 @@
     border-radius: 50%; 
     overflow: hidden; /* Garante que a imagem não vaze do container */
     position: relative;
-    cursor: pointer;
     background-color: #F9BD1C;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
     border: 4px solid #231F17;
@@ -54,7 +53,6 @@
     height: 300px;
     overflow: hidden;
     position: relative;
-    cursor: pointer;
     background-color: #c79200;
   }
   
@@ -128,22 +126,7 @@
     color: #fff;
     margin: 24px 0 0 24px;
   }
-  
-  .confirmProfile{
-    position: fixed;
-    bottom: 50px;
-    right: 50px; 
-    cursor: pointer;
-    transition: 0.2s;
-    background-color: #F9BD1C;
-    border-radius: 100%;
-    padding: 20px;
-  }
-  
-  .confirmProfile:hover{
-    transform: scale(1.15);
-    transition: 0.2s;
-  }
+
   
   .species{
     width: 250px;

@@ -15,6 +15,11 @@ interface profileProps{
 export default function publicProfile({coverImage, profileImage, userName, userDesc, nameApiary, numHives}: profileProps){
 
     userName = 'Laís Teixeira de Freitas'
+    profileImage = '/beekeeper.svg'
+    coverImage = '/default-cover.png'
+    userDesc = 'Descrição......'
+    nameApiary = 'Apiário Freitas'
+    numHives = 21
 
     return(
         <div className={styles.main}>
@@ -23,6 +28,8 @@ export default function publicProfile({coverImage, profileImage, userName, userD
             <div className={styles.cover}>
                 <div className={styles.imageContainer}>
                     <Image
+                    width={1200}
+                    height={300}
                     src={coverImage}
                     alt="Foto de capa do usuário"
                     layout="full"
@@ -35,6 +42,8 @@ export default function publicProfile({coverImage, profileImage, userName, userD
             <div className={styles.profile}>
                 <div className={styles.imageContainerProfile}>
                     <Image
+                    width={200}
+                    height={200}
                     src={profileImage}
                     alt="Foto de capa do usuário"
                     layout="full"
