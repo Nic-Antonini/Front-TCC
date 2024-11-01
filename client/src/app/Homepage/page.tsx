@@ -7,9 +7,16 @@ import Link from "next/link";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
+interface props{
+  userProfile: string;
+  userProfilePhoto: string;
+}
 
-export default function Homepage() {
+export default function Homepage({userProfile, userProfilePhoto}: props) {
   
+  userProfile = '/beekeeper/profile'
+  userProfilePhoto = '/farmer.svg'
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -35,10 +42,10 @@ export default function Homepage() {
         <Sidebar />
         <main className={style.main}>
           <div className={style.myProfileDiv}>
-            <Link href={"/MeuPerfil"}>
+            <Link href={userProfile}>
               <Image
                 alt="Meu Perfil"
-                src="/AgriProfile.svg"
+                src={userProfilePhoto}
                 className={style.myProfile}
                 width={50}
                 height={50}
