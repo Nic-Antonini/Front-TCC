@@ -47,17 +47,9 @@ export default function searchArea() {
                 availability={28}
                 species="Africana; Europeia."
               />
-                <ProfileSearched2
-                profilePhoto="/farmer.svg"
-                name="Nicolas Pablo Antonini Dos Santos"
-                location="Bastos, São Paulo."
-                hectares={32}
-                cultivation="Abacate; Amendoim; Café; Milho."
-                pesticides={true}
-                />
 
             </div>
-              <Filter2/>
+              <Filter1/>
           </div>
         </main>
       </div>

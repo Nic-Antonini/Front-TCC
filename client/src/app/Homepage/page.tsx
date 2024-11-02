@@ -7,9 +7,27 @@ import Link from "next/link";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
+interface props{
+  myProfile: string,
+  myPhoto: string,
+  myUserType: string,
+  favUsers: string,
+  favUsersPhoto: string
+}
 
-export default function Homepage() {
+export default function Homepage({myProfile, myPhoto, myUserType, favUsers, favUsersPhoto}: props) {
+
+  const colors = {
+    beekeeper: '#F9BD1C',
+    farmer: '#51754C',
+  }
   
+  myProfile = '/farmer/profile';
+  myPhoto = '/farmer.svg';
+  myUserType = colors.farmer;
+  
+
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -35,21 +53,22 @@ export default function Homepage() {
         <Sidebar />
         <main className={style.main}>
           <div className={style.myProfileDiv}>
-            <Link href={"/MeuPerfil"}>
+            <Link href={myProfile}>
               <Image
                 alt="Meu Perfil"
-                src="/AgriProfile.svg"
+                src={myPhoto}
                 className={style.myProfile}
                 width={50}
                 height={50}
                 priority
+                style={{backgroundColor: myUserType}}
               />
             </Link>
           </div>
           <div className={style.sections}>
             <section className={style.sec1}>
               <h1 className={style.secTitle}>
-                Apicultores que talvez você se interesse:
+                Usuários que talvez você se interesse:
               </h1>
               <Carousel  responsive={responsive} className={style.profiles}>
                   <div className={style.profile}>
@@ -87,7 +106,7 @@ export default function Homepage() {
             </section>
             <section className={style.sec1}>
               <h1 className={style.secTitle}>
-                Apicultores mais próximos de você:
+                Usuários mais próximos de você:
               </h1>
               
               <div className={style.profiles}>
@@ -128,7 +147,7 @@ export default function Homepage() {
             </section>
             <section className={style.sec1}>
               <h1 className={style.secTitle}>
-                Apicultores favoritados:
+                Usuários favoritados:
               </h1>
               <div className={style.profiles}>
               <Carousel  responsive={responsive} className={style.profiles}>

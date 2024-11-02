@@ -9,10 +9,9 @@ interface ProfileProps {
     hectares: number;
     profilePhoto: string;
     cultivation: string;
-    pesticides: boolean;
 }
 
-export default function profileSearched2({name, location, hectares, profilePhoto, cultivation, pesticides }: ProfileProps){
+export default function profileSearched2({name, location, hectares, profilePhoto, cultivation }: ProfileProps){
     return(
         <div className={styles.profile}>
             <Link href={'/?'} className={styles.profileLink}>
@@ -27,7 +26,6 @@ export default function profileSearched2({name, location, hectares, profilePhoto
                     <li className={styles.profileInfo}>Proximidade: {location}</li>
                     <li className={styles.profileInfo}>Hectares da plantação: {hectares}ha</li>
                     <li className={styles.profileInfo}>Culturas: {cultivation}</li>
-                    <li className={styles.profileInfo}>Faz uso de agrotóxico? {pesticides ? "Sim" : "Não"}</li>
                 </ul>
             </Link>
         </div>
