@@ -14,7 +14,7 @@ interface profileProps{
     numHec: number;
 }
 
-export default function publicProfile({coverImage, profileImage, userName, userDesc, nameProperty, numHec}: profileProps){
+export default function profile({coverImage, profileImage, userName, userDesc, nameProperty, numHec}: profileProps){
 
     userName = 'Nome do agricultor'
     profileImage = '/farmer.svg'
