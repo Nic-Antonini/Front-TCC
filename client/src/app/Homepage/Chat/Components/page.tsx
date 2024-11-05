@@ -8,14 +8,24 @@ export default function SideBar(){
     return(
         <aside className={styles.sidebar}>
         <nav className={styles.navBar}>
+
             {/* BOTÃO DE VOLTAR E INPUT PARA PROCURAR CONVERSA */}
+
+            <Link href={'/Homepage'} className={styles.backBtn}>
+                <ArrowLeftCircleIcon color="#231F17" size={33}/>
+            </Link>
+
+            <div className={styles.divInput}>
+                <input type="text" name="" id="" className={styles.searchInput} />
+            </div>
+
         </nav>
 
+        <p className={styles.titleSecNavBar}>Conversas</p> 
         <hr className={styles.division} />
 
         <nav className={styles.secondNavBar}>
             {/*LISTA DE CONVERSAS*/}
-        <p className={styles.titleSecNavBar}>Conversas</p> 
 
 
 
