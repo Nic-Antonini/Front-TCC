@@ -1,0 +1,323 @@
+.main {
+    display: flex;
+    flex: 1 1 0%;
+    background-color: #231F17;
+    flex-direction: column;
+    height: auto;
+    padding-bottom: 100px;
+    padding-top: 40px;
+  }
+  
+  /* Estilo do container para a foto de perfil */
+  .profile {
+    display: flex;
+    align-items: start;
+    margin-top: -100px; /* Ajusta a posição da foto de perfil sobre a capa */
+    margin-left: 390px;
+  }
+  
+  .imageContainerProfile {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; 
+    overflow: hidden; /* Garante que a imagem não vaze do container */
+    position: relative;
+    background-color: #43603f;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    border: 4px solid #231F17;
+  }
+  
+  /* Estilo para o input de alterar nome do usuário */
+  
+  .nameProfile{
+    margin-top: 130px;
+    margin-left: 20px;
+    padding: 5px;
+    color: #fff;
+    font-size: 1.8rem;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    width: 700px;
+  }
+  
+  /* Estilo do container para a foto de capa */
+  .cover {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .imageContainer {
+    margin: 20px auto 0 auto;
+    border-radius: 10px;
+    width: 1200px;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    background-color: #30372F;
+  }
+  
+  .uploadIcon{
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .imgProfile{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .imageContainer:hover .uploadIcon{
+    opacity: 1;
+  }
+  
+  /* Estilo para o nome de perfil */
+  .profileName {
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  /* ...... */
+  
+  .more{
+    display: flex;
+    flex-direction: column;
+    margin: 100px auto 0 auto;
+    
+  }
+  
+  .section1{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 65px;
+  }
+  
+  .descArea{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 15px;
+    width: 870px;
+    height: 300px;
+    border: none;
+    background-color: rgba(72, 98, 69, 0.195);
+    box-sizing: border-box;
+  }
+
+  .description{
+    width: 100%;
+    height: 250px;
+    border-radius: 15px;
+    background-color: transparent;
+    box-sizing: border-box;
+    resize: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.6rem;
+    color: rgb(215, 215, 215);
+    padding: 10px 24px 24px 24px;
+    border: none;
+  }
+  
+  
+  .descTitle{
+    font-size: 2.0rem;
+    font-weight: 500;
+    color: #fff;
+    margin: 24px 0 0 24px;
+  }
+
+  
+  .species{
+    width: 250px;
+    padding-left: 5px;
+    height: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  .titleSpecies{
+    font-size: 2.0rem;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+  
+  .specie{
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .farm{
+    margin-top: 150px;
+  }
+  
+  .titleFarm{
+    font-size: 30px;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  
+  .nameFarm{
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 4px;
+    margin-left: 10px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .hecFarm{
+    font-size: 1.6rem;
+    color: #fff;
+    margin-left: 10px;
+    font-weight: 300;
+  }
+  
+  .nameFarmEdit{
+    color: #fff;
+    font-size: 1.6rem;
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    width: 300px;
+    margin-left: 4px;
+    font-weight: 200;
+  }
+  
+  .nameFarmEdit::placeholder{
+    color: #fff;
+    font-weight: 200;
+  }
+  
+  .hecFarmEdit{
+    color: #fff;
+    font-size: 1.6rem;
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    width: 90px;
+    margin-left: 4px;
+    font-weight: 200;
+    margin-top: 4px;
+  }
+  
+  .hecFarmEdit::placeholder{
+    color: #fff;
+    font-weight: 200;
+  }
+  
+  .map{
+    margin-top: 35px;
+    height: 600px;
+    border-radius: 20px;
+  }
+  
+  .searchInput{
+    background-color: #b98800;
+    border: none;
+    box-shadow: none;
+    height: 22px;
+    border-radius: 10px;
+    margin-right: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+    color: 2f412d;
+    width: 300px;
+  }
+  
+  .searchInput::placeholder{
+    color: #231f17a8;
+  }
+  
+  .searchInput:focus{
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  
+  
+  .searchBtn{
+    background-color: #43603f;
+    border: none;
+    box-sizing: border-box;
+    color: white;
+    font-size: 12px;
+    width: 50px;
+    height: 22px;
+    border-radius: 10px;
+  }
+
+  .backBtn{
+    position: fixed;
+    top: 50px;
+    left: 50px; 
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .backBtn:hover{
+    transform: translateX(-10px);
+  }
+
+  .container .input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .container {
+    user-select: none;
+  }
+  
+  .svg {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-top: 130px;
+    height: 35px;
+    width: 35px;
+    transition: all 0.3s;
+    fill: #666;
+    cursor: pointer;
+  }
+  
+  .container .svg:hover {
+    transform: scale(1.05);
+  }
+  
+  .container .input:checked ~ .svg {
+    fill: #ffeb49;
+  }
+
+.chatLink{
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+}
+
+.chatBtn{
+  margin-top: 129px;
+  margin-left: 20px;
+  background-color: #43603f;
+  border: none;
+  width: 150px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.chatBtn:hover{
+  transform: scale(1.05);
+}

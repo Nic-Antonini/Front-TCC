@@ -10,18 +10,18 @@ interface profileProps{
     profileImage: string;
     userName: string;
     userDesc: string;
-    nameApiary: string;
-    numHives: number;
+    nameProperty: string;
+    numHec: number;
 }
 
-export default function profile({coverImage, profileImage, userName, userDesc, nameApiary, numHives}: profileProps){
+export default function profile({coverImage, profileImage, userName, userDesc, nameProperty, numHec}: profileProps){
 
-    userName = 'Laís Teixeira de Freitas'
-    profileImage = '/beekeeper.svg'
+    userName = 'Nome do agricultor'
+    profileImage = '/farmer.svg'
     coverImage = '/default-cover.png'
     userDesc = 'Descrição......'
-    nameApiary = 'Apiário Freitas'
-    numHives = 21
+    nameProperty = 'Nome da propriedade'
+    numHec = 21
 
     useEffect(() => {
         const initMap = () => {
@@ -144,15 +144,17 @@ export default function profile({coverImage, profileImage, userName, userDesc, n
                     </div>
                 </section>
                 <div className={styles.farm}>
-                    <h1 className={styles.titleFarm}>Apiário</h1>
-                    <p className={styles.nameFarm}>Nome do apiário: {nameApiary}
+                    <h1 className={styles.titleFarm}>Propriedade</h1>
+                    <p className={styles.nameFarm}>Nome da propriedade: {nameProperty}
                     </p>
-                    <p className={styles.hecFarm}>Colméias disponíveis: {JSON.stringify(numHives)}
+                    <p className={styles.hecFarm}>Hectares de plantação: {JSON.stringify(numHec)}
                     </p>
 
                     <div className={styles.map}>
+
                     {/* Div onde o mapa será renderizado */}
-                    <div id="map" className={styles.map}> 
+                    <div id="map" className={styles.map}>
+                        
                     </div>
                     </div>
                 </div>

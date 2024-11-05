@@ -26,7 +26,6 @@
 
 .myProfile{
     border-radius: 100px;
-    background-color: #51754C;
     cursor: pointer;
 }
 
@@ -61,7 +60,7 @@
     display: flex;
     flex-direction: row;
     width: 1380px;
-    height: 300px;
+    height: 240px;
 }
 
 .profile{
@@ -69,9 +68,11 @@
     width: 215px;
     height: 215px;
     border-radius: 20px;
-    cursor: pointer;
+    transition: cubic-bezier(0.42, 0, 0.26, 1.14);
 }
 
 .profile:hover{
+    cursor: pointer;
     transform: scale(1.05);
+    transition: cubic-bezier(1, -0.02, 0.07, 1.19);
 }

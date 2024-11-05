@@ -57,13 +57,6 @@ export default function filter2(){
                 </div>
             </div>
 
-            <p className={styles.filter}>Plantação com agrotóxico</p>
-            <hr className={styles.division} />
-            <select className={styles.select}>
-                <option value="" data-default disabled selected></option>
-                <option className={styles.option} value="não">Sem agrotóxico</option>
-                <option className={styles.option} value="todos">Tanto faz</option>
-            </select>
 
             <p className={styles.filter}>Localização</p>
 
