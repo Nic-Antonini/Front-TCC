@@ -22,7 +22,7 @@ export default function Homepage({myProfile, myPhoto, myUserType, favUsers, favU
     farmer: '#51754C',
   }
   
-  myProfile = '/farmer/profile';
+  myProfile = '/Farmer/profile';
   myPhoto = '/farmer.svg';
   myUserType = colors.farmer;
   
