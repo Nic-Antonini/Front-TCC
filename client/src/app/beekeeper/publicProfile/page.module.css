@@ -22,7 +22,7 @@
     border-radius: 50%; 
     overflow: hidden; /* Garante que a imagem não vaze do container */
     position: relative;
-    background-color: #43603f;
+    background-color: #F9BD1C;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
     border: 4px solid #231F17;
   }
@@ -54,7 +54,7 @@
     height: 300px;
     overflow: hidden;
     position: relative;
-    background-color: #30372F;
+    background-color: #c79200;
   }
   
   .uploadIcon{
@@ -102,7 +102,7 @@
     width: 870px;
     height: 300px;
     border: none;
-    background-color: rgba(72, 98, 69, 0.195);
+    background-color: #926b0096;
     box-sizing: border-box;
   }
 
@@ -230,7 +230,7 @@
     margin-right: 10px;
     padding: 8px;
     box-sizing: border-box;
-    color: 2f412d;
+    color: #231F17;
     width: 300px;
   }
   
@@ -246,10 +246,10 @@
   
   
   .searchBtn{
-    background-color: #43603f;
+    background-color: #F9BD1C;
     border: none;
     box-sizing: border-box;
-    color: white;
+    color: #231F17;
     font-size: 12px;
     width: 50px;
     height: 22px;
@@ -302,14 +302,14 @@
 
 .chatLink{
   text-decoration: none;
-  color: white;
+  color: #231F17;
   font-size: 15px;
 }
 
 .chatBtn{
   margin-top: 129px;
   margin-left: 20px;
-  background-color: #43603f;
+  background-color: #F9BD1C;
   border: none;
   width: 150px;
   height: 40px;
@@ -321,4 +321,3 @@
 .chatBtn:hover{
   transform: scale(1.05);
 }
-
