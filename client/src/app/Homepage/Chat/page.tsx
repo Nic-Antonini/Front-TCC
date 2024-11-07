@@ -1,6 +1,6 @@
 'use client'
 import styles from './page.module.css';
-import SideBar from './Components/page';
+import SideBar from './Components/sideBar/page';
 
 export default function Chat(){
     return(

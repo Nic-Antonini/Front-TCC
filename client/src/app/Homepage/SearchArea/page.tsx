@@ -40,16 +40,16 @@ export default function searchArea() {
                 />
                 <Search strokeWidth={3} className={styles.iconSearch} />
               </div>
-              <ProfileSearched1
-                profilePhoto="/beekeeper.svg"
+              <ProfileSearched2
+                profilePhoto="/farmer.svg"
                 name="Laís Teixeira"
                 location="Tupã, São Paulo."
-                availability={28}
-                species="Africana; Europeia."
+                hectares={28}
+                cultivation="Africana; Europeia."
               />
 
             </div>
-              <Filter1/>
+              <Filter2/>
           </div>
         </main>
       </div>

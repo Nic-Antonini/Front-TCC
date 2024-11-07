@@ -81,7 +81,11 @@
   }
   
   .backBtn{
+    transition: transform 0.3s ease;
+  }
 
+  .backBtn:hover{
+    transform: translateX(-10px);
   }
 
 .divInput{

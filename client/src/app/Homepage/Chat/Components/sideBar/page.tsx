@@ -27,7 +27,7 @@ export default function SideBar(){
         <nav className={styles.secondNavBar}>
             {/*LISTA DE CONVERSAS*/}
 
-
+        
 
         </nav>
     </aside>
