@@ -47,8 +47,8 @@
   }
   
   .secondNavBar {
-    height: 500px;
-    width: 300px;
+    height: 700px;
+    width: 455px;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -60,6 +60,20 @@
     margin-bottom: 5px;
   }
   
+  .secondNavBar::-webkit-scrollbar {
+    width: 8px;               /* width of the entire scrollbar */
+  }
+  
+  .secondNavBar::-webkit-scrollbar-track {
+    background: transparent;        /* color of the tracking area */
+  }
+  
+  .secondNavBar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.361);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid transparent;  /* creates padding around scroll thumb */
+  }
+
   .navChat {
     display: flex;
     align-items: center;
@@ -90,7 +104,7 @@
 
 .divInput{
   width: 370px;
-  height: 40px;
+  height: 35px;
   background-color: #1e1b16;
   border-radius: 20px;
   display: flex;

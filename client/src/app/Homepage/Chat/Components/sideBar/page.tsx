@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image"
 import {Search, ArrowLeftCircleIcon } from "lucide-react";
+import ProfileChat from "../profileChat/page";
 
 export default function SideBar(){
     return(
@@ -26,8 +27,22 @@ export default function SideBar(){
 
         <nav className={styles.secondNavBar}>
             {/*LISTA DE CONVERSAS*/}
-
         
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
+        <ProfileChat imageAddress='/beekeeper.svg' userName='nome do apicultor' chatLink=""/>
 
         </nav>
     </aside>

@@ -3,13 +3,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 interface props{
-    imageAddress: string;
+    imageAddress: string,
+    userName: string,
+    chatLink: string,
 }
 
-export default function profileChat({imageAddress}: props){
+export default function profileChat({imageAddress, userName, chatLink}: props){
     return(
-        <div className={styles.profileContainer}>
-            <Image src={imageAddress} alt='Foto de perfil do usuário' height={55} width={55} />
+        <div className={styles.a}>
+            <div className={styles.profileContainer}>
+                <Link href={chatLink} className={styles.link}>
+                    <Image src={imageAddress} alt='Foto de perfil do usuário' height={50} width={50} className={styles.profileImg} />
+                    <p className={styles.userName}>{userName}</p>
+                </Link>
+            </div>
+            <hr className={styles.division}/>
         </div>
     )
 }

@@ -1,0 +1,39 @@
+.a{
+    width: 100%;
+}
+
+.profileContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.link{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+}
+
+.profileImg{
+    border-radius: 100px;
+    border: 1px solid black;
+    margin-left: 25px;
+}
+
+.userName{
+    margin-left: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+
+.division{
+    width: 410px;
+    background-color: #231f175f;
+    border: none;
+    height: 1px;
+    margin-bottom: 20px;
+}
