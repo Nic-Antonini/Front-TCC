@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Sidebar from "../Components/sidebar/page";
-import ProfileSearched1 from "../../farmer/profileSearched/page";
-import ProfileSearched2 from "../../beekeeper/profileSearched/page";
-import Filter1 from "../../farmer/filter/page";
-import Filter2 from "../../beekeeper/filter/page";
+import ProfileSearched1 from "../../Farmer/profileSearched/page";
+import ProfileSearched2 from "../../Beekeeper/profileSearched/page";
+import Filter1 from "../../Farmer/filter/page";
+import Filter2 from "../../Beekeeper/filter/page";
 import { Search } from "lucide-react";
 import styles from "./page.module.css";
 import Link from "next/link";
@@ -47,9 +47,8 @@ export default function searchArea() {
                 hectares={28}
                 cultivation="Africana; Europeia."
               />
-
             </div>
-              <Filter2/>
+            <Filter2 />
           </div>
         </main>
       </div>

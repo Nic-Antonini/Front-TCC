@@ -104,11 +104,12 @@
 
 .divInput{
   width: 370px;
-  height: 35px;
+  height: 37px;
   background-color: #1e1b16;
   border-radius: 20px;
   display: flex;
   align-items: center;
+  padding-right: 12px;
 }
 
 .searchInput{
