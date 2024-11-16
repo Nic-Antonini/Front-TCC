@@ -1,3 +1,4 @@
+
 // ProfileChat.tsx
 import styles from './page.module.css';
 import Link from 'next/link';
@@ -21,3 +22,4 @@ export default function ProfileChat({ imageAddress, userName, chatId, setCurrent
         </div>
     );
 }
+
