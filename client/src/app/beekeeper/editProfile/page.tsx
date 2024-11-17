@@ -1,3 +1,5 @@
+//EDITAR PERFIL (APICULTOR)
+
 'use client';
 import { useEffect } from "react";
 import Image from "next/image";
@@ -11,12 +13,12 @@ type ImageType = 'profile' | 'cover';
 interface ProfileProps {
     name: string;
     description: string;
-    nameFarm: string;
-    hectares: number;
+    nameApiary: string;
+    availability: number;
 }
 
 
-export default function EditProfile({name, description, nameFarm, hectares}: ProfileProps) {
+export default function EditProfile({name, description, nameApiary, availability}: ProfileProps) {
     const [profileImage, setProfileImage] = useState<string>('/apiProfile.svg'); // Imagem padrão do profile
     const [coverImage, setCoverImage] = useState<string>('/default-cover.png'); // Imagem padrão do cover
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Para armazenar a mensagem de erro
@@ -231,10 +233,10 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
                 <div className={styles.farm}>
                     <h1 className={styles.titleFarm}>Apiário</h1>
                     <p className={styles.nameFarm}>Nome do apiário: 
-                        <input type="text" name="nameFarm" className={styles.nameFarmEdit} placeholder={nameFarm}/> 
+                        <input type="text" name="nameFarm" className={styles.nameFarmEdit} placeholder={nameApiary}/> 
                     </p>
                     <p className={styles.hecFarm}>Colméias disponíveis: 
-                        <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(hectares)}/>
+                        <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(availability)}/>
                     </p>
 
                     <div className={styles.map}>
