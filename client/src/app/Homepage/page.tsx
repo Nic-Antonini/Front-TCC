@@ -21,6 +21,7 @@ export default function Homepage({ myProfile, myPhoto, myUserType, favUsers = []
     farmer: '#51754C',
   };
 
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
