@@ -1,12 +1,10 @@
-//EDITAR PERFIL (AGRICULTOR)
-
 'use client';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Dropzone, { DropEvent, FileRejection } from "react-dropzone";
-import { Upload, Check} from 'lucide-react';
-import { useState } from "react";
+import axios from "axios";
+import { Upload, Check } from 'lucide-react';
 
 type ImageType = 'profile' | 'cover';
 
@@ -17,11 +15,16 @@ interface ProfileProps {
     hectares: number;
 }
 
+interface Cultivo {
+    Cult_Id: number;
+    Cult_Nome: string;
+}
 
-export default function EditProfile({name, description, nameFarm, hectares}: ProfileProps) {
+export default function EditProfile({ name, description, nameFarm, hectares }: ProfileProps) {
     const [profileImage, setProfileImage] = useState<string>('/agriProfile.svg'); // Imagem padrão do profile
     const [coverImage, setCoverImage] = useState<string>('/default-cover.png'); // Imagem padrão do cover
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Para armazenar a mensagem de erro
+    const [cultivos, setCultivos] = useState<Cultivo[]>([]); // Estado para armazenar cultivos vindos da API
 
     const handleDrop = (acceptedFiles: File[], type: ImageType) => {
         const file = acceptedFiles[0];
@@ -44,54 +47,22 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
         }
     };
 
+    // Fetch cultivos da API
+    // Certifique-se de que a variável de ambiente é reconhecida
     useEffect(() => {
-        const initMap = () => {
-          // Inicializa o mapa centrado nas coordenadas fornecidas
-          const initialLocation = { lat: -21.9385624, lng: -50.5269037 };
-          const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
-            center: initialLocation,
-            zoom: 17.25, // Nível de zoom desejado
-          });
-    
-          const geocoder = new google.maps.Geocoder();
-    
-          // Coloca um marcador na localização inicial
-          const marker = new google.maps.Marker({
-            map: map,
-            position: initialLocation,
-          });
-    
-          // Evento para buscar a localização quando o botão é clicado
-          document.getElementById('search-btn')?.addEventListener('click', () => {
-            const address = (document.getElementById('address') as HTMLInputElement).value;
-            geocoder.geocode({ address }, (results, status) => {
-              if (status === 'OK') {
-                map.setCenter(results[0].geometry.location);
-    
-                // Coloca um marcador no endereço encontrado
-                const newMarker = new google.maps.Marker({
-                  map: map,
-                  position: results[0].geometry.location,
-                });
-              } else {
-                alert('Geocode não foi bem-sucedido: ' + status);
-              }
-            });
-          });
+        const fetchCultivos = async () => {
+            try {
+                console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/cultivo`); // Para confirmar a URL
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/cultivo`);
+                setCultivos(response.data.dados); // Assuma que o JSON tem uma propriedade "dados"
+            } catch (error) {
+                console.error('Erro ao buscar cultivos:', error);
+            }
         };
-    
-        if (typeof window !== 'undefined') {
-          // Carregar o script do Google Maps
-          const script = document.createElement('script');
-          script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAfFGULetLC2YCwaOZsFZSmsm135I5f2jQ&callback=initMap`;
-          script.defer = true;
-          script.async = true;
-          document.head.appendChild(script);
-    
-          // Define a função global para o callback
-          (window as any).initMap = initMap;
-        }
-      }, []);
+
+        fetchCultivos();
+    }, []);
+
 
     return (
         <main className={styles.main}>
@@ -148,84 +119,12 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
                             Cultivos
                         </h1>
                         <div className={styles.cultures}>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox} />
-                                <p>
-                                    Soja
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Milho
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Café
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Laranja
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Abacate
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Maçâ
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Abóbora
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Sorgo
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Melancia
-                                </p>
-                            </div>                            
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Amendoim
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Mandioca
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Abacaxi
-                                </p>
-                            </div>
-                            <div className={styles.culture}>
-                                <input type="checkbox" className={styles.checkbox}/>
-                                <p>
-                                    Berinjela
-                                </p>
-                            </div>
+                            {cultivos.map((cultivo) => (
+                                <div key={cultivo.Cult_Id} className={styles.culture}>
+                                    <input type="checkbox" className={styles.checkbox} />
+                                    <p>{cultivo.Cult_Nome}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -237,19 +136,6 @@ export default function EditProfile({name, description, nameFarm, hectares}: Pro
                     <p className={styles.hecFarm}>Hectares de plantação: 
                         <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(hectares)}/>
                     </p>
-
-                    <div className={styles.map}>
-                              {/* Campo de busca para o endereço */}
-                    <div id="search-box">
-                        <input type="text" className={styles.searchInput} id="address" placeholder="Digite o endereço ou localização aproximada" />
-                        <button id="search-btn" className={styles.searchBtn}>Buscar</button>
-                    </div>
-
-                    {/* Div onde o mapa será renderizado */}
-                    <div id="map" className={styles.map}>
-                        
-                    </div>
-                    </div>
                 </div>
             </div>
             <Check size={25} color="#fff" className={styles.confirmProfile}/>

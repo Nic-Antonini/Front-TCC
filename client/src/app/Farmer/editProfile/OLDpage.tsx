@@ -1,11 +1,10 @@
-//EDITAR PERFIL (APICULTOR)
+//EDITAR PERFIL (AGRICULTOR)
 
 'use client';
 import { useEffect } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Dropzone, { DropEvent, FileRejection } from "react-dropzone";
-import axios from "axios";
 import { Upload, Check} from 'lucide-react';
 import { useState } from "react";
 
@@ -14,21 +13,15 @@ type ImageType = 'profile' | 'cover';
 interface ProfileProps {
     name: string;
     description: string;
-    nameApiary: string;
-    availability: number;
-}
-
-interface Especie {
-    Espe_Id: number;
-    Espe_Nome: string;
+    nameFarm: string;
+    hectares: number;
 }
 
 
-export default function EditProfile({name, description, nameApiary, availability}: ProfileProps) {
-    const [profileImage, setProfileImage] = useState<string>('/apiProfile.svg'); // Imagem padrão do profile
+export default function EditProfile({name, description, nameFarm, hectares}: ProfileProps) {
+    const [profileImage, setProfileImage] = useState<string>('/agriProfile.svg'); // Imagem padrão do profile
     const [coverImage, setCoverImage] = useState<string>('/default-cover.png'); // Imagem padrão do cover
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Para armazenar a mensagem de erro
-    const [especies, setEspecies] = useState<Especie[]>([]);
 
     const handleDrop = (acceptedFiles: File[], type: ImageType) => {
         const file = acceptedFiles[0];
@@ -52,7 +45,6 @@ export default function EditProfile({name, description, nameApiary, availability
     };
 
     useEffect(() => {
-        
         const initMap = () => {
           // Inicializa o mapa centrado nas coordenadas fornecidas
           const initialLocation = { lat: -21.9385624, lng: -50.5269037 };
@@ -100,20 +92,6 @@ export default function EditProfile({name, description, nameApiary, availability
           (window as any).initMap = initMap;
         }
       }, []);
-
-      useEffect(() => {
-        const fetchEspecies = async () => {
-            try {
-                console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/especie`); // Para confirmar a URL
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/especie`);
-                setEspecies(response.data.dados); // Assuma que o JSON tem uma propriedade "dados"
-            } catch (error) {
-                console.error('Erro ao buscar especie:', error);
-            }
-        };
-
-        fetchEspecies();
-    }, []);
 
     return (
         <main className={styles.main}>
@@ -165,27 +143,99 @@ export default function EditProfile({name, description, nameApiary, availability
                         <p className={styles.descTitle}>Descrição</p>
                         <textarea name="description" id="description" className={styles.description}>{description}</textarea>
                     </div>
-                    <div className={styles.speciesArea}>
-                        <h1 className={styles.titleSpecies}>
-                            Espécies
+                    <div className={styles.culturesArea}>
+                        <h1 className={styles.titleCultures}>
+                            Cultivos
                         </h1>
-                        <div className={styles.species}>
-                            {especies.map((especie) => (
-                                <div key={especie.Espe_Id} className={styles.specie}>
-                                    <input type="checkbox" className={styles.checkbox} />
-                                    <p>{especie.Espe_Nome}</p>
-                                </div>
-                            ))}
+                        <div className={styles.cultures}>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox} />
+                                <p>
+                                    Soja
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Milho
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Café
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Laranja
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Abacate
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Maçâ
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Abóbora
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Sorgo
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Melancia
+                                </p>
+                            </div>                            
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Amendoim
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Mandioca
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Abacaxi
+                                </p>
+                            </div>
+                            <div className={styles.culture}>
+                                <input type="checkbox" className={styles.checkbox}/>
+                                <p>
+                                    Berinjela
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </section>
                 <div className={styles.farm}>
-                    <h1 className={styles.titleFarm}>Apiário</h1>
-                    <p className={styles.nameFarm}>Nome do apiário: 
-                        <input type="text" name="nameFarm" className={styles.nameFarmEdit} placeholder={nameApiary}/> 
+                    <h1 className={styles.titleFarm}>Propriedade</h1>
+                    <p className={styles.nameFarm}>Nome da propriedade: 
+                        <input type="text" name="nameFarm" className={styles.nameFarmEdit} placeholder={nameFarm}/> 
                     </p>
-                    <p className={styles.hecFarm}>Colméias disponíveis: 
-                        <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(availability)}/>
+                    <p className={styles.hecFarm}>Hectares de plantação: 
+                        <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(hectares)}/>
                     </p>
 
                     <div className={styles.map}>

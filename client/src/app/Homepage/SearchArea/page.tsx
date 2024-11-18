@@ -10,6 +10,12 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
+interface props {
+  myProfile: string;
+  myPhoto: string;
+  myUserType: string;
+}
+
 export default function searchArea() {
   return (
     <div className={styles.allPage}>
