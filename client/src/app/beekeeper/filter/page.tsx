@@ -1,8 +1,33 @@
+'use client';
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import styles from './page.module.css'
+import axios from "axios";
+
+interface Cultivo {
+    Cult_Id: number;
+    Cult_Nome: string;
+}
 
 export default function filter2(){
+
+    const [cultivos, setCultivos] = useState<Cultivo[]>([]);
+
+    useEffect(() => {
+        const fetchCultivos = async () => {
+            try {
+                console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/cultivo`); // Para confirmar a URL
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/cultivo`);
+                setCultivos(response.data.dados); // Assuma que o JSON tem uma propriedade "dados"
+            } catch (error) {
+                console.error('Erro ao buscar cultivos:', error);
+            }
+        };
+
+        fetchCultivos();
+    }, []);
+
     return(
     <div className={styles.searchFilter}>
         <div className={styles.main}>
@@ -13,48 +38,12 @@ export default function filter2(){
             <p className={styles.filter}>Cultivos</p>
             <hr className={styles.division} />
             <div className={styles.cultures}>
-                <div className={styles.culture}>
+            {cultivos.map((cultivo) => (
+                <div key={cultivo.Cult_Id} className={styles.culture}>
                     <input type="checkbox" className={styles.checkbox}/>
-                    <p>
-                        cultivo 1
-                    </p>
+                    <p>{cultivo.Cult_Nome}</p>
                 </div>
-                <div className={styles.culture}>
-                    <input type="checkbox" className={styles.checkbox}/>
-                    <p>
-                        cultivo 2
-                    </p>
-                </div>
-                <div className={styles.culture}>
-                    <input type="checkbox" className={styles.checkbox}/>
-                    <p>
-                        cultivo 3
-                    </p>
-                </div>
-                <div className={styles.culture}>
-                    <input type="checkbox" className={styles.checkbox}/>
-                    <p>
-                        cultivo 4
-                    </p>
-                </div>
-                <div className={styles.culture}>
-                    <input type="checkbox" className={styles.checkbox}/>
-                    <p>
-                        cultivo 5
-                    </p>
-                </div>
-                <div className={styles.culture}>
-                    <input type="checkbox" className={styles.checkbox}/>
-                    <p>
-                        cultivo 6
-                    </p>
-                </div>
-                <div className={styles.culture}>
-                    <input type="checkbox" className={styles.checkbox}/>
-                    <p>
-                        cultivo 7
-                    </p>
-                </div>
+            ))}
             </div>
 
 

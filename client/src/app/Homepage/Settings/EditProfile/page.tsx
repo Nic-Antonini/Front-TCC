@@ -10,8 +10,8 @@ export default function editProfile(){
         <div className={styles.allPage}>
             <div className={styles.secondDiv}>
                 <Sidebar />
-                <Beekeeper name='Nome do agricultor' description='Informações sobre o agricultor...'
-                nameApiary='Nome da propriedade' availability={10}  />
+                <Farmer name='Nome do agricultor' description='Informações sobre o agricultor...'
+                nameFarm='Nome da propriedade' hectares={10}  />
             </div>
         </div>
     )
