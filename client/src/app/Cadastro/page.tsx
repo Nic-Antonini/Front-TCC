@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import styles from './page.module.css';
 import Link from "next/link";
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
     name: string;
