@@ -1,5 +1,0 @@
-Coisas a fazer:
-    -Adicionar carrousel no editar perfil;
-    -Ver com o alexandre a API do google maps;
-    -Olhar a documentação do nodemailer para usar no back-end;
-    -Pesquisar como colocar o manter-me conectado no back-end.
