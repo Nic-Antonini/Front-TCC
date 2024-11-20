@@ -6,7 +6,7 @@ const nextConfig = {
                 protocol: 'http',
                 hostname: '192.168.0.17',
                 port: '3333', // A porta do seu servidor back-end
-                pathname: '/upload/**',
+                pathname: '/public/upload/**',
             },
         ],
     },
