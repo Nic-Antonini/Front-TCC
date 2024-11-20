@@ -1,0 +1,14 @@
+-Edit Profile (farmer/beekeeper) = Acabar a conex. da API nela (Nome, Desc, Fotos) depois colocar
+cultivo/especie, propriedade/apiario, hectares/caixas e googleMaps de novo;
+
+-Falar com o pessoal da documentação para adicionar informações como Autenticação JWS, Criptografia de senha,
+Responsividade/Galeria/TelaPropriedade/TelaApiário/Feedback(avaliação) como implementações futuras;
+
+-Pegar Chave API do googleMaps com o Alexandre, pesquisar como colocar o mapa e o input no next para gerar lat, lnt através da demarcação
+e autocomplete no input e conectar com o banco de dados;
+
+-Talvez tenha que mudar a tabela cultivo e espécie;
+
+-Mudar a tabela Propriedade e Apiário = tirar not null;
+
+-Pedir ajuda para o Ewerton ou Allan para usar o nodemailer e conectar no contato/suporte.

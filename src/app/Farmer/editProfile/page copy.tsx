@@ -1,34 +1,30 @@
-//EDITAR PERFIL (APICULTOR)
-
 'use client';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Dropzone, { DropEvent, FileRejection } from "react-dropzone";
 import axios from "axios";
-import { Upload, Check} from 'lucide-react';
-import { useState } from "react";
+import { Upload, Check } from 'lucide-react';
 
 type ImageType = 'profile' | 'cover';
 
 interface ProfileProps {
     name: string;
     description: string;
-    nameApiary: string;
-    availability: number;
+    nameFarm: string;
+    hectares: number;
 }
 
-interface Especie {
-    Espe_Id: number;
-    Espe_Nome: string;
+interface Cultivo {
+    Cult_Id: number;
+    Cult_Nome: string;
 }
 
-
-export default function EditProfile({name, description, nameApiary, availability}: ProfileProps) {
-    const [profileImage, setProfileImage] = useState<string>('/apiProfile.svg'); // Imagem padrão do profile
+export default function EditProfile({ name, description, nameFarm, hectares }: ProfileProps) {
+    const [profileImage, setProfileImage] = useState<string>('/agriProfile.svg'); // Imagem padrão do profile
     const [coverImage, setCoverImage] = useState<string>('/default-cover.png'); // Imagem padrão do cover
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Para armazenar a mensagem de erro
-    const [especies, setEspecies] = useState<Especie[]>([]);
+    const [cultivos, setCultivos] = useState<Cultivo[]>([]); // Estado para armazenar cultivos vindos da API
 
     const handleDrop = (acceptedFiles: File[], type: ImageType) => {
         const file = acceptedFiles[0];
@@ -51,19 +47,22 @@ export default function EditProfile({name, description, nameApiary, availability
         }
     };
 
-      useEffect(() => {
-        const fetchEspecies = async () => {
+    // Fetch cultivos da API
+    // Certifique-se de que a variável de ambiente é reconhecida
+    useEffect(() => {
+        const fetchCultivos = async () => {
             try {
-                console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/especie`); // Para confirmar a URL
-                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/especie`);
-                setEspecies(response.data.dados); // Assuma que o JSON tem uma propriedade "dados"
+                console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/cultivo`); // Para confirmar a URL
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/cultivo`);
+                setCultivos(response.data.dados); // Assuma que o JSON tem uma propriedade "dados"
             } catch (error) {
-                console.error('Erro ao buscar especie:', error);
+                console.error('Erro ao buscar cultivos:', error);
             }
         };
 
-        fetchEspecies();
+        fetchCultivos();
     }, []);
+
 
     return (
         <main className={styles.main}>
@@ -115,27 +114,27 @@ export default function EditProfile({name, description, nameApiary, availability
                         <p className={styles.descTitle}>Descrição</p>
                         <textarea name="description" id="description" className={styles.description}>{description}</textarea>
                     </div>
-                    <div className={styles.speciesArea}>
-                        <h1 className={styles.titleSpecies}>
-                            Espécies
+                    <div className={styles.culturesArea}>
+                        <h1 className={styles.titleCultures}>
+                            Cultivos
                         </h1>
-                        <div className={styles.species}>
-                            {especies.map((especie) => (
-                                <div key={especie.Espe_Id} className={styles.specie}>
+                        <div className={styles.cultures}>
+                            {cultivos.map((cultivo) => (
+                                <div key={cultivo.Cult_Id} className={styles.culture}>
                                     <input type="checkbox" className={styles.checkbox} />
-                                    <p>{especie.Espe_Nome}</p>
+                                    <p>{cultivo.Cult_Nome}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </section>
                 <div className={styles.farm}>
-                    <h1 className={styles.titleFarm}>Apiário</h1>
-                    <p className={styles.nameFarm}>Nome do apiário: 
-                        <input type="text" name="nameFarm" className={styles.nameFarmEdit} placeholder={nameApiary}/> 
+                    <h1 className={styles.titleFarm}>Propriedade</h1>
+                    <p className={styles.nameFarm}>Nome da propriedade: 
+                        <input type="text" name="nameFarm" className={styles.nameFarmEdit} placeholder={nameFarm}/> 
                     </p>
-                    <p className={styles.hecFarm}>Colméias disponíveis: 
-                        <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(availability)}/>
+                    <p className={styles.hecFarm}>Hectares de plantação: 
+                        <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(hectares)}/>
                     </p>
 
                     <div className={styles.map}>
