@@ -48,11 +48,9 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
     };
 
     // Fetch cultivos da API
-    // Certifique-se de que a variável de ambiente é reconhecida
     useEffect(() => {
         const fetchCultivos = async () => {
             try {
-                console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/cultivo`); // Para confirmar a URL
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/cultivo`);
                 setCultivos(response.data.dados); // Assuma que o JSON tem uma propriedade "dados"
             } catch (error) {
@@ -63,17 +61,16 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
         fetchCultivos();
     }, []);
 
-
     return (
         <main className={styles.main}>
-            {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>} {/* Mostrar mensagem de erro se houver */}
-            
+            {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
+
             <div className={styles.cover}>
-                <Dropzone 
+                <Dropzone
                     onDrop={(files: File[], fileRejections: FileRejection[], event: DropEvent) => {
                         handleDrop(files, 'cover');
                         handleRejection(fileRejections);
-                    }} 
+                    }}
                     accept={{
                         'image/png': ['.png'],
                         'image/jpeg': ['.jpeg', '.jpg'],
@@ -89,11 +86,11 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
             </div>
 
             <div className={styles.profile}>
-                <Dropzone 
+                <Dropzone
                     onDrop={(files: File[], fileRejections: FileRejection[], event: DropEvent) => {
                         handleDrop(files, 'profile');
                         handleRejection(fileRejections);
-                    }} 
+                    }}
                     accept={{
                         'image/png': ['.png'],
                         'image/jpeg': ['.jpeg', '.jpg'],
@@ -106,7 +103,7 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
                         </div>
                     )}
                 </Dropzone>
-                <input type="text" name="name" className={styles.nameProfile} placeholder={name}/> 
+                <input type="text" name="name" className={styles.nameProfile} placeholder={name} /> 
             </div>
             <div className={styles.more}>
                 <section className={styles.section1}>
@@ -138,16 +135,14 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
                     </p>
 
                     <div className={styles.map}>
-                              {/* Campo de busca para o endereço */}
-                    <div id="search-box">
-                        <input type="text" className={styles.searchInput} id="address" placeholder="Digite o endereço ou localização aproximada" />
-                        <button id="search-btn" className={styles.searchBtn}>Buscar</button>
-                    </div>
+                        {/* Campo de busca para o endereço */}
+                        <div id="search-box">
+                            <input type="text" className={styles.searchInput} id="address" placeholder="Digite o endereço ou localização aproximada" />
+                            <button id="search-btn" className={styles.searchBtn}>Buscar</button>
+                        </div>
 
                         {/* Div onde o mapa será renderizado */}
-                        <div id="map" className={styles.map}>
-                            
-                        </div>
+                        <div id="map" className={styles.map}></div>
                     </div>
                 </div>
             </div>

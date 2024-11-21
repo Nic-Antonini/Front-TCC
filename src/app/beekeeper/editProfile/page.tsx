@@ -1,13 +1,10 @@
-//EDITAR PERFIL (APICULTOR)
-
 'use client';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Dropzone, { DropEvent, FileRejection } from "react-dropzone";
 import axios from "axios";
-import { Upload, Check} from 'lucide-react';
-import { useState } from "react";
+import { Upload, Check } from 'lucide-react';
 
 type ImageType = 'profile' | 'cover';
 
@@ -23,8 +20,7 @@ interface Especie {
     Espe_Nome: string;
 }
 
-
-export default function EditProfile({name, description, nameApiary, availability}: ProfileProps) {
+export default function EditProfile({ name, description, nameApiary, availability }: ProfileProps) {
     const [profileImage, setProfileImage] = useState<string>('/apiProfile.svg'); // Imagem padrão do profile
     const [coverImage, setCoverImage] = useState<string>('/default-cover.png'); // Imagem padrão do cover
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Para armazenar a mensagem de erro
@@ -51,14 +47,14 @@ export default function EditProfile({name, description, nameApiary, availability
         }
     };
 
-      useEffect(() => {
+    // Fetch espécies da API
+    useEffect(() => {
         const fetchEspecies = async () => {
             try {
-                console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/especie`); // Para confirmar a URL
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/especie`);
                 setEspecies(response.data.dados); // Assuma que o JSON tem uma propriedade "dados"
             } catch (error) {
-                console.error('Erro ao buscar especie:', error);
+                console.error('Erro ao buscar especies:', error);
             }
         };
 
@@ -68,13 +64,13 @@ export default function EditProfile({name, description, nameApiary, availability
     return (
         <main className={styles.main}>
             {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>} {/* Mostrar mensagem de erro se houver */}
-            
+
             <div className={styles.cover}>
-                <Dropzone 
+                <Dropzone
                     onDrop={(files: File[], fileRejections: FileRejection[], event: DropEvent) => {
                         handleDrop(files, 'cover');
                         handleRejection(fileRejections);
-                    }} 
+                    }}
                     accept={{
                         'image/png': ['.png'],
                         'image/jpeg': ['.jpeg', '.jpg'],
@@ -90,11 +86,11 @@ export default function EditProfile({name, description, nameApiary, availability
             </div>
 
             <div className={styles.profile}>
-                <Dropzone 
+                <Dropzone
                     onDrop={(files: File[], fileRejections: FileRejection[], event: DropEvent) => {
                         handleDrop(files, 'profile');
                         handleRejection(fileRejections);
-                    }} 
+                    }}
                     accept={{
                         'image/png': ['.png'],
                         'image/jpeg': ['.jpeg', '.jpg'],
@@ -102,12 +98,12 @@ export default function EditProfile({name, description, nameApiary, availability
                     {({ getRootProps, getInputProps }) => (
                         <div {...getRootProps()} className={styles.imageContainerProfile}>
                             <input {...getInputProps()} />
-                            <Image src={profileImage} alt="Profile Image" layout="fill" className={styles.imgProfile}/>
+                            <Image src={profileImage} alt="Profile Image" layout="fill" className={styles.imgProfile} />
                             <Upload color="#ffffff" strokeWidth={2.25} className={styles.uploadIconProfile} />
                         </div>
                     )}
                 </Dropzone>
-                <input type="text" name="name" className={styles.nameProfile} placeholder={name}/> 
+                <input type="text" name="name" className={styles.nameProfile} placeholder={name} />
             </div>
             <div className={styles.more}>
                 <section className={styles.section1}>
@@ -139,16 +135,14 @@ export default function EditProfile({name, description, nameApiary, availability
                     </p>
 
                     <div className={styles.map}>
-                              {/* Campo de busca para o endereço */}
-                    <div id="search-box">
-                        <input type="text" className={styles.searchInput} id="address" placeholder="Digite o endereço ou localização aproximada" />
-                        <button id="search-btn" className={styles.searchBtn}>Buscar</button>
-                    </div>
+                        {/* Campo de busca para o endereço */}
+                        <div id="search-box">
+                            <input type="text" className={styles.searchInput} id="address" placeholder="Digite o endereço ou localização aproximada" />
+                            <button id="search-btn" className={styles.searchBtn}>Buscar</button>
+                        </div>
 
                         {/* Div onde o mapa será renderizado */}
-                        <div id="map" className={styles.map}>
-                            
-                        </div>
+                        <div id="map" className={styles.map}></div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,8 @@
 .allPage{
     display: flex;
     flex: 1 1 0%;
+    min-height: 100vh;
+    background-color: #231F17;
 }
 
 .secondDiv{
@@ -9,3 +11,14 @@
 }
 
 
+/* Loader */
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    background-color: #231F17;
+    color: white;
+    height: 100vh;
+  }
