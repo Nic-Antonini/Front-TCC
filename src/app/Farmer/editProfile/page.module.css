@@ -314,13 +314,13 @@
   font-weight: 200;
 }
 
-.map{
+.map {
   margin-top: 35px;
   height: 600px;
   border-radius: 20px;
 }
 
-.searchInput{
+.searchInput {
   background-color: #2f412d;
   border: none;
   box-shadow: none;
@@ -331,9 +331,10 @@
   box-sizing: border-box;
   color: white;
   width: 300px;
+  margin-bottom: 35px;
 }
 
-.searchBtn{
+.searchBtn {
   background-color: #43603f;
   border: none;
   box-sizing: border-box;
