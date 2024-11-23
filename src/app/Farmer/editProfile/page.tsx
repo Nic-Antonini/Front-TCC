@@ -33,7 +33,7 @@ const containerStyle = {
 const libraries: Libraries = ['places'];
 
 export default function EditProfile({ name, description, nameFarm, hectares }: ProfileProps) {
-  const [profileImage, setProfileImage] = useState<string>('/agriProfile.svg');
+  const [profileImage, setProfileImage] = useState<string>('/farmer.png');
   const [coverImage, setCoverImage] = useState<string>('/default-cover.png');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [cultivos, setCultivos] = useState<Cultivo[]>([]);
@@ -137,7 +137,7 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()} className={styles.imageContainer}>
               <input {...getInputProps()} />
-              <Image src={coverImage} alt="Cover Image" layout="fill" className={styles.imgProfile} />
+              <Image src={coverImage} alt="Cover Image" layout="fill" className={styles.imgProfile} priority/>
               <Upload color="#ffffff" strokeWidth={2.25} className={styles.uploadIcon} />
             </div>
           )}
@@ -158,7 +158,7 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()} className={styles.imageContainerProfile}>
               <input {...getInputProps()} />
-              <Image src={profileImage} alt="Profile Image" layout="fill" className={styles.imgProfile} />
+              <Image src={profileImage} alt="Profile Image" layout="fill" className={styles.imgProfile} priority/>
               <Upload color="#ffffff" strokeWidth={2.25} className={styles.uploadIconProfile} />
             </div>
           )}
