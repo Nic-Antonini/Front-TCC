@@ -1,10 +1,12 @@
 'use client';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Dropzone, { DropEvent, FileRejection } from "react-dropzone";
 import axios from "axios";
 import { Upload, Check } from 'lucide-react';
+import { GoogleMap, LoadScript, Autocomplete } from '@react-google-maps/api';
+import { Libraries } from '@react-google-maps/api'; // Importando o tipo correto para libraries
 
 type ImageType = 'profile' | 'cover';
 
@@ -20,11 +22,62 @@ interface Especie {
     Espe_Nome: string;
 }
 
+const containerStyle = {
+    width: '100%',
+    height: '400px',
+    borderRadius: '10px',
+  };
+  
+  // Usando o tipo correto para as bibliotecas
+  const libraries: Libraries = ['places'];
+
 export default function EditProfile({ name, description, nameApiary, availability }: ProfileProps) {
-    const [profileImage, setProfileImage] = useState<string>('/apiProfile.svg'); // Imagem padrão do profile
+    const [profileImage, setProfileImage] = useState<string>('/beekeeper.png'); // Imagem padrão do profile
     const [coverImage, setCoverImage] = useState<string>('/default-cover.png'); // Imagem padrão do cover
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Para armazenar a mensagem de erro
     const [especies, setEspecies] = useState<Especie[]>([]);
+    const [location, setLocation] = useState({ lat: -15.7942, lng: -47.8822 });
+    const [marker, setMarker] = useState<google.maps.LatLngLiteral | null>(null);
+
+    const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
+    const mapRef = useRef<google.maps.Map | null>(null);
+  
+    const handleLoad = (autocomplete: google.maps.places.Autocomplete) => {
+      autocompleteRef.current = autocomplete;
+    };
+  
+    const handlePlaceChanged = () => {
+        if (autocompleteRef.current) {
+          const place = autocompleteRef.current.getPlace();
+          if (place.geometry?.location) {
+            const lat = place.geometry.location.lat();
+            const lng = place.geometry.location.lng();
+            setLocation({ lat, lng });
+            setMarker({ lat, lng });
+            saveLocationToStorage(lat, lng);
+          }
+        }
+      };
+    
+      const handleMapClick = (event: google.maps.MapMouseEvent) => {
+        if (event.latLng) {
+          const lat = event.latLng.lat();
+          const lng = event.latLng.lng();
+          setMarker({ lat, lng });
+    
+          const geocoder = new google.maps.Geocoder();
+          geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+            if (status === 'OK' && results) {
+              saveLocationToStorage(lat, lng);
+            }
+          });
+        }
+      };
+    
+      const saveLocationToStorage = (lat: number, lng: number) => {
+        const locationData = { lat, lng };
+        localStorage.setItem('userLocation', JSON.stringify(locationData));
+      };
 
     const handleDrop = (acceptedFiles: File[], type: ImageType) => {
         const file = acceptedFiles[0];
@@ -134,16 +187,28 @@ export default function EditProfile({ name, description, nameApiary, availabilit
                         <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(availability)}/>
                     </p>
 
-                    <div className={styles.map}>
-                        {/* Campo de busca para o endereço */}
-                        <div id="search-box">
-                            <input type="text" className={styles.searchInput} id="address" placeholder="Digite o endereço ou localização aproximada" />
-                            <button id="search-btn" className={styles.searchBtn}>Buscar</button>
+                    <LoadScript googleMapsApiKey="AIzaSyCmwSFKGgAId-Qegv1-EMff3WFG4Y0mokI" libraries={libraries}>
+                        <div className={styles.map}>
+                            <Autocomplete onLoad={handleLoad} onPlaceChanged={handlePlaceChanged}>
+                                <input
+                                type="text"
+                                placeholder="Digite o endereço ou localização aproximada"
+                                className={styles.searchInput}
+                                />
+                            </Autocomplete>
+                            <GoogleMap
+                                mapContainerStyle={containerStyle}
+                                center={location}
+                                zoom={10}
+                                onClick={handleMapClick}
+                                onLoad={(map) => {
+                                mapRef.current = map;
+                                }}
+                            >
+                                {marker && <div className={styles.marker} />}
+                            </GoogleMap>
                         </div>
-
-                        {/* Div onde o mapa será renderizado */}
-                        <div id="map" className={styles.map}></div>
-                    </div>
+                </LoadScript>
                 </div>
             </div>
             <Check size={25} color="#fff" className={styles.confirmProfile}/>

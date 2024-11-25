@@ -202,7 +202,7 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
             />
           </p>
 
-          <LoadScript googleMapsApiKey="AIzaSyAtj1ReV_DAdpgg3CCQS7rIlbFX8hfQ-fw" libraries={libraries}>
+          <LoadScript googleMapsApiKey="AIzaSyCmwSFKGgAId-Qegv1-EMff3WFG4Y0mokI" libraries={libraries}>
             <div className={styles.map}>
               <Autocomplete onLoad={handleLoad} onPlaceChanged={handlePlaceChanged}>
                 <input

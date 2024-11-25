@@ -102,6 +102,7 @@ export default function Cadastro() {
                         value={formData.password}
                         onChange={handleInputChange}
                         className={styles.input}
+                        minLength={8}
                     />
                     <input
                         type="password"
@@ -110,6 +111,7 @@ export default function Cadastro() {
                         value={formData.confirmPassword}
                         onChange={handleInputChange}
                         className={styles.input}
+                        minLength={8}
                     />
                     <div className={styles.options}>
                         <p className={styles.textOptions}>Você é um:</p>
@@ -120,6 +122,7 @@ export default function Cadastro() {
                                 value="Apicultor"
                                 checked={formData.accountType === 'Apicultor'}
                                 onChange={() => setFormData({ ...formData, accountType: 'Apicultor' })}
+                                required
                             /> Apicultor
                         </label>
                         <label className={styles.textOptions}>
@@ -128,6 +131,7 @@ export default function Cadastro() {
                                 name="typeAccount"
                                 value="Agricultor"
                                 checked={formData.accountType === 'Agricultor'}
+                                required
                                 onChange={() => setFormData({ ...formData, accountType: 'Agricultor' })}
                             /> Agricultor
                         </label>
