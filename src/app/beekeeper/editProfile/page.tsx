@@ -24,12 +24,12 @@ interface Especie {
 
 const containerStyle = {
     width: '100%',
-    height: '400px',
+    height: '500px',
     borderRadius: '10px',
-  };
-  
-  // Usando o tipo correto para as bibliotecas
-  const libraries: Libraries = ['places'];
+};
+
+// Usando o tipo correto para as bibliotecas
+const libraries: Libraries = ['places'];
 
 export default function EditProfile({ name, description, nameApiary, availability }: ProfileProps) {
     const [profileImage, setProfileImage] = useState<string>('/beekeeper.png'); // Imagem padrão do profile
@@ -41,43 +41,43 @@ export default function EditProfile({ name, description, nameApiary, availabilit
 
     const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
     const mapRef = useRef<google.maps.Map | null>(null);
-  
+
     const handleLoad = (autocomplete: google.maps.places.Autocomplete) => {
-      autocompleteRef.current = autocomplete;
+        autocompleteRef.current = autocomplete;
     };
-  
+
     const handlePlaceChanged = () => {
         if (autocompleteRef.current) {
-          const place = autocompleteRef.current.getPlace();
-          if (place.geometry?.location) {
-            const lat = place.geometry.location.lat();
-            const lng = place.geometry.location.lng();
-            setLocation({ lat, lng });
-            setMarker({ lat, lng });
-            saveLocationToStorage(lat, lng);
-          }
-        }
-      };
-    
-      const handleMapClick = (event: google.maps.MapMouseEvent) => {
-        if (event.latLng) {
-          const lat = event.latLng.lat();
-          const lng = event.latLng.lng();
-          setMarker({ lat, lng });
-    
-          const geocoder = new google.maps.Geocoder();
-          geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-            if (status === 'OK' && results) {
-              saveLocationToStorage(lat, lng);
+            const place = autocompleteRef.current.getPlace();
+            if (place.geometry?.location) {
+                const lat = place.geometry.location.lat();
+                const lng = place.geometry.location.lng();
+                setLocation({ lat, lng });
+                setMarker({ lat, lng });
+                saveLocationToStorage(lat, lng);
             }
-          });
         }
-      };
-    
-      const saveLocationToStorage = (lat: number, lng: number) => {
+    };
+
+    const handleMapClick = (event: google.maps.MapMouseEvent) => {
+        if (event.latLng) {
+            const lat = event.latLng.lat();
+            const lng = event.latLng.lng();
+            setMarker({ lat, lng });
+
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+                if (status === 'OK' && results) {
+                    saveLocationToStorage(lat, lng);
+                }
+            });
+        }
+    };
+
+    const saveLocationToStorage = (lat: number, lng: number) => {
         const locationData = { lat, lng };
         localStorage.setItem('userLocation', JSON.stringify(locationData));
-      };
+    };
 
     const handleDrop = (acceptedFiles: File[], type: ImageType) => {
         const file = acceptedFiles[0];
@@ -208,7 +208,7 @@ export default function EditProfile({ name, description, nameApiary, availabilit
                                 {marker && <div className={styles.marker} />}
                             </GoogleMap>
                         </div>
-                </LoadScript>
+                    </LoadScript>
                 </div>
             </div>
             <Check size={25} color="#fff" className={styles.confirmProfile}/>

@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleMap, LoadScript, Autocomplete } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Autocomplete, Marker } from '@react-google-maps/api';
 import axios from 'axios';
 import Dropzone, { DropEvent, FileRejection } from 'react-dropzone';
 import { Upload } from 'lucide-react';
 import Image from 'next/image';
 import styles from './page.module.css';
-import { Libraries } from '@react-google-maps/api'; // Importando o tipo correto para libraries
+import { Libraries } from '@react-google-maps/api';
 
 type ImageType = 'profile' | 'cover';
 
@@ -25,11 +25,10 @@ interface Cultivo {
 
 const containerStyle = {
   width: '100%',
-  height: '400px',
-  borderRadius: '10px',
+  height: '600px',
+  borderRadius: '15px',
 };
 
-// Usando o tipo correto para as bibliotecas
 const libraries: Libraries = ['places'];
 
 export default function EditProfile({ name, description, nameFarm, hectares }: ProfileProps) {
@@ -53,32 +52,58 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
       if (place.geometry?.location) {
         const lat = place.geometry.location.lat();
         const lng = place.geometry.location.lng();
-        setLocation({ lat, lng });
-        setMarker({ lat, lng });
-        saveLocationToStorage(lat, lng);
+        updateLocation(lat, lng); // Atualiza o mapa, sem alterar o input
       }
     }
   };
+  
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
     if (event.latLng) {
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
-      setMarker({ lat, lng });
-
-      const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-        if (status === 'OK' && results) {
-          saveLocationToStorage(lat, lng);
-        }
-      });
+      updateLocation(lat, lng);
     }
   };
 
-  const saveLocationToStorage = (lat: number, lng: number) => {
-    const locationData = { lat, lng };
-    localStorage.setItem('userLocation', JSON.stringify(locationData));
+  const updateLocation = (lat: number, lng: number) => {
+    setLocation({ lat, lng }); // Atualiza o centro do mapa
+    setMarker({ lat, lng }); // Coloca o marcador no novo local
+  
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+      if (status === 'OK' && results) {
+        const addressComponents = results[0]?.address_components || [];
+        let city =
+          addressComponents.find((component) => component.types.includes('locality'))?.long_name ||
+          addressComponents.find((component) =>
+            component.types.includes('administrative_area_level_2'),
+          )?.long_name;
+  
+        if (!city) {
+          city = 'Desconhecido';
+        }
+  
+        const state =
+          addressComponents.find((component) =>
+            component.types.includes('administrative_area_level_1'),
+          )?.short_name || 'Desconhecido';
+  
+        const locationData = {
+          lat,
+          lng,
+          city,
+          state,
+        };
+  
+        console.log('Localização salva:', locationData);
+        localStorage.setItem('userLocation', JSON.stringify(locationData));
+      } else {
+        console.error('Erro ao buscar endereço:', status);
+      }
+    });
   };
+  
 
   const handleDrop = (files: File[], type: ImageType) => {
     const file = files[0];
@@ -137,7 +162,13 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()} className={styles.imageContainer}>
               <input {...getInputProps()} />
-              <Image src={coverImage} alt="Cover Image" layout="fill" className={styles.imgProfile} priority/>
+              <Image
+                src={coverImage}
+                alt="Cover Image"
+                layout="fill"
+                className={styles.imgProfile}
+                priority
+              />
               <Upload color="#ffffff" strokeWidth={2.25} className={styles.uploadIcon} />
             </div>
           )}
@@ -158,7 +189,13 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()} className={styles.imageContainerProfile}>
               <input {...getInputProps()} />
-              <Image src={profileImage} alt="Profile Image" layout="fill" className={styles.imgProfile} priority/>
+              <Image
+                src={profileImage}
+                alt="Profile Image"
+                layout="fill"
+                className={styles.imgProfile}
+                priority
+              />
               <Upload color="#ffffff" strokeWidth={2.25} className={styles.uploadIconProfile} />
             </div>
           )}
@@ -220,7 +257,7 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
                   mapRef.current = map;
                 }}
               >
-                {marker && <div className={styles.marker} />}
+                {marker && <Marker position={marker} />}
               </GoogleMap>
             </div>
           </LoadScript>
