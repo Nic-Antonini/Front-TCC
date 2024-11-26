@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, Autocomplete, Marker } from '@react-google-maps/api';
 import axios from 'axios';
 import Dropzone, { DropEvent, FileRejection } from 'react-dropzone';
-import { Upload } from 'lucide-react';
+import { Upload, Check } from 'lucide-react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import { Libraries } from '@react-google-maps/api';
@@ -263,6 +263,7 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
           </LoadScript>
         </div>
       </div>
+      <Check size={25} color="#fff" className={styles.confirmProfile}/>
     </main>
   );
 }
