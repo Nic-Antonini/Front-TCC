@@ -1,5 +1,5 @@
+//EDIT PROFILE
 'use client';
-
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode'; // Para decodificar o JWT
 import Sidebar from '../components/sidebar/page';
