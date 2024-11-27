@@ -245,6 +245,7 @@
   border: 1px solid #F9BD1C;
   border-radius: 3px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .checkbox:checked{

@@ -16,12 +16,19 @@ interface ProfileProps {
   description: string;
   nameFarm: string;
   hectares: number;
+  profileImage: string;
+  profileCover: string;
+  lat: number;
+  lng: number;
+  city: string;
+  state: string;
+  cultivosSelecionados: number[]; //caso ele já tenha selecionado algum antes, quando abrir a tela de editar perfil, aparecerá a lista de cultivos e os ids do cultivos que tiverem aqui apareceram como selected na lista de cultivos
 }
 
 interface Cultivo {
   Cult_Id: number;
   Cult_Nome: string;
-}
+} //Listar todas as opções de cultivo que o usuario pode selecionar ou não
 
 const containerStyle = {
   width: '100%',
@@ -31,12 +38,21 @@ const containerStyle = {
 
 const libraries: Libraries = ['places'];
 
-export default function EditProfile({ name, description, nameFarm, hectares }: ProfileProps) {
+export default function ({ name, description, nameFarm, hectares, lat, lng, cultivosSelecionados }: ProfileProps) {
   const [profileImage, setProfileImage] = useState<string>('/farmer.png');
   const [coverImage, setCoverImage] = useState<string>('/default-cover.png');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [cultivos, setCultivos] = useState<Cultivo[]>([]);
-  const [location, setLocation] = useState({ lat: -15.7942, lng: -47.8822 });
+  const [selectedCultivos, setSelectedCultivos] = useState<number[]>(cultivosSelecionados); // Estado local dos cultivos selecionados
+  const [currentName, setCurrentName] = useState<string>(name);
+  const [currentDescription, setCurrentDescription] = useState<string>(description);
+  const [currentnameFarm, setCurrentNameFarm] = useState<string>(nameFarm);
+
+  // Verifica se as coordenadas recebidas são números válidos
+  const validLat = isNaN(lat) ? -15.7942 : lat; // Exemplo: usa -15.7942 se a lat for inválida
+  const validLng = isNaN(lng) ? -47.8822 : lng; // Exemplo: usa -47.8822 se a lng for inválida
+  const [location, setLocation] = useState({ lat: validLat, lng: validLng });
+
   const [marker, setMarker] = useState<google.maps.LatLngLiteral | null>(null);
 
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
@@ -56,7 +72,6 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
       }
     }
   };
-  
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
     if (event.latLng) {
@@ -103,7 +118,6 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
       }
     });
   };
-  
 
   const handleDrop = (files: File[], type: ImageType) => {
     const file = files[0];
@@ -143,6 +157,18 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
 
     fetchCultivos();
   }, []);
+
+  const toggleCultivo = (cultivoId: number) => {
+    setSelectedCultivos((prev) => {
+      if (prev.includes(cultivoId)) {
+        // Se já está selecionado, desmarca
+        return prev.filter((id) => id !== cultivoId);
+      } else {
+        // Caso contrário, adiciona
+        return [...prev, cultivoId];
+      }
+    });
+  };
 
   return (
     <main className={styles.main}>
@@ -200,14 +226,22 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
             </div>
           )}
         </Dropzone>
-        <input type="text" name="name" className={styles.nameProfile} placeholder={name} />
+        <input
+          type="text"
+          value={currentName}
+          onChange={(e) => setCurrentName(e.target.value)}
+          className={styles.nameProfile}
+          placeholder={name}
+        />
       </div>
 
       <div className={styles.more}>
         <section className={styles.section1}>
           <div className={styles.descArea}>
             <p className={styles.descTitle}>Descrição</p>
-            <textarea name="description" id="description" className={styles.description}>
+            <textarea name="description" id="description" value={currentDescription}
+              onChange={(e) => setCurrentDescription(e.target.value)}
+              className={styles.description}>
               {description}
             </textarea>
           </div>
@@ -216,7 +250,9 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
             <div className={styles.cultures}>
               {cultivos.map((cultivo) => (
                 <div key={cultivo.Cult_Id} className={styles.culture}>
-                  <input type="checkbox" className={styles.checkbox} />
+                  <input type="checkbox" className={styles.checkbox} 
+                    checked={selectedCultivos.includes(cultivo.Cult_Id)} 
+                    onChange={() => toggleCultivo(cultivo.Cult_Id)}/> 
                   <p>{cultivo.Cult_Nome}</p>
                 </div>
               ))}
@@ -227,7 +263,7 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
           <h1 className={styles.titleFarm}>Propriedade</h1>
           <p className={styles.nameFarm}>
             Nome da propriedade:
-            <input type="text" name="nameFarm" className={styles.nameFarmEdit} placeholder={nameFarm} />
+            <input type="text" name="nameFarm" className={styles.nameFarmEdit}  value={currentnameFarm} onChange={(e) => setCurrentNameFarm(e.target.value)}/>
           </p>
           <p className={styles.hecFarm}>
             Hectares de plantação:
@@ -235,6 +271,8 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
               type="number"
               name="hecFarm"
               className={styles.hecFarmEdit}
+              step=".01"
+              min={0}
               placeholder={JSON.stringify(hectares)}
             />
           </p>
@@ -263,7 +301,7 @@ export default function EditProfile({ name, description, nameFarm, hectares }: P
           </LoadScript>
         </div>
       </div>
-      <Check size={25} color="#fff" className={styles.confirmProfile}/>
+      <Check size={25} color="#fff" className={styles.confirmProfile} />
     </main>
   );
 }

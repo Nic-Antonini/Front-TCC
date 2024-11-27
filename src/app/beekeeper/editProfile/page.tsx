@@ -15,6 +15,13 @@ interface ProfileProps {
     description: string;
     nameApiary: string;
     availability: number;
+    profileImage: string;
+    profileCover: string;
+    lat: number;
+    lng: number;
+    city: string;
+    state: string;
+    especiesSelecionadas: number[];
 }
 
 interface Especie {
@@ -30,12 +37,21 @@ const containerStyle = {
   
   const libraries: Libraries = ['places'];
 
-export default function EditProfile({ name, description, nameApiary, availability }: ProfileProps) {
+export default function EditProfile({ name, description, nameApiary, availability, lat, lng, especiesSelecionadas}: ProfileProps) {
     const [profileImage, setProfileImage] = useState<string>('/beekeeper.png'); // Imagem padrão do profile
     const [coverImage, setCoverImage] = useState<string>('/default-cover.png'); // Imagem padrão do cover
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Para armazenar a mensagem de erro
     const [especies, setEspecies] = useState<Especie[]>([]);
-    const [location, setLocation] = useState({ lat: -15.7942, lng: -47.8822 });
+    const [selectedEspecies, setSelectedEspecies] = useState<number[]>(especiesSelecionadas); // Estado local dos cultivos selecionados
+    const [currentName, setCurrentName] = useState<string>(name);
+    const [currentDescription, setCurrentDescription] = useState<string>(description);
+    const [currentnameApiary, setCurrentNameApiary] = useState<string>(nameApiary);
+
+      // Verifica se as coordenadas recebidas são números válidos
+    const validLat = isNaN(lat) ? -15.7942 : lat; // Exemplo: usa -15.7942 se a lat for inválida
+    const validLng = isNaN(lng) ? -47.8822 : lng; // Exemplo: usa -47.8822 se a lng for inválida
+  const [location, setLocation] = useState({ lat: validLat, lng: validLng });
+
     const [marker, setMarker] = useState<google.maps.LatLngLiteral | null>(null);
   
     const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
@@ -138,6 +154,18 @@ export default function EditProfile({ name, description, nameApiary, availabilit
         fetchEspecies();
     }, []);
 
+    const toggleEspecie = (especieId: number) => {
+        setSelectedEspecies((prev) => {
+          if (prev.includes(especieId)) {
+            // Se já está selecionado, desmarca
+            return prev.filter((id) => id !== especieId);
+          } else {
+            // Caso contrário, adiciona
+            return [...prev, especieId];
+          }
+        });
+      };
+
     return (
         <main className={styles.main}>
             {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>} {/* Mostrar mensagem de erro se houver */}
@@ -195,7 +223,9 @@ export default function EditProfile({ name, description, nameApiary, availabilit
                         <div className={styles.species}>
                             {especies.map((especie) => (
                                 <div key={especie.Espe_Id} className={styles.specie}>
-                                    <input type="checkbox" className={styles.checkbox} />
+                                    <input type="checkbox" className={styles.checkbox} 
+                                    checked={selectedEspecies.includes(especie.Espe_Id)} 
+                                    onChange={() => toggleEspecie(especie.Espe_Id)} />
                                     <p>{especie.Espe_Nome}</p>
                                 </div>
                             ))}
@@ -208,7 +238,7 @@ export default function EditProfile({ name, description, nameApiary, availabilit
                         <input type="text" name="nameFarm" className={styles.nameFarmEdit} placeholder={nameApiary}/> 
                     </p>
                     <p className={styles.hecFarm}>Colméias disponíveis: 
-                        <input type="number" name="hecFarm" className={styles.hecFarmEdit} placeholder={JSON.stringify(availability)}/>
+                        <input type="number" name="hecFarm" className={styles.hecFarmEdit} min={0} placeholder={JSON.stringify(availability)}/>
                     </p>
 
                     <LoadScript googleMapsApiKey="AIzaSyCmwSFKGgAId-Qegv1-EMff3WFG4Y0mokI" libraries={libraries}>
