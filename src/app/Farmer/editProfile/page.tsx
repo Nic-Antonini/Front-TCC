@@ -4,11 +4,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, Autocomplete, Marker } from '@react-google-maps/api';
 import axios from 'axios';
 import Dropzone, { DropEvent, FileRejection } from 'react-dropzone';
-import { Upload, Check } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import { Libraries } from '@react-google-maps/api';
-import { UserData } from '../../types'; // Certifique-se de que o tipo UserData esteja importado corretamente
+import { UserData } from '../../types';
 
 type ImageType = 'profile' | 'cover';
 
@@ -23,7 +23,7 @@ interface ProfileProps {
   lng: number;
   city: string;
   state: string;
-  cultivosSelecionados: number[]; // Caso o usuário já tenha selecionado alguns cultivos, mostrar na edição.
+  cultivosSelecionados: number[];
   onUpdate: (updatedFields: Partial<UserData>) => void;
 }
 
@@ -47,6 +47,8 @@ export default function Farmer({
   hectares,
   lat,
   lng,
+  city,
+  state,
   cultivosSelecionados,
   onUpdate,
 }: ProfileProps) {
@@ -54,7 +56,10 @@ export default function Farmer({
   const [coverImage, setCoverImage] = useState<string>('/default-cover.png');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [cultivos, setCultivos] = useState<Cultivo[]>([]);
-  const [selectedCultivos, setSelectedCultivos] = useState<number[]>(cultivosSelecionados); // Estado local dos cultivos selecionados
+  const [selectedCultivos, setSelectedCultivos] = useState<number[]>(cultivosSelecionados);
+  const [location, setLocation] = useState({ lat, lng });
+  const [currentCity, setCurrentCity] = useState(city);
+  const [currentState, setCurrentState] = useState(state);
   const [currentName, setCurrentName] = useState<string>(name);
   const [currentDescription, setCurrentDescription] = useState<string>(description);
   const [currentnameFarm, setCurrentNameFarm] = useState<string>(nameFarm);
@@ -63,103 +68,10 @@ export default function Farmer({
     onUpdate({ [field]: value });
   };
 
-  // Verifica se as coordenadas recebidas são números válidos
-  const validLat = isNaN(lat) ? -15.7942 : lat; // Exemplo: usa -15.7942 se a lat for inválida
-  const validLng = isNaN(lng) ? -47.8822 : lng; // Exemplo: usa -47.8822 se a lng for inválida
-  const [location, setLocation] = useState({ lat: validLat, lng: validLng });
-
-  const [marker, setMarker] = useState<google.maps.LatLngLiteral | null>(null);
-
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
   const mapRef = useRef<google.maps.Map | null>(null);
 
-  const handleLoad = (autocomplete: google.maps.places.Autocomplete) => {
-    autocompleteRef.current = autocomplete;
-  };
-
-  const handlePlaceChanged = () => {
-    if (autocompleteRef.current) {
-      const place = autocompleteRef.current.getPlace();
-      if (place.geometry?.location) {
-        const lat = place.geometry.location.lat();
-        const lng = place.geometry.location.lng();
-        updateLocation(lat, lng); // Atualiza o mapa, sem alterar o input
-      }
-    }
-  };
-
-  const handleMapClick = (event: google.maps.MapMouseEvent) => {
-    if (event.latLng) {
-      const lat = event.latLng.lat();
-      const lng = event.latLng.lng();
-      updateLocation(lat, lng);
-    }
-  };
-
-  const updateLocation = (lat: number, lng: number) => {
-    setLocation({ lat, lng }); // Atualiza o centro do mapa
-    setMarker({ lat, lng }); // Coloca o marcador no novo local
-  
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ location: { lat, lng } }, (results, status) => {
-      if (status === 'OK' && results) {
-        const addressComponents = results[0]?.address_components || [];
-        let city =
-          addressComponents.find((component) => component.types.includes('locality'))?.long_name ||
-          addressComponents.find((component) =>
-            component.types.includes('administrative_area_level_2'),
-          )?.long_name;
-  
-        if (!city) {
-          city = 'Desconhecido';
-        }
-  
-        const state =
-          addressComponents.find((component) =>
-            component.types.includes('administrative_area_level_1'),
-          )?.short_name || 'Desconhecido';
-  
-        const locationData = {
-          lat,
-          lng,
-          city,
-          state,
-        };
-  
-        console.log('Localização salva:', locationData);
-        localStorage.setItem('userLocation', JSON.stringify(locationData));
-      } else {
-        console.error('Erro ao buscar endereço:', status);
-      }
-    });
-  };
-
-  const handleDrop = (files: File[], type: ImageType) => {
-    const file = files[0];
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      const result = reader.result as string;
-      if (type === 'profile') {
-        setProfileImage(result);
-      } else if (type === 'cover') {
-        setCoverImage(result);
-      }
-    };
-
-    reader.readAsDataURL(file);
-    setErrorMessage(null);
-  };
-
-  const handleRejection = (fileRejections: FileRejection[]) => {
-    const rejectedFile = fileRejections[0]?.file;
-    if (rejectedFile) {
-      setErrorMessage(
-        `O formato ${rejectedFile.type} não é suportado. Por favor, use apenas arquivos PNG, JPEG ou JPG.`,
-      );
-    }
-  };
-
+  // Fetch cultivos on component mount
   useEffect(() => {
     const fetchCultivos = async () => {
       try {
@@ -169,21 +81,92 @@ export default function Farmer({
         console.error('Erro ao buscar cultivos:', error);
       }
     };
-
     fetchCultivos();
   }, []);
 
-  const toggleCultivo = (cultivoId: number) => {
-    setSelectedCultivos((prev) => {
-      if (prev.includes(cultivoId)) {
-        // Se já está selecionado, desmarca
-        return prev.filter((id) => id !== cultivoId);
-      } else {
-        // Caso contrário, adiciona
-        return [...prev, cultivoId];
+
+    const handleDrop = (files: File[], type: ImageType) => {
+      const file = files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const result = reader.result as string;
+        if (type === 'profile') {
+          setProfileImage(result);
+        } else if (type === 'cover') {
+          setCoverImage(result);
+        }
+      };
+
+      reader.readAsDataURL(file);
+      setErrorMessage(null);
+    };
+
+    const handleRejection = (fileRejections: FileRejection[]) => {
+      const rejectedFile = fileRejections[0]?.file;
+      if (rejectedFile) {
+        setErrorMessage(
+         'O formato ${rejectedFile.type} não é suportado. Por favor, use apenas arquivos PNG, JPEG ou JPG.'
+        );
       }
-    });
-  };
+    };
+
+    const handleLoad = (autocomplete: google.maps.places.Autocomplete) => {
+      autocompleteRef.current = autocomplete;
+    };
+  
+    const handlePlaceChanged = () => {
+      if (autocompleteRef.current) {
+        const place = autocompleteRef.current.getPlace();
+        if (place.geometry?.location) {
+          const lat = place.geometry.location.lat();
+          const lng = place.geometry.location.lng();
+          updateLocation(lat, lng);
+        }
+      }
+    };
+  
+    const handleMapClick = (event: google.maps.MapMouseEvent) => {
+      if (event.latLng) {
+        const lat = event.latLng.lat();
+        const lng = event.latLng.lng();
+        updateLocation(lat, lng);
+      }
+    };
+  
+    const updateLocation = (lat: number, lng: number) => {
+      setLocation({ lat, lng });
+      onUpdate({ lat, lng });
+  
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+        if (status === 'OK' && results) {
+          const addressComponents = results[0]?.address_components || [];
+          const city =
+            addressComponents.find((comp) => comp.types.includes('locality'))?.long_name ||
+            'Cidade não encontrada';
+          const state =
+            addressComponents.find((comp) => comp.types.includes('administrative_area_level_1'))
+              ?.short_name || 'Estado não encontrado';
+  
+          setCurrentCity(city);
+          setCurrentState(state);
+          onUpdate({ city, state });
+        } else {
+          console.error('Erro ao buscar endereço:', status);
+        }
+      });
+    };
+  
+    const toggleCultivo = (cultivoId: number) => {
+      setSelectedCultivos((prev) => {
+        const updatedCultivos = prev.includes(cultivoId)
+          ? prev.filter((id) => id !== cultivoId)
+          : [...prev, cultivoId];
+        onUpdate({ cultivosSelecionados: updatedCultivos });
+        return updatedCultivos;
+      });
+    };
 
   return (
     <main className={styles.main}>
@@ -191,14 +174,9 @@ export default function Farmer({
 
       <div className={styles.cover}>
         <Dropzone
-          onDrop={(files: File[], fileRejections: FileRejection[], event: DropEvent) => {
-            handleDrop(files, 'cover');
-            handleRejection(fileRejections);
-          }}
-          accept={{
-            'image/png': ['.png'],
-            'image/jpeg': ['.jpeg', '.jpg'],
-          }}
+          onDrop={(files) => handleDrop(files, 'cover')}
+          onDropRejected={handleRejection}
+          accept={{ 'image/png': ['.png'], 'image/jpeg': ['.jpeg', '.jpg'] }}
         >
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()} className={styles.imageContainer}>
@@ -218,14 +196,9 @@ export default function Farmer({
 
       <div className={styles.profile}>
         <Dropzone
-          onDrop={(files: File[], fileRejections: FileRejection[], event: DropEvent) => {
-            handleDrop(files, 'profile');
-            handleRejection(fileRejections);
-          }}
-          accept={{
-            'image/png': ['.png'],
-            'image/jpeg': ['.jpeg', '.jpg'],
-          }}
+          onDrop={(files) => handleDrop(files, 'profile')}
+          onDropRejected={handleRejection}
+          accept={{ 'image/png': ['.png'], 'image/jpeg': ['.jpeg', '.jpg'] }}
         >
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()} className={styles.imageContainerProfile}>
@@ -243,19 +216,16 @@ export default function Farmer({
         </Dropzone>
         <input
           type="text"
-          value={currentName}
-          onChange={(e) => {
-            setCurrentName(e.target.value);
-            handleChange('name', e.target.value); // Atualiza os dados no pai (EditProfile)
-          }}
+          value={name}
+          onChange={(e) => onUpdate({ name: e.target.value })}
           className={styles.nameProfile}
-          placeholder={name}
+          placeholder="Nome"
         />
       </div>
 
       <div className={styles.more}>
         <section className={styles.section1}>
-          <div className={styles.descArea}>
+        <div className={styles.descArea}>
             <p className={styles.descTitle}>Descrição</p>
             <textarea name="description" id="description" value={currentDescription}
               onChange={(e) => {
@@ -272,17 +242,21 @@ export default function Farmer({
             <div className={styles.cultures}>
               {cultivos.map((cultivo) => (
                 <div key={cultivo.Cult_Id} className={styles.culture}>
-                  <input type="checkbox" className={styles.checkbox} 
-                    checked={selectedCultivos.includes(cultivo.Cult_Id)} 
-                    onChange={() => toggleCultivo(cultivo.Cult_Id)} /> 
+                  <input
+                    type="checkbox"
+                    className={styles.checkbox} 
+                    checked={selectedCultivos.includes(cultivo.Cult_Id)}
+                    onChange={() => toggleCultivo(cultivo.Cult_Id)}
+                  />
                   <p>{cultivo.Cult_Nome}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
         <div className={styles.farm}>
-          <h1 className={styles.titleFarm}>Propriedade</h1>
+        <h1 className={styles.titleFarm}>Propriedade</h1>
           <p className={styles.nameFarm}>
             Nome da propriedade:
             <input type="text" name="nameFarm" className={styles.nameFarmEdit} value={currentnameFarm} 
@@ -303,10 +277,15 @@ export default function Farmer({
               onChange={(e) => handleChange('hectares', e.target.value)} // Atualiza os dados no pai (EditProfile)
             />
           </p>
-
-          <LoadScript googleMapsApiKey="AIzaSyCmwSFKGgAId-Qegv1-EMff3WFG4Y0mokI" libraries={libraries}>
+          <p>
+            Cidade: <strong>{currentCity}</strong>
+          </p>
+          <p>
+            Estado: <strong>{currentState}</strong>
+          </p>
+          <LoadScript googleMapsApiKey={'AIzaSyCmwSFKGgAId-Qegv1-EMff3WFG4Y0mokI' || ''} libraries={libraries}>
             <div className={styles.map}>
-              <Autocomplete onLoad={handleLoad} onPlaceChanged={handlePlaceChanged}>
+            <Autocomplete onLoad={handleLoad} onPlaceChanged={handlePlaceChanged}>
                 <input
                   type="text"
                   placeholder="Digite o endereço ou localização aproximada"
@@ -322,8 +301,8 @@ export default function Farmer({
                   mapRef.current = map;
                 }}
               >
-                {marker && <Marker position={marker} />}
-              </GoogleMap>
+              <Marker position={location} />
+            </GoogleMap>
             </div>
           </LoadScript>
         </div>
@@ -331,3 +310,22 @@ export default function Farmer({
     </main>
   );
 }
+
+
+{/*AIzaSyCmwSFKGgAId-Qegv1-EMff3WFG4Y0mokI
+            <LoadScript googleMapsApiKey={'AIzaSyCmwSFKGgAId-Qegv1-EMff3WFG4Y0mokI' || ''} libraries={libraries}>
+            <div className={styles.map}>
+            <GoogleMap
+              mapContainerStyle={containerStyle}
+              center={location}
+              zoom={10}
+              onClick={handleMapClick}
+            >
+            <Autocomplete onLoad={handleLoad} onPlaceChanged={handlePlaceChanged}>
+              <input
+                type="text"
+                placeholder="Digite o endereço ou localização aproximada"
+                className={styles.searchInput}
+              />
+            </Autocomplete>
+  */}
