@@ -22,3 +22,29 @@
     color: white;
     height: 100vh;
   }
+
+
+  .confirmProfile{
+    position: fixed;
+    bottom: 50px;
+    right: 50px; 
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 100%;
+    padding: 20px;
+  }
+  
+  .confirmProfile:hover{
+    transform: scale(1.15);
+    transition: 0.2s;
+  }
+  
+
+  .apicultorButton {
+    background-color: #f9bd1c; /* Cor para o usuário tipo 1 (apicultor) */
+  }
+  
+  .agricultorButton {
+    background-color: #43603f; /* Cor para o usuário tipo 2 (agricultor) */
+  }
+  

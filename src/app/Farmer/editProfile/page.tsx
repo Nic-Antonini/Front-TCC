@@ -8,6 +8,7 @@ import { Upload, Check } from 'lucide-react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import { Libraries } from '@react-google-maps/api';
+import { UserData } from '../../types'; // Certifique-se de que o tipo UserData esteja importado corretamente
 
 type ImageType = 'profile' | 'cover';
 
@@ -22,13 +23,14 @@ interface ProfileProps {
   lng: number;
   city: string;
   state: string;
-  cultivosSelecionados: number[]; //caso ele já tenha selecionado algum antes, quando abrir a tela de editar perfil, aparecerá a lista de cultivos e os ids do cultivos que tiverem aqui apareceram como selected na lista de cultivos
+  cultivosSelecionados: number[]; // Caso o usuário já tenha selecionado alguns cultivos, mostrar na edição.
+  onUpdate: (updatedFields: Partial<UserData>) => void;
 }
 
 interface Cultivo {
   Cult_Id: number;
   Cult_Nome: string;
-} //Listar todas as opções de cultivo que o usuario pode selecionar ou não
+}
 
 const containerStyle = {
   width: '100%',
@@ -38,7 +40,16 @@ const containerStyle = {
 
 const libraries: Libraries = ['places'];
 
-export default function ({ name, description, nameFarm, hectares, lat, lng, cultivosSelecionados }: ProfileProps) {
+export default function Farmer({
+  name,
+  description,
+  nameFarm,
+  hectares,
+  lat,
+  lng,
+  cultivosSelecionados,
+  onUpdate,
+}: ProfileProps) {
   const [profileImage, setProfileImage] = useState<string>('/farmer.png');
   const [coverImage, setCoverImage] = useState<string>('/default-cover.png');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -47,6 +58,10 @@ export default function ({ name, description, nameFarm, hectares, lat, lng, cult
   const [currentName, setCurrentName] = useState<string>(name);
   const [currentDescription, setCurrentDescription] = useState<string>(description);
   const [currentnameFarm, setCurrentNameFarm] = useState<string>(nameFarm);
+
+  const handleChange = (field: keyof UserData, value: any) => {
+    onUpdate({ [field]: value });
+  };
 
   // Verifica se as coordenadas recebidas são números válidos
   const validLat = isNaN(lat) ? -15.7942 : lat; // Exemplo: usa -15.7942 se a lat for inválida
@@ -229,7 +244,10 @@ export default function ({ name, description, nameFarm, hectares, lat, lng, cult
         <input
           type="text"
           value={currentName}
-          onChange={(e) => setCurrentName(e.target.value)}
+          onChange={(e) => {
+            setCurrentName(e.target.value);
+            handleChange('name', e.target.value); // Atualiza os dados no pai (EditProfile)
+          }}
           className={styles.nameProfile}
           placeholder={name}
         />
@@ -240,8 +258,12 @@ export default function ({ name, description, nameFarm, hectares, lat, lng, cult
           <div className={styles.descArea}>
             <p className={styles.descTitle}>Descrição</p>
             <textarea name="description" id="description" value={currentDescription}
-              onChange={(e) => setCurrentDescription(e.target.value)}
-              className={styles.description}>
+              onChange={(e) => {
+                setCurrentDescription(e.target.value);
+                handleChange('description', e.target.value); // Atualiza os dados no pai (EditProfile)
+              }}
+              className={styles.description}
+            >
               {description}
             </textarea>
           </div>
@@ -252,7 +274,7 @@ export default function ({ name, description, nameFarm, hectares, lat, lng, cult
                 <div key={cultivo.Cult_Id} className={styles.culture}>
                   <input type="checkbox" className={styles.checkbox} 
                     checked={selectedCultivos.includes(cultivo.Cult_Id)} 
-                    onChange={() => toggleCultivo(cultivo.Cult_Id)}/> 
+                    onChange={() => toggleCultivo(cultivo.Cult_Id)} /> 
                   <p>{cultivo.Cult_Nome}</p>
                 </div>
               ))}
@@ -263,7 +285,11 @@ export default function ({ name, description, nameFarm, hectares, lat, lng, cult
           <h1 className={styles.titleFarm}>Propriedade</h1>
           <p className={styles.nameFarm}>
             Nome da propriedade:
-            <input type="text" name="nameFarm" className={styles.nameFarmEdit}  value={currentnameFarm} onChange={(e) => setCurrentNameFarm(e.target.value)}/>
+            <input type="text" name="nameFarm" className={styles.nameFarmEdit} value={currentnameFarm} 
+              onChange={(e) => {
+                setCurrentNameFarm(e.target.value);
+                handleChange('nameFarm', e.target.value); // Atualiza os dados no pai (EditProfile)
+              }} />
           </p>
           <p className={styles.hecFarm}>
             Hectares de plantação:
@@ -274,6 +300,7 @@ export default function ({ name, description, nameFarm, hectares, lat, lng, cult
               step=".01"
               min={0}
               placeholder={JSON.stringify(hectares)}
+              onChange={(e) => handleChange('hectares', e.target.value)} // Atualiza os dados no pai (EditProfile)
             />
           </p>
 
@@ -301,7 +328,6 @@ export default function ({ name, description, nameFarm, hectares, lat, lng, cult
           </LoadScript>
         </div>
       </div>
-      <Check size={25} color="#fff" className={styles.confirmProfile} />
     </main>
   );
 }

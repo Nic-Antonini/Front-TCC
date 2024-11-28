@@ -265,7 +265,6 @@ export default function EditProfile({ name, description, nameApiary, availabilit
                     </LoadScript>
                 </div>
             </div>
-            <Check size={25} color="#fff" className={styles.confirmProfile}/>
         </main>
     );
 }
