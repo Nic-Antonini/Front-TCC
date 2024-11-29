@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import styles from './page.module.css';
 import Sidebar from '../components/sidebar/page';
@@ -29,7 +28,7 @@ export default function EditProfile() {
 
         // Ajuste na URL para pegar o userId
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/usuarios/${userId}`, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {Authorization:`Bearer ${token}`},
         });
 
         const user = response.data.dados;
@@ -133,11 +132,9 @@ export default function EditProfile() {
           onClick={handleSaveChanges}
           size={25}
           color="#fff"
-          className={`${styles.confirmProfile} ${
-            userData?.userType === 1 ? styles.apicultorButton : styles.agricultorButton
-          }`}
+          className={`${styles.confirmProfile} ${userData?.userType === 1 ? styles.apicultorButton : styles.agricultorButton}`}
         />
       </div>
     </div>
   );
-}
+} 

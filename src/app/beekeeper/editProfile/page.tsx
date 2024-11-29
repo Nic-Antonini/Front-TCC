@@ -281,4 +281,4 @@ export default function EditProfile({ name, description, nameApiary, availabilit
             </div>
         </main>
     );
-}
+} 
