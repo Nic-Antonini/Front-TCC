@@ -325,14 +325,15 @@
   background-color: #2f412d;
   border: none;
   box-shadow: none;
-  height: 22px;
+  height: 26px;
   border-radius: 10px;
   margin-right: 10px;
   padding: 8px;
   box-sizing: border-box;
   color: white;
-  width: 300px;
+  width: 400px;
   margin-bottom: 35px;
+  font-size: 16px;
 }
 
 .searchBtn {

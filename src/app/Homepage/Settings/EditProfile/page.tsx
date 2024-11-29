@@ -14,6 +14,8 @@ export default function EditProfile() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -60,42 +62,64 @@ export default function EditProfile() {
   const handleSaveChanges = async () => {
     try {
       if (!userData) return;
-
+      
       const token = localStorage.getItem('token');
       if (!token) throw new Error('Usuário não autenticado.');
-
+  
       // Decodifica o token para obter o userId
       const decodedToken: any = jwtDecode(token);
       const userId = decodedToken.userId;
 
-      // Ajuste na URL para passar o userId na rota
+      setIsSaving(true);
+      if (!userData) return;
+  
+      // Dados a serem enviados (sem imagens em base64)
+      const payload = {
+        name: userData.name,
+        description: userData.description,
+        profileImage: userData.profileImage, // Já atualizado pelo handleDrop no componente filho
+        profileCover: userData.profileCover, // Já atualizado pelo handleDrop no componente filho
+        userType: userData.userType,
+        lat: userData.lat,
+        lng: userData.lng,
+        city: userData.city,
+        state: userData.state,
+        cultivosSelecionados: userData.cultivosSelecionados,
+        nameFarm: userData.nameFarm,
+        hectares: userData.hectares,
+        nameApiary: userData.nameApiary,
+        availability: userData.availability,
+      };
+  
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/usuarios/${userId}`, // Usando o userId na URL
-        userData,
+        payload,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
+  
       if (response.data.sucesso) {
         setSuccessMessage('Alterações salvas com sucesso.');
+        alert(successMessage);
       } else {
         throw new Error('Erro ao salvar as alterações.');
       }
     } catch (error) {
       console.error('Erro ao salvar alterações:', error);
       setErrorMessage('Erro ao salvar as alterações.');
+    } finally {
+      setIsSaving(false);
     }
   };
+  
 
   const handleUpdateUserData = (updatedFields: Partial<UserData>) => {
     setUserData((prev) => (prev ? { ...prev, ...updatedFields } : prev));
-  };
+  };  
 
   return (
     <div className={styles.allPage}>
       <div className={styles.secondDiv}>
         <Sidebar />
-        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
-        {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
         {userData ? (
           userData.userType === 1 ? (
             <Beekeeper {...userData} onUpdate={handleUpdateUserData} />
