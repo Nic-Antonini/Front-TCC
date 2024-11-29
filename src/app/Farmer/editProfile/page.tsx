@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, Autocomplete, Marker } from '@react-google-maps/api';
 import axios from 'axios';

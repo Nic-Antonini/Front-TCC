@@ -158,7 +158,7 @@ export default function EditProfile({ name, description, nameApiary, availabilit
         const updatedEspecies = prev.includes(especieId)
           ? prev.filter((id) => id !== especieId)
           : [...prev, especieId];
-        onUpdate({ cultivosSelecionados: updatedEspecies});
+        onUpdate({ especiesSelecionadas: updatedEspecies});
         return updatedEspecies;
       });
     };
@@ -206,18 +206,26 @@ export default function EditProfile({ name, description, nameApiary, availabilit
                     )}
                 </Dropzone>
                 <input
-                type="text"
-                value={name}
-                onChange={(e) => onUpdate({ name: e.target.value })}
-                className={styles.nameProfile}
-                placeholder="Nome"
+                  type="text"
+                  value={name}
+                  onChange={(e) => onUpdate({ name: e.target.value })}
+                  className={styles.nameProfile}
+                  placeholder={name}
                 />
             </div>
             <div className={styles.more}>
                 <section className={styles.section1}>
                     <div className={styles.descArea}>
                         <p className={styles.descTitle}>Descrição</p>
-                        <textarea name="description" id="description" className={styles.description}>{description}</textarea>
+                       <textarea name="description" id="description" value={currentDescription}
+                        onChange={(e) => {
+                          setCurrentDescription(e.target.value);
+                          handleChange('description', e.target.value); // Atualiza os dados no pai (EditProfile)
+                        }}
+                        className={styles.description}
+                      >
+                        {description}
+                    </textarea>
                     </div>
                     <div className={styles.speciesArea}>
                         <h1 className={styles.titleSpecies}>

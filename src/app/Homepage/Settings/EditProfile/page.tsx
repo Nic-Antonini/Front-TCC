@@ -84,6 +84,7 @@ export default function EditProfile() {
         city: userData.city,
         state: userData.state,
         cultivosSelecionados: userData.cultivosSelecionados,
+        especiesSelecionadas: userData.especiesSelecionadas,
         nameFarm: userData.nameFarm,
         hectares: userData.hectares,
         nameApiary: userData.nameApiary,
@@ -97,8 +98,9 @@ export default function EditProfile() {
       );
   
       if (response.data.sucesso) {
-        setSuccessMessage('Alterações salvas com sucesso.');
-        alert(successMessage);
+        const successMsg = 'Alterações salvas com sucesso.';
+        setSuccessMessage(successMsg);
+        alert(successMsg); // Use o valor diretamente
       } else {
         throw new Error('Erro ao salvar as alterações.');
       }
