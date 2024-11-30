@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, Autocomplete, Marker } from '@react-google-maps/api';
 import axios from 'axios';
-import Dropzone, { DropEvent, FileRejection } from 'react-dropzone';
+import Dropzone, { DropEvent, FileRejection, Accept } from 'react-dropzone';
 import { Upload } from 'lucide-react';
 import Image from 'next/image';
 import styles from './page.module.css';
@@ -86,56 +86,31 @@ export default function Farmer({
   }, []);
 
 
-  const handleDrop = async (files: File[], type: ImageType) => {
-    try {
-      const file = files[0];
-      if (!file) return;
-  
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('type', type); // Informar se é imagem de perfil ou capa
-  
-      const token = localStorage.getItem('token');
-      if (!token) {
-        setErrorMessage('Usuário não autenticado.');
-        return;
-      }
-  
-      // Enviar arquivo ao backend
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/upload`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-  
-      // Atualizar imagem no estado com a URL retornada pelo backend
-      const { imageUrl } = response.data;
-  
-      if (type === 'profile') {
-        setProfileImage(imageUrl);
-        onUpdate({ profileImage: imageUrl }); // Atualiza no estado global
-      } else if (type === 'cover') {
-        setCoverImage(imageUrl);
-        onUpdate({ profileCover: imageUrl }); // Atualiza no estado global
-      }      
-  
-      setErrorMessage(null);
-    } catch (error) {
-      console.error('Erro ao enviar imagem:', error);
-      alert('Erro ao enviar a imagem. Tente novamente.')
-    }
-  };
-  
+  const handleDrop = (files: File[], type: ImageType) => {
+    const file = files[0];
+    const reader = new FileReader();
+    
+    reader.onload = () => {
+        const result = reader.result as string;
+        if (type === 'profile') {
+            setProfileImage(result);
+        } else if (type === 'cover') {
+            setCoverImage(result);
+        }
+    };
+    reader.readAsDataURL(file);
+};
+
 
     const handleRejection = (fileRejections: FileRejection[]) => {
       const rejectedFile = fileRejections[0]?.file;
       if (rejectedFile) {
         setErrorMessage(
-         'O formato ${rejectedFile.type} não é suportado. Por favor, use apenas arquivos PNG, JPEG ou JPG.'
+          `O formato ${rejectedFile.type} não é suportado. Por favor, use apenas arquivos PNG, JPEG ou JPG.`
         );
       }
     };
+  
 
     const handleLoad = (autocomplete: google.maps.places.Autocomplete) => {
       autocompleteRef.current = autocomplete;
@@ -206,32 +181,40 @@ export default function Farmer({
       {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
 
       <div className={styles.cover}>
-        <Dropzone
-          onDrop={(files) => handleDrop(files, 'cover')}
-          onDropRejected={handleRejection}
-          accept={{ 'image/png': ['.png'], 'image/jpeg': ['.jpeg', '.jpg'] }}
-        >
-          {({ getRootProps, getInputProps }) => (
-            <div {...getRootProps()} className={styles.imageContainer}>
-              <input {...getInputProps()} />
-              <Image
-                src={coverImage}
-                alt="Cover Image"
-                layout="fill"
-                className={styles.imgProfile}
-                priority
-              />
-              <Upload color="#ffffff" strokeWidth={2.25} className={styles.uploadIcon} />
-            </div>
-          )}
-        </Dropzone>
+      <Dropzone
+        onDrop={(files) => handleDrop(files, 'cover')}
+        onDropRejected={handleRejection}
+        accept={{
+          'image/png': ['.png'],
+          'image/jpeg': ['.jpeg', '.jpg']
+        } as Accept} 
+      >
+        {({ getRootProps, getInputProps }) => (
+          <div {...getRootProps()} className={styles.imageContainer}>
+            <input {...getInputProps()} />
+            <Image
+              src={coverImage}
+              alt="Cover Image"
+              layout="intrinsic"
+              width={500}
+              height={200}
+              className={styles.imgProfile}
+              priority
+            />
+            <Upload color="#ffffff" strokeWidth={2.25} className={styles.uploadIcon} />
+          </div>
+        )}
+      </Dropzone>
       </div>
 
       <div className={styles.profile}>
-        <Dropzone
+      <Dropzone
           onDrop={(files) => handleDrop(files, 'profile')}
           onDropRejected={handleRejection}
-          accept={{ 'image/png': ['.png'], 'image/jpeg': ['.jpeg', '.jpg'] }}
+                  accept={{
+          'image/png': ['.png'],
+          'image/jpeg': ['.jpeg', '.jpg']
+        } as Accept}
         >
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()} className={styles.imageContainerProfile}>
@@ -239,7 +222,9 @@ export default function Farmer({
               <Image
                 src={profileImage}
                 alt="Profile Image"
-                layout="fill"
+                layout="intrinsic"
+                width={200}
+                height={200}
                 className={styles.imgProfile}
                 priority
               />
@@ -266,6 +251,7 @@ export default function Farmer({
                 handleChange('description', e.target.value); // Atualiza os dados no pai (EditProfile)
               }}
               className={styles.description}
+              maxLength={1000}
             >
               {description}
             </textarea>

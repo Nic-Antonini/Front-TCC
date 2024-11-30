@@ -102,11 +102,6 @@
   filter: brightness(0.5); 
 }
 
-.uploadIcon{
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
 .imgProfile{
   width: 100%;
   height: 100%;
@@ -129,7 +124,19 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
+
+.upload{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+
 
 /* Estilo para o nome de perfil */
 .profileName {
@@ -159,7 +166,7 @@
   justify-content: space-between;
   border-radius: 15px;
   width: 870px;
-  height: 300px;
+  height: 310px;
   border: none;
   background-color: rgba(72, 98, 69, 0.195);
   box-sizing: border-box;
@@ -187,6 +194,20 @@
   outline: none;
   box-shadow: none;
   border: none;
+}
+
+.description::-webkit-scrollbar {
+  width: 8px;               /* width of the entire scrollbar */
+}
+
+.description::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+
+.description::-webkit-scrollbar-thumb {
+  background-color: rgba(99, 89, 64, 0.69);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid transparent;  /* creates padding around scroll thumb */
 }
 
 .descTitle{

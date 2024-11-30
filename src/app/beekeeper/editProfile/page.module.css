@@ -159,7 +159,7 @@
   justify-content: space-between;
   border-radius: 15px;
   width: 870px;
-  height: 300px;
+  height: 310px;
   border: none;
   background-color: #926b0096;
   box-sizing: border-box;
@@ -187,6 +187,20 @@
   outline: none;
   box-shadow: none;
   border: none;
+}
+
+.description::-webkit-scrollbar {
+  width: 8px;               /* width of the entire scrollbar */
+}
+
+.description::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+
+.description::-webkit-scrollbar-thumb {
+  background-color: rgba(235, 168, 0, 0.69);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid transparent;  /* creates padding around scroll thumb */
 }
 
 .descTitle{
@@ -273,6 +287,8 @@
   display: flex;
   flex-direction: row;
 }
+
+
 
 .hecFarm{
   font-size: 1.6rem;

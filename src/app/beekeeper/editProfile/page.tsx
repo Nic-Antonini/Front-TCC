@@ -39,9 +39,9 @@ const containerStyle = {
   
   const libraries: Libraries = ['places'];
 
-export default function EditProfile({ name, description, nameApiary, availability, lat, lng, especiesSelecionadas, city, state, onUpdate}: ProfileProps) {
-    const [profileImage, setProfileImage] = useState<string>('/beekeeper.png'); // Imagem padrão do profile
-    const [coverImage, setCoverImage] = useState<string>('/default-cover.png'); // Imagem padrão do cover
+export default function EditProfile({ name, description, nameApiary, availability, lat, lng, especiesSelecionadas, city, state, onUpdate, profileImage, profileCover}: ProfileProps) {
+    const [profileImagee, setProfileImage] = useState<string>(profileImage); // Imagem padrão do profile
+    const [coverImage, setCoverImage] = useState<string>(profileCover); // Imagem padrão do cover
     const [errorMessage, setErrorMessage] = useState<string | null>(null); // Para armazenar a mensagem de erro
     const [especies, setEspecies] = useState<Especie[]>([]);
     const [selectedEspecies, setSelectedEspecies] = useState<number[]>(especiesSelecionadas); // Estado local dos cultivos selecionados
@@ -63,19 +63,25 @@ export default function EditProfile({ name, description, nameApiary, availabilit
       const handleDrop = (files: File[], type: ImageType) => {
         const file = files[0];
         const reader = new FileReader();
-  
+      
         reader.onload = () => {
           const result = reader.result as string;
           if (type === 'profile') {
             setProfileImage(result);
+            onUpdate({ profileImage: result }); // Envia a imagem para o componente pai
           } else if (type === 'cover') {
             setCoverImage(result);
+            onUpdate({ profileCover: result }); // Envia a imagem para o componente pai
           }
         };
-  
+      
         reader.readAsDataURL(file);
         setErrorMessage(null);
       };
+      
+
+    console.log(profileImagee, coverImage);
+
   
       const handleRejection = (fileRejections: FileRejection[]) => {
         const rejectedFile = fileRejections[0]?.file;
@@ -168,7 +174,7 @@ export default function EditProfile({ name, description, nameApiary, availabilit
             {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>} {/* Mostrar mensagem de erro se houver */}
 
             <div className={styles.cover}>
-                <Dropzone
+            <Dropzone
                     onDrop={(files: File[], fileRejections: FileRejection[], event: DropEvent) => {
                         handleDrop(files, 'cover');
                         handleRejection(fileRejections);
@@ -179,12 +185,12 @@ export default function EditProfile({ name, description, nameApiary, availabilit
                     }}>
                     {({ getRootProps, getInputProps }) => (
                         <div {...getRootProps()} className={styles.imageContainer}>
-                            <input {...getInputProps()} />
-                            <Image src={coverImage} alt="Cover Image" layout="fill" className={styles.imgProfile} />
+                            <input {...getInputProps()}/>
+                            <Image src={coverImage} alt="Cover Image" width={1200} height={300} className={styles.imgProfile} />
                             <Upload color="#ffffff" strokeWidth={2.25} className={styles.uploadIcon} />
                         </div>
                     )}
-                </Dropzone>
+            </Dropzone>       
             </div>
 
             <div className={styles.profile}>
@@ -200,7 +206,7 @@ export default function EditProfile({ name, description, nameApiary, availabilit
                     {({ getRootProps, getInputProps }) => (
                         <div {...getRootProps()} className={styles.imageContainerProfile}>
                             <input {...getInputProps()} />
-                            <Image src={profileImage} alt="Profile Image" layout="fill" className={styles.imgProfile} />
+                            <Image src={profileImagee} alt="Profile Image" width={200} height={200} className={styles.imgProfile} />
                             <Upload color="#ffffff" strokeWidth={2.25} className={styles.uploadIconProfile} />
                         </div>
                     )}
@@ -223,6 +229,7 @@ export default function EditProfile({ name, description, nameApiary, availabilit
                           handleChange('description', e.target.value); // Atualiza os dados no pai (EditProfile)
                         }}
                         className={styles.description}
+                        maxLength={1000}
                       >
                         {description}
                     </textarea>

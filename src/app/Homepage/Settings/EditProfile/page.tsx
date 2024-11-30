@@ -35,8 +35,8 @@ export default function EditProfile() {
         setUserData({
           name: user.Usu_NomeCompleto,
           description: user.Usu_Tipo === 1 ? user.Apic_Biografia : user.Agri_Biografia,
-          profileImage: user.Usu_Tipo === 1 ? user.Apic_Foto_Perfil : user.Agri_Foto_Perfil,
-          profileCover: user.Usu_Tipo === 1 ? user.Apic_Foto_Capa : user.Agri_Foto_Capa,
+          profileImage: user.profileImage,
+          profileCover: user.profileCover,
           userType: user.Usu_Tipo,
           lat: parseFloat(user.lat),
           lng: parseFloat(user.lng),
