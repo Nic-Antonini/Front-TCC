@@ -23,55 +23,6 @@ export default function profile({coverImage, profileImage, userName, userDesc, n
     nameApiary = 'Apiário Freitas'
     numHives = 21
 
-    useEffect(() => {
-        const initMap = () => {
-          // Inicializa o mapa centrado nas coordenadas fornecidas
-          const initialLocation = { lat: -21.9385624, lng: -50.5269037 };
-          const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
-            center: initialLocation,
-            zoom: 17.25, // Nível de zoom desejado
-          });
-    
-          const geocoder = new google.maps.Geocoder();
-    
-          // Coloca um marcador na localização inicial
-          const marker = new google.maps.Marker({
-            map: map,
-            position: initialLocation,
-          });
-    
-          // Evento para buscar a localização quando o botão é clicado
-          document.getElementById('search-btn')?.addEventListener('click', () => {
-            const address = (document.getElementById('address') as HTMLInputElement).value;
-            geocoder.geocode({ address }, (results, status) => {
-              if (status === 'OK') {
-                map.setCenter(results[0].geometry.location);
-    
-                // Coloca um marcador no endereço encontrado
-                const newMarker = new google.maps.Marker({
-                  map: map,
-                  position: results[0].geometry.location,
-                });
-              } else {
-                alert('Geocode não foi bem-sucedido: ' + status);
-              }
-            });
-          });
-        };
-    
-        if (typeof window !== 'undefined') {
-          // Carregar o script do Google Maps
-          const script = document.createElement('script');
-          script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAfFGULetLC2YCwaOZsFZSmsm135I5f2jQ&callback=initMap`;
-          script.defer = true;
-          script.async = true;
-          document.head.appendChild(script);
-    
-          // Define a função global para o callback
-          (window as any).initMap = initMap;
-        }
-      }, []);
-
     return(
         <div className={styles.main}>
 

@@ -1,165 +1,195 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { ArrowLeftCircle } from "lucide-react";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {jwtDecode} from "jwt-decode";
+import axios from "axios";
+import { Libraries } from '@react-google-maps/api';
 
-interface profileProps{
-    coverImage: string;
-    profileImage: string;
-    userName: string;
-    userDesc: string;
-    nameProperty: string;
-    numHec: number;
+interface ProfileProps {
+  name: string;
+  description: string;
+  nameFarm: string;
+  hectares: number;
+  profileImage: string;
+  profileCover: string;
+  lat: number | null;
+  lng: number | null;
+  cultivosSelecionados: number[];
 }
 
-export default function profile({coverImage, profileImage, userName, userDesc, nameProperty, numHec}: profileProps){
+interface Cultivo {
+  Cult_Id: number;
+  Cult_Nome: string;
+}
 
-    userName = 'Nome do agricultor'
-    profileImage = '/farmer.svg'
-    coverImage = '/default-cover.png'
-    userDesc = 'Descrição......'
-    nameProperty = 'Nome da propriedade'
-    numHec = 21
+const containerStyle = {
+  width: "100%",
+  height: "600px",
+  borderRadius: "15px",
+};
 
-    useEffect(() => {
-        const initMap = () => {
-          // Inicializa o mapa centrado nas coordenadas fornecidas
-          const initialLocation = { lat: -21.9385624, lng: -50.5269037 };
-          const map = new google.maps.Map(document.getElementById('map') as HTMLElement, {
-            center: initialLocation,
-            zoom: 17.25, // Nível de zoom desejado
-          });
-    
-          const geocoder = new google.maps.Geocoder();
-    
-          // Coloca um marcador na localização inicial
-          const marker = new google.maps.Marker({
-            map: map,
-            position: initialLocation,
-          });
-    
-          // Evento para buscar a localização quando o botão é clicado
-          document.getElementById('search-btn')?.addEventListener('click', () => {
-            const address = (document.getElementById('address') as HTMLInputElement).value;
-            geocoder.geocode({ address }, (results, status) => {
-              if (status === 'OK') {
-                map.setCenter(results[0].geometry.location);
-    
-                // Coloca um marcador no endereço encontrado
-                const newMarker = new google.maps.Marker({
-                  map: map,
-                  position: results[0].geometry.location,
-                });
-              } else {
-                alert('Geocode não foi bem-sucedido: ' + status);
-              }
-            });
-          });
-        };
-    
-        if (typeof window !== 'undefined') {
-          // Carregar o script do Google Maps
-          const script = document.createElement('script');
-          script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAfFGULetLC2YCwaOZsFZSmsm135I5f2jQ&callback=initMap`;
-          script.defer = true;
-          script.async = true;
-          document.head.appendChild(script);
-    
-          // Define a função global para o callback
-          (window as any).initMap = initMap;
-        }
-      }, []);
+const libraries: Libraries = ['places'];
 
-    return(
-        <div className={styles.main}>
+export default function Profile({
+  profileCover,
+  profileImage,
+  name,
+  description,
+  nameFarm,
+  hectares,
+  lat,
+  lng,
+  cultivosSelecionados,
+}: ProfileProps) {
+  const [userData, setUserData] = useState<ProfileProps | null>(null);
+  const [location, setLocation] = useState({ lat: lat || -15.7942, lng: lng || -47.8822 });
+  const [selectedCultivos, setSelectedCultivos] = useState<Cultivo[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const mapRef = useRef<google.maps.Map | null>(null);
 
-            {/* FOTO DE CAPA */}
-            <div className={styles.cover}>
-                <div className={styles.imageContainer}>
-                    <Image
-                    width={1200}
-                    height={300}
-                    src={coverImage}
-                    alt="Foto de capa do usuário"
-                    layout="full"
-                    className={styles.img}
-                    />
-                </div>
-            </div>
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("Usuário não autenticado.");
 
-            {/* FOTO DE PERFIL + O NOME DE PERFIL */}
-            <div className={styles.profile}>
-                <div className={styles.imageContainerProfile}>
-                    <Image
-                    width={200}
-                    height={200}
-                    src={profileImage}
-                    alt="Foto de capa do usuário"
-                    layout="full"
-                    className={styles.img}
-                    />
-                </div>
-                <p className={styles.nameProfile}>{userName}</p>
-            </div>
+        const decoded: any = jwtDecode(token);
+        const userId = decoded.userId;
 
-            <div className={styles.more}>
-            <section className={styles.section1}>
-                    <div className={styles.descArea}>
-                        <p className={styles.descTitle}>Descrição</p>
-                        <p className={styles.description}>{userDesc}</p>
-                    </div>
-                    <div className={styles.speciesArea}>
-                        <h1 className={styles.titleSpecies}>
-                            Espécies
-                        </h1>
-                        <div className={styles.species}>
-                            <div className={styles.specie}>
-                                <p>
-                                    Uruçu
-                                </p>
-                            </div>
-                            <div className={styles.specie}>
-                                <p>
-                                    Mandaçaia
-                                </p>
-                            </div>
-                            <div className={styles.specie}>
-                                <p>
-                                    Jataí
-                                </p>
-                            </div>
-                            <div className={styles.specie}>
-                                <p>
-                                    Manduri
-                                </p>
-                            </div>
-                            <div className={styles.specie}>
-                                <p>
-                                    Bugia
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div className={styles.farm}>
-                    <h1 className={styles.titleFarm}>Propriedade</h1>
-                    <p className={styles.nameFarm}>Nome da propriedade: {nameProperty}
-                    </p>
-                    <p className={styles.hecFarm}>Hectares de plantação: {JSON.stringify(numHec)}
-                    </p>
+        // Busca os dados do usuário no back-end
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/usuarios/${userId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
-                    <div className={styles.map}>
+        const data = response.data.dados;
+        setUserData({
+          name: data.Usu_NomeCompleto,
+          description: data.Agri_Biografia || "Descrição não fornecida",
+          profileImage: data.profileImage || "/default-profile.png",
+          profileCover: data.profileCover || "/default-cover.png",
+          nameFarm: data.nameFarm || "Propriedade não especificada",
+          hectares: data.hectares || 0,
+          lat: data.lat || -15.7942,
+          lng: data.lng || -47.8822,
+          cultivosSelecionados: data.cultivosSelecionados || [],
+        });
 
-                    {/* Div onde o mapa será renderizado */}
-                    <div id="map" className={styles.map}>
-                        
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <Link href={'/Homepage'}><ArrowLeftCircle size={35} color="#fff" className={styles.backBtn}/></Link>
+        // Atualiza a localização para o mapa
+        setLocation({
+          lat: parseFloat(data.lat) || -15.7942,
+          lng: parseFloat(data.lng) || -47.8822,
+        });
+
+        // Filtra apenas os cultivos selecionados
+        const cultivosResponse = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/cultivo`
+        );
+        const allCultivos: Cultivo[] = cultivosResponse.data.dados || [];
+        const filteredCultivos = allCultivos.filter((cultivo) =>
+          data.cultivosSelecionados.includes(cultivo.Cult_Id)
+        );
+        setSelectedCultivos(filteredCultivos);
+      } catch (err) {
+        console.error("Erro ao carregar os dados do usuário:", err);
+        setError("Erro ao carregar os dados do usuário.");
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  if (!userData) {
+    return <p>Carregando...</p>;
+  }
+
+  return (
+    <div className={styles.main}>
+      {/* FOTO DE CAPA */}
+      <div className={styles.cover}>
+        <div className={styles.imageContainer}>
+          <Image
+            width={1200}
+            height={300}
+            src={userData.profileCover}
+            alt="Foto de capa do usuário"
+            className={styles.img}
+          />
         </div>
-    )
+      </div>
+
+      {/* FOTO DE PERFIL + O NOME DE PERFIL */}
+      <div className={styles.profile}>
+        <div className={styles.imageContainerProfile}>
+          <Image
+            width={200}
+            height={200}
+            src={userData.profileImage}
+            alt="Foto do perfil do usuário"
+            className={styles.img}
+          />
+        </div>
+        <p className={styles.nameProfile}>{userData.name}</p>
+      </div>
+
+      <div className={styles.more}>
+        <section className={styles.section1}>
+          <div className={styles.descArea}>
+            <p className={styles.descTitle}>Descrição</p>
+            <p className={styles.description}>{userData.description}</p>
+          </div>
+          <div className={styles.speciesArea}>
+            <h1 className={styles.titleSpecies}>Cultivos</h1>
+            <div className={styles.species}>
+              {selectedCultivos.map((cultivo) => (
+                <div key={cultivo.Cult_Id} className={styles.specie}>
+                  <p>{cultivo.Cult_Nome}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        <div className={styles.farm}>
+          <h1 className={styles.titleFarm}>Propriedade</h1>
+          <p className={styles.nameFarm}>
+            Nome da propriedade: {userData.nameFarm}
+          </p>
+          <p className={styles.hecFarm}>
+            Hectares de plantação: {userData.hectares}
+          </p>
+
+          <div className={styles.map}>
+            {/* Div onde o mapa será renderizado */}
+            <LoadScript
+              googleMapsApiKey={"AIzaSyCmwSFKGgAId-Qegv1-EMff3WFG4Y0mokI"}
+              libraries={libraries}
+            >
+              <div id="map" className={styles.map}>
+                <GoogleMap
+                  mapContainerStyle={containerStyle}
+                  center={location}
+                  zoom={15}
+                  mapTypeId="hybrid"
+                  onLoad={(map) => {
+                    mapRef.current = map;
+                  }}
+                >
+                  <Marker position={location} />
+                </GoogleMap>
+              </div>
+            </LoadScript>
+          </div>
+        </div>
+      </div>
+      <Link href={"/Homepage"}>
+        <ArrowLeftCircle size={35} color="#fff" className={styles.backBtn} />
+      </Link>
+    </div>
+  );
 }
