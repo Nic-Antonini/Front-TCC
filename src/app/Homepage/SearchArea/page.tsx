@@ -46,13 +46,6 @@ export default function searchArea() {
                 />
                 <Search strokeWidth={3} className={styles.iconSearch} />
               </div>
-              <ProfileSearched1
-                profilePhoto="/beekeeper.svg"
-                name="Laís Teixeira"
-                location="Tupã, São Paulo."
-                availability={18}
-                species="Africana; Europeia."
-              />
             </div>
             <Filter1 />
           </div>

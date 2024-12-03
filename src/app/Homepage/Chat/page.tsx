@@ -1,202 +1,213 @@
-'use client';
-import { useState, useRef, useEffect } from 'react';
-import styles from './page.module.css';
-import SideBar from './Components/sideBar/page';
-import { SendHorizonal, Paperclip } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation"; // Para atualizar a URL
+import styles from "./page.module.css";
+import SideBar from "./Components/sideBar/page";
+import { SendHorizonal, Paperclip } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import axios from "axios";
+import { useSearchParams } from "next/navigation";
+import { jwtDecode } from "jwt-decode";
 
 interface Message {
-    text: string;
-    sender: 'user' | 'other';
+  text: string;
+  sender: "user" | "other";
+  timestamp: string;
 }
 
 interface CurrentChat {
-    chatId: string;
-    userName: string;
-    imageAddress: string;
+  chatId: string;
+  userName: string;
+  imageAddress: string;
+  userId: string;
+  Apic_Id?: string;
+  Agri_Id?: string;
 }
 
 export default function Chat() {
-    const [message, setMessage] = useState('');
-    const [currentChat, setCurrentChat] = useState<CurrentChat | null>(null);
-    const messagesEndRef = useRef<HTMLDivElement | null>(null);
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [message, setMessage] = useState("");
+  const [currentChat, setCurrentChat] = useState<CurrentChat | null>(null);
+  const [chatMessages, setChatMessages] = useState<Message[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file && currentChat) {
-            const mockApiResponse = async () => {
-                return new Promise<{ fileUrl: string }>((resolve) => {
-                    setTimeout(() => {
-                        resolve({ fileUrl: URL.createObjectURL(file) }); // Criação da URL do arquivo
-                    }, 1000); // Simula tempo de resposta da API
-                });
-            };
+  const router = useRouter(); // Usando o router para atualizar a URL
+  const searchParams = useSearchParams();
+  const chatIdFromUrl = searchParams.get("chatId");
 
-            try {
-                const data = await mockApiResponse();
+  const token = localStorage.getItem("token");
+  const loggedUserId = token ? (jwtDecode(token) as any).userId : null;
 
-                // Adiciona a mensagem com o arquivo enviado
-                setChatMessages((prevMessages) => ({
-                    ...prevMessages,
-                    [currentChat.chatId]: [
-                        ...prevMessages[currentChat.chatId],
-                        { text: `Enviou um arquivo: ${data.fileUrl}`, sender: 'user' },
-                    ],
-                }));
-            } catch (error) {
-                console.error('Erro:', error);
-            }
+  // Função para carregar mensagens do chat
+  const loadMessages = async (chatId: string) => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/chat/messages/${chatId}`
+      );
+      setChatMessages(
+        response.data.dados.map((msg: any) => ({
+          text: msg.Chat_Mensagem,
+          sender: msg.sender === "user" ? "user" : "other",
+          timestamp: msg.Chat_Dta_Hora,
+        }))
+      );
+    } catch (error) {
+      console.error("Erro ao carregar mensagens:", error);
+    }
+  };
 
-            event.target.value = ''; // Reseta o input de arquivo
+  // Atualizar `currentChat` e carregar mensagens ao mudar `chatIdFromUrl`
+  useEffect(() => {
+    if (chatIdFromUrl) {
+      const fetchChatDetails = async () => {
+        try {
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/chat/detalhes/${chatIdFromUrl}`
+          );
+          const chatData = response.data.dados;
+
+          setCurrentChat({
+            chatId: chatData.Chat_Id,
+            userName: chatData.NomeOutroUsuario,
+            imageAddress: chatData.FotoOutroUsuario,
+            userId: chatData.UserIdOutroUsuario,
+            Apic_Id: chatData.Apic_Id,
+            Agri_Id: chatData.Agri_Id,
+          });
+
+          await loadMessages(chatIdFromUrl);
+        } catch (error) {
+          console.error("Erro ao carregar detalhes do chat:", error);
         }
-    };
+      };
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
+      fetchChatDetails();
+    }
+  }, [chatIdFromUrl]);
 
-    const [chatMessages, setChatMessages] = useState<{ [key: string]: Message[] }>({
-        'nome_do_apicultor_1': [],
-        'nome_do_apicultor_2': [],
-    });
+  // Função para enviar mensagem
+  const handleSendMessage = async () => {
+    if (message.trim() && currentChat) {
+      try {
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
 
-    const handleSendMessage = () => {
-        if (message.trim() && currentChat) {
-            setChatMessages({
-                ...chatMessages,
-                [currentChat.chatId]: [
-                    ...chatMessages[currentChat.chatId],
-                    { text: message, sender: 'user' },
-                ],
-            });
-            setMessage('');
+        const newMessage = {
+          Chat_Mensagem: message,
+          Chat_Visto: false,
+          Chat_Dta_Hora: formattedDate,
+          Apic_Id: 1,  // ID do apicultor
+          Agri_Id: 1,  // ID do agricultor
+          Chat_Ativo: 1
+        };
 
-            setTimeout(() => {
-                setChatMessages((prevMessages) => ({
-                    ...prevMessages,
-                    [currentChat.chatId]: [
-                        ...prevMessages[currentChat.chatId],
-                        { text: 'Esta é uma resposta automática.', sender: 'other' },
-                    ],
-                }));
-            }, 2000);
-        }
-    };
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/chat`, newMessage);
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            handleSendMessage();
-        }
-    };
+        // Atualizar localmente as mensagens
+        setChatMessages((prev) => [
+          ...prev,
+          { text: message, sender: "user", timestamp: formattedDate },
+        ]);
+        setMessage("");  // Limpar o campo de mensagem
 
-    useEffect(() => {
-        if (currentChat && chatMessages[currentChat.chatId]) {
-            scrollToBottom();
-        }
-    }, [chatMessages, currentChat]);
+        // Salvar mensagens no localStorage para persistência
+        localStorage.setItem("chatMessages", JSON.stringify(chatMessages));
 
-    return (
-        <div className={styles.allPage}>
-            <div className={styles.secondDiv}>
-                <SideBar setCurrentChat={(chatId, userName, imageAddress) =>
-                    setCurrentChat({ chatId, userName, imageAddress })
-                } />
+      } catch (error) {
+        console.error("Erro ao enviar mensagem:", error);
+      }
+    }
+  };
+  // Scroll automático para última mensagem
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]);
 
-                <main className={styles.main}>
-                    <div className={styles.chatContainer}>
+  // Atualizar a URL ao clicar no ProfileChat
+  const handleProfileChatClick = (chatId: string) => {
+    router.push(`/Homepage/Chat?chatId=${chatId}`); // Atualiza a URL para Homepage/Chat?chatId=xxx
+  };
 
-                    {currentChat && (
-                        <div className={styles.chatHeader}>
-                            <div className={styles.userInfo}>
-                                <Image
-                                    src={currentChat.imageAddress}
-                                    alt={`Foto de perfil de ${currentChat.userName}`}
-                                    height={48}
-                                    width={48}
-                                    className={styles.profileImg}
-                                />
-                                <p className={styles.userName}>{currentChat.userName}</p>
-                            </div>
-                            <Link href={`/Beekeeper/publicProfile/${currentChat.chatId}`} className={styles.profileLink}>
-                                ver perfil
-                            </Link>
-                        </div>
-                    )}
+  return (
+    <div className={styles.allPage}>
+      <div className={styles.secondDiv}>
+        <SideBar setCurrentChat={setCurrentChat} onProfileChatClick={handleProfileChatClick} />
 
-                        <div className={styles.messages}>
-                            {currentChat ? (
-                                chatMessages[currentChat.chatId].map((msg, index) => (
-                                    <div
-                                        key={index}
-                                        className={msg.sender === 'user' ? styles.sentMessage : styles.receivedMessage}
-                                    >
-                                        {msg.text.includes('Enviou um arquivo:') ? (
-                                            <div>
-                                                {msg.text.match(/\.(jpeg|jpg|png|gif)$/i) ? (
-                                                    <img
-                                                        src={msg.text.replace('Enviou um arquivo: ', '')}
-                                                        alt="Anexo"
-                                                        className={styles.chatImage}
-                                                        style={{ maxWidth: '100%', maxHeight: '200px' }} 
-                                                    />
-                                                ) : (
-                                                    <a
-                                                        href={msg.text.replace('Enviou um arquivo: ', '')}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className={styles.fileLink}
-                                                    >
-                                                     Visualizar Anexo
-                                                    </a>
-                                                )}
-                                            </div>
-                                        ) : (
-                                            <p>{msg.text}</p>
-                                        )}
-                                    </div>
-                                ))
-                            ) : (
-                                <p className={styles.placeholder}>Selecione uma conversa para começar</p>
-                            )}
-                            <div ref={messagesEndRef} />
-                        </div>
+        <main className={styles.main}>
+          <div className={styles.chatContainer}>
+            {currentChat && (
+              <div className={styles.chatHeader}>
+                <div className={styles.userInfo}>
+                  <Image
+                    src={currentChat.imageAddress }
+                    alt={`Foto de perfil de ${currentChat.userName}`}
+                    height={48}
+                    width={48}
+                    className={styles.profileImg}
+                  />
+                  <p className={styles.userName}>{currentChat.userName}</p>
+                </div>
+                <Link
+                  href={`/beekeeper/publicProfile/2`}
+                  className={styles.profileLink}
+                >
+                  Ver perfil
+                </Link>
+              </div>
+            )}
 
-                        <div className={styles.inputContainer}>
-                            <button
-                                className={styles.attachButton}
-                                onClick={() => fileInputRef.current?.click()}
-                                disabled={!currentChat}
-                            >
-                                <Paperclip color="#F7C04A" />
-                            </button>
-                            <input
-                                type="file"
-                                ref={fileInputRef}
-                                onChange={handleFileUpload}
-                                style={{ display: 'none' }}
-                            />
-                            <input
-                                type="text"
-                                placeholder="Digite sua mensagem..."
-                                className={styles.messageInput}
-                                value={message}
-                                onChange={(e) => setMessage(e.target.value)}
-                                onKeyDown={handleKeyDown}
-                                disabled={!currentChat}
-                            />
-                            <button
-                                className={styles.sendButton}
-                                onClick={handleSendMessage}
-                                disabled={!currentChat}
-                            >
-                                <SendHorizonal color="#F7C04A" />
-                            </button>
-                        </div>
-                    </div>
-                </main>
+            <div className={styles.messages}>
+              {chatMessages.length > 0 ? (
+                chatMessages.map((msg, index) => (
+                  <div
+                    key={index}
+                    className={
+                      msg.sender === "user" ? styles.sentMessage : styles.receivedMessage
+                    }
+                  >
+                    <p>{msg.text}</p> {/* Removido a data */}
+                  </div>
+                ))
+              ) : (
+                <p className={styles.placeholder}>Selecione uma conversa para começar</p>
+              )}
+              <div ref={messagesEndRef} />
             </div>
-        </div>
-    );
+
+            <div className={styles.inputContainer}>
+              <button
+                className={styles.attachButton}
+                onClick={() => fileInputRef.current?.click()}
+                disabled={!currentChat}
+              >
+                <Paperclip color="#F7C04A" />
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: "none" }}
+              />
+              <input
+                type="text"
+                placeholder="Digite sua mensagem..."
+                className={styles.messageInput}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                disabled={!currentChat}
+              />
+              <button
+                className={styles.sendButton}
+                onClick={handleSendMessage}
+                disabled={!currentChat}
+              >
+                <SendHorizonal color="#F7C04A" />
+              </button>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
 }

@@ -24,6 +24,14 @@
     padding: 2.0rem 2.0rem 0 0;
 }
 
+.apicultorProfile{
+    background-color: #F9BD1C;
+}
+
+.agricultorProfile{
+    background-color: #43603f;
+}
+
 .myProfile{
     border-radius: 100px;
     cursor: pointer;
@@ -75,4 +83,8 @@
     cursor: pointer;
     transform: scale(1.05);
     transition: cubic-bezier(1, -0.02, 0.07, 1.19);
+}
+
+.profileImg{
+    border-radius: 20px;
 }
