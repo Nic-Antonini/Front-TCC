@@ -49,10 +49,11 @@ export default function Farmer({
   city,
   state,
   cultivosSelecionados,
+  profileImage, profileCover,
   onUpdate,
 }: ProfileProps) {
-  const [profileImage, setProfileImage] = useState<string>('/farmer.png');
-  const [coverImage, setCoverImage] = useState<string>('/default-cover.png');
+  const [profileImagee, setProfileImage] = useState<string>(profileImage);
+  const [coverImage, setCoverImage] = useState<string>(profileCover);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [cultivos, setCultivos] = useState<Cultivo[]>([]);
   const [selectedCultivos, setSelectedCultivos] = useState<number[]>(cultivosSelecionados);
