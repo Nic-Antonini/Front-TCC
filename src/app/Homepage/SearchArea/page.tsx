@@ -3,8 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import Sidebar from "../Components/sidebar/page";
 import ProfileSearched1 from "../../Farmer/profileSearched/page";
 import ProfileSearched2 from "../../beekeeper/profileSearched/page";
-import Filter1 from "../../Farmer/filter/page";
-import Filter2 from "../../beekeeper/filter/page";
 import { Search } from "lucide-react";
 import styles from "./page.module.css";
 import Link from "next/link";
@@ -47,7 +45,6 @@ export default function searchArea() {
                 <Search strokeWidth={3} className={styles.iconSearch} />
               </div>
             </div>
-            <Filter1 />
           </div>
         </main>
       </div>
