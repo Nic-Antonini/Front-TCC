@@ -150,7 +150,6 @@ export default function Home() {
             <a href="/#SobreNós" className={styles.navLink}>Sobre Nós</a>
             <a href="/#ComoFunciona" className={styles.navLink}>Como Funciona?</a>
             <a href="/#Contato" className={styles.navLink}>Contato</a>
-            <Link href={"/Faq"} className={styles.navLink}>FAQ</Link>
             <Link href={"/Login"} className={styles.navLink}>Entrar</Link>
             <Link href={"/Cadastro"}><button className={styles.navBtn}>Cadastrar</button></Link>
           </nav>
@@ -169,7 +168,6 @@ export default function Home() {
               <>
                 <a href="/#ComoFunciona" className={styles.navLink1}>Como Funciona</a>
                 <a href="/#Contato" className={styles.navLink1}>Contato</a>
-                <Link href={"/Faq"} className={styles.navLink1}>FAQ</Link>
                 <a href="/#SobreNós" className={styles.navLink1}>Sobre Nós</a>
                 <Link href={"/Login"} className={styles.navLink1}>Entrar</Link>
                 <Link href={"/Cadastro"}><button className={styles.navBtn1}>Cadastrar</button></Link>
